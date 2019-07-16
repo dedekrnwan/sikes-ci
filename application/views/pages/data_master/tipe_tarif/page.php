@@ -7,7 +7,7 @@
 			<!-- <small>Data Master & Pembayaran</small> -->
 		</h1>
 		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-map-signs"></i> Data Master</a></li>
+			<li><a href="#"><i class="fa fa-cubes"></i> Data Master</a></li>
 			<li class="active">Tipe Tarif</li>
 		</ol>
 	</section>

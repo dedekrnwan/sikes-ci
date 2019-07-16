@@ -70,3 +70,7 @@ $route['data_master/tipe_tarif/page/detail'] = 'data_master/TipeTarifController/
 #pembayaran
 $route['pembayaran'] = 'pembayaran/PembayaranController/index';
 $route['pembayaran/page'] = 'pembayaran/PembayaranController/index';
+
+#sms
+$route['sms'] = 'sms/SmsController/index';
+$route['sms/page'] = 'sms/SmsController/index';

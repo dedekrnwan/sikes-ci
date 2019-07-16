@@ -3,12 +3,11 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-			Data Master Siswa
-			<!-- <small>Data Master & Pembayaran</small> -->
+			Data History SMS
+			<!-- <small>Data & Pembayaran</small> -->
 		</h1>
 		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-user"></i> Data Master</a></li>
-			<li class="active">Siswa</li>
+			<li class="active"><a href="#"><i class="fa fa-envelope-o"></i> Data History SMS</a></li>
 		</ol>
 	</section>
 
@@ -23,22 +22,22 @@
 					<div class="box-body">
 						<form role="form">
 							<div class="box-body">
-								<div class="col-md-4 form-group">
-									<label>Tahun Ajaran</label>
+								<div class="col-md-3 form-group">
+									<label>Tipe SMS</label>
 									<select class="form-control">
-										<option>2018</option>
-										<option>2019</option>
+										<option>Pembayaran</option>
+										<option>Reminder</option>
 									</select>
 								</div>
-								<div class="col-md-4 form-group">
-									<label>Kelas</label>
-									<select class="form-control">
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-									</select>
+								<div class="col-md-3 form-group">
+									<label>Dari Tanggal</label>
+									<input type="date" class="form-control">
 								</div>
-								<div class="col-md-4 form-group">
+								<div class="col-md-3 form-group">
+									<label>Dari Tanggal</label>
+									<input type="date" class="form-control">
+								</div>
+								<div class="col-md-3 form-group">
 									<label></label>
 									<button type="button" class="btn btn-block btn-warning" style="width:50%">
 										<i class="fa fa-search"></i> Filter
@@ -52,65 +51,51 @@
 			<div class="col-xs-12">
 				<div class="box">
 					<div class="box-header">
-						<h3 class="box-title">Data Siswa</h3>
+						<h3 class="box-title">Data History SMS</h3>
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body">
-						<div class="col-md-12" style="margin-bottom:20px">
-							<button type="button" class="btn btn-block btn-primary" onclick="show_detail()" style="width:15%">
-								<i class="fa fa-plus"></i>
-								Tambah Data
-							</button>
-						</div>
 						<div class="col-md-12">
 							<table id="example1" class="table table-bordered table-striped table-hover">
 								<thead>
 									<tr>
 										<th>No</th>
+										<th>Tipe SMS</th>
+										<th>Tanggal SMS</th>
 										<th>NIS</th>
 										<th>Nama</th>
-										<th>Jenis Kelamin</th>
-										<th>Nama Orang Tua</th>
-										<th>Status</th>
-										<th>Aksi</th>
+										<th>No Orang Tua</th>
+										<th>Tipe Tarif</th>
+										<th>Nominal Pembayaran</th>
+										<th>Teks SMS</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
 										<td>1</td>
-										<td>1132</td>
+										<td>
+											<small class="label bg-green">Pembayaran</small>
+										</td>
+										<td>27-08-2019 09:00</td>
+										<td>1332</td>
 										<td>Linda Purnama</td>
-										<td>P</td>
-										<td>Turminah</td>
-										<td>
-											<small class="label bg-green">Aktif</small>
-										</td>
-										<td>
-											<a href="#" style="color:#f56954" data-toggle="tooltip" title="Edit" onclick="show_detail()">
-												<i class="fa fa-edit"></i>
-											</a>
-											<a href="<?= base_url() ?>data_master/siswa/page/status" style="color:green" onclick="show_detail()">
-												<i class="fa fa-search"></i>
-											</a>
-										</td>
+										<td>081231828311</td>
+										<td>SPP Bulanan</td>
+										<td>Rp. 900.000</td>
+										<td>Anda telah membayarankan</td>
 									</tr>
 									<tr>
 										<td>2</td>
-										<td>1133</td>
-										<td>Aisyah Fadly</td>
-										<td>P</td>
-										<td>Parjo</td>
 										<td>
-											<small class="label bg-red">Tidak Aktif</small>
+											<small class="label bg-red">Reminder</small>
 										</td>
-										<td>
-											<a href="#" style="color:#f56954" data-toggle="tooltip" title="Edit" onclick="show_detail()">
-												<i class="fa fa-edit"></i>
-											</a>
-											<a href="<?= base_url() ?>data_master/siswa/page/status" style="color:green" onclick="show_detail()">
-												<i class="fa fa-search"></i>
-											</a>
-										</td>
+										<td>27-08-2019 09:00</td>
+										<td>1332</td>
+										<td>Linda Purnama</td>
+										<td>081231828311</td>
+										<td>OSIS</td>
+										<td>Rp. 900.000</td>
+										<td>Anda harus membayar Rp. 900.000 pada tanggal 19 agustus</td>
 									</tr>
 								</tbody>
 							</table>
@@ -136,7 +121,7 @@
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title">Detail Siswa</h4>
+				<h4 class="modal-title">Detail History SMS</h4>
 			</div>
 			<div class="modal-body">
 				<form role="form">

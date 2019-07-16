@@ -40,9 +40,12 @@
 			<li>
 				<a href="<?= base_url() ?>pembayaran/page">
 					<i class="fa fa-money"></i> <span>Data Pembayaran</span>
-					<!-- <span class="pull-right-container">
-						<small class="label pull-right bg-green">new</small>
-					</span> -->
+				</a>
+			</li>
+			<li class="header">SMS Service</li>
+			<li>
+				<a href="<?= base_url() ?>sms/page">
+					<i class="fa fa-envelope-o"></i> <span>History SMS</span>
 				</a>
 			</li>
 		</ul>
