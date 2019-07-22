@@ -9,45 +9,41 @@
 </style>
 
 <body class="hold-transition login-page bg-custom">
-  <div class="login-box">
-
-    <div class="login-box-body">
-      <div class="login-logo">
-        <a href="#">
-          <font color="#666"><b>SIKES</b> </font>
-        </a>
+  <div class="col-md-4 col-md-offset-4" style="margin-top: 70px">
+    <div id="box-login" class="box box-danger">
+      <div class="box-header text-center">
+        <h3 class="box-title" style="font-size: 30px;">
+          <b>SIKES</b>
+        </h3>
+        <p style="font-size: 15px;"><b>(Sistem Informasi Keuangan Sekolah)</b></p>
       </div>
-      <!-- /.login-logo -->
-      <p class="login-box-msg"><b>Sistem Informasi Keuangan Sekolah</b></p>
-
-      <form action="#">
-        <div class="form-group has-feedback">
-          <input type="email" class="form-control" placeholder="Email">
-          <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-        </div>
-        <div class="form-group has-feedback">
-          <input type="password" class="form-control" placeholder="Password">
-          <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-        </div>
-        <div class="row mb-1">
-          <!-- /.col -->
-          <div class="col-xs-12">
-          <a href="<?= base_url() ?>dashboard">
-            <button type="button" class="btn btn-block btn-flat btn-danger login"><i class="fa fa-mail-forward"></i> Login</button>
-          </a>
-            <!-- <button type="button" class="btn btn-primary btn-block btn-flat">Sign In</button> -->
+      <div class="box-body">
+        <form id="form-login">
+          <div class="form-group has-feedback">
+            <input type="text" name="username" class="form-control" placeholder="Username">
+            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
           </div>
-          <!-- /.col -->
-        </div>
-        <div class="text-center" style="margin-top:10px">
-          <i>
-            <p><small>Copyright &copy; SIKES 2019</small>
-              <p>
-          </i>
-        </div>
-      </form>
-
+          <div class="form-group has-feedback">
+            <input type="password" name="password" class="form-control" placeholder="Password">
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+          </div>
+          <div class="row mb-1">
+            <!-- /.col -->
+            <div class="col-xs-12">
+              <button btn-login type="button" class="btn btn-block btn-flat btn-danger">
+                <i class="fa fa-mail-forward"></i> Login
+              </button>
+              <!-- <button type="button" class="btn btn-primary btn-block btn-flat">Sign In</button> -->
+            </div>
+            <!-- /.col -->
+          </div>
+          <div class="text-center" style="margin-top:10px">
+            <i>
+              <p><small>Copyright &copy; SIKES 2019</small>
+                <p>
+            </i>
+          </div>
+        </form>
+      </div>
     </div>
-    <!-- /.login-box-body -->
   </div>
-  <!-- /.login-box -->

@@ -32,12 +32,20 @@
 <!-- AdminLTE App -->
 <script src="<?= base_url() ?>public/assets/AdminLTE/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="<?= base_url() ?>public/assets/AdminLTE/dist/js/pages/dashboard.js"></script>
+<!-- <script src="<?= base_url() ?>public/assets/AdminLTE/dist/js/pages/dashboard.js"></script> -->
 <!-- AdminLTE for demo purposes -->
 <script src="<?= base_url() ?>public/assets/AdminLTE/dist/js/demo.js"></script>
 <!-- DataTables -->
 <script src="<?= base_url() ?>public/assets/AdminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?= base_url() ?>public/assets/AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<!-- SweetAlert -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<!-- Core script -->
+<script>
+  const base_url = "<?= base_url() ?>"
+</script>
+<script src="<?= base_url() ?>public/assets/custom/js/core.js"></script>
 
 <!-- Page Script -->
 <script>
@@ -54,6 +62,9 @@
     })
   })
 </script>
+
+<!-- Custom script -->
+<?= (isset($scriptjs)) ? '<script src="'.base_url().'public/assets/custom/js/'.$scriptjs.'.js"></script>' : '' ?>
 
 </body>
 </html>

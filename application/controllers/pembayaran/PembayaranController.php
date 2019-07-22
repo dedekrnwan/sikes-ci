@@ -19,8 +19,8 @@ class PembayaranController extends CI_Controller
 
 	public function index()
 	{
-		$dataHtml1['html'] = $this->load->view('pages/pembayaran/page', null, true);
-		$dataHtml2['html'] = $this->load->view('pages/layout', $dataHtml1, true);
+		$dataHtml1['html']['page'] = $this->load->view('pages/pembayaran/page', null, true);
+		$dataHtml2['html']['page'] = $this->load->view('pages/layout', $dataHtml1, true);
 		$this->load->view('layout', $dataHtml2);
 	}
 }

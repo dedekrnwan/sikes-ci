@@ -2,7 +2,7 @@
 <div class="wrapper">
     <?php $this->load->view('pages/header') ?>
     <?php $this->load->view('pages/nav') ?>
-    <?php echo $html ?>
+    <?= $html['page'] ?>
     <?php $this->load->view('pages/footer') ?>
 </div>
 <!-- ./wrapper -->
