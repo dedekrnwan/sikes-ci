@@ -72,7 +72,7 @@
         <!-- small box -->
         <div class="small-box bg-yellow">
           <div class="inner">
-            <h3><sup style="font-size: 20px">Rp</sup> 1,000,000</h3>
+            <h3><sup style="font-size: 20px">Rp</sup> <?= $sumLastMonth ?></h3>
 
             <p>Total Pemayaran Bulan Lalu</p>
           </div>
@@ -87,7 +87,7 @@
         <!-- small box -->
         <div class="small-box bg-red">
           <div class="inner">
-            <h3><sup style="font-size: 20px">Rp</sup> 5,000,000</h3>
+            <h3><sup style="font-size: 20px">Rp</sup> <?= $sumThisMonth ?></h3>
 
             <p>Total Pembayaran Bulan Ini</p>
           </div>
@@ -102,7 +102,7 @@
         <!-- small box -->
         <div class="small-box bg-green">
           <div class="inner">
-            <h3><sup style="font-size: 20px">Rp</sup> 6,000,000</h3>
+            <h3><sup style="font-size: 20px">Rp</sup>  <?= $sumAll ?></h3>
 
             <p>Total Pembayaran Keseluruhan</p>
           </div>

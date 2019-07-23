@@ -10,4 +10,13 @@ class TahunAjaranModel extends CI_Model
 
     return $res;
   }
+
+  function getTahunAjaran()
+  {
+    $this->db->select('*');
+    $q = $this->db->get('ta');
+    $res = $q->result_array();
+
+    return $res;
+  }
 }

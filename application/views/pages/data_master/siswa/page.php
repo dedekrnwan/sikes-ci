@@ -25,22 +25,25 @@
 							<div class="box-body">
 								<div class="col-md-4 form-group">
 									<label>Tahun Ajaran</label>
-									<select class="form-control">
-										<option>2018</option>
-										<option>2019</option>
+									<select param-filter name="ta_id" class="form-control">
+										<option value="0">-Pilih-</option>
+										<?php foreach ($listTahunAjaran as $ta) : ?>
+											<option value="<?= $ta['ta_id'] ?>"><?= $ta['ta'] ?></option>
+										<?php endforeach; ?>
 									</select>
 								</div>
 								<div class="col-md-4 form-group">
 									<label>Kelas</label>
-									<select class="form-control">
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
+									<select param-filter name="kelas" class="form-control">
+									<option value="0">-Pilih-</option>
+										<?php foreach ($listKelas as $kls) : ?>
+											<option value="<?= $kls ?>"><?= $kls ?></option>
+										<?php endforeach; ?>
 									</select>
 								</div>
 								<div class="col-md-4 form-group">
 									<label></label>
-									<button type="button" class="btn btn-block btn-warning" style="width:50%">
+									<button btn-filter type="button" class="btn btn-block btn-warning" style="width:50%">
 										<i class="fa fa-search"></i> Filter
 									</button>
 								</div>
@@ -63,7 +66,7 @@
 							</button>
 						</div>
 						<div class="col-md-12">
-							<table id="example1" class="table table-bordered table-striped table-hover">
+							<table id="datatables-ss1" class="table table-bordered table-striped table-hover">
 								<thead>
 									<tr>
 										<th>No</th>
@@ -76,42 +79,6 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>1</td>
-										<td>1132</td>
-										<td>Linda Purnama</td>
-										<td>P</td>
-										<td>Turminah</td>
-										<td>
-											<small class="label bg-green">Aktif</small>
-										</td>
-										<td>
-											<a href="#" style="color:#f56954" data-toggle="tooltip" title="Edit" onclick="show_detail()">
-												<i class="fa fa-edit"></i>
-											</a>
-											<a href="<?= base_url() ?>data_master/siswa/page/status" style="color:green" onclick="show_detail()">
-												<i class="fa fa-search"></i>
-											</a>
-										</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>1133</td>
-										<td>Aisyah Fadly</td>
-										<td>P</td>
-										<td>Parjo</td>
-										<td>
-											<small class="label bg-red">Tidak Aktif</small>
-										</td>
-										<td>
-											<a href="#" style="color:#f56954" data-toggle="tooltip" title="Edit" onclick="show_detail()">
-												<i class="fa fa-edit"></i>
-											</a>
-											<a href="<?= base_url() ?>data_master/siswa/page/status" style="color:green" onclick="show_detail()">
-												<i class="fa fa-search"></i>
-											</a>
-										</td>
-									</tr>
 								</tbody>
 							</table>
 						</div>
