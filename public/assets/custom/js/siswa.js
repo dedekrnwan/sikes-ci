@@ -1,31 +1,40 @@
 (function () {
-  // My Datatables
+  // define
   url = `${base_url}/data_master/siswa/listData`
-  $(document).ready(() => {
-    totalCol = parseInt($("#datatables-ss1").find('tr:nth-child(1) th').length)
-    tbl = $('#datatables-ss1').DataTable({
-      "PaginationType": "bootstrap",
-      "responsive": true,
-      "processing": true,
-      "searching": true,
-      "serverSide": true,
-      "deferRender": true,
-      "order": [],
-      "ajax": {
-        "url": url,
-        "type": "POST",
-        "data": (param) => {
-          param.query = jsonFilter
+  formId = '#form-siswa'
+  boxId = '#box-siswa'
+  modalId = '#modal-siswa'
+
+  // collection
+  const siswaSave = () => {
+    let data = $(formId).serialize()
+    $.ajax({
+      type: 'POST',
+      url: `${base_url}data_master/siswa/saveData`,
+      data: data,
+      beforeSend: () => { addLoading(boxId) },
+      success: (res) => {
+        removeLoading(boxId)
+
+        if (res === 'true') {
+          swal("Berhasil !", "Data berhasil disave !", "success").then((v) => {
+            $(modalId).modal('hide')
+          })
+        } else {
+          swal("Gagal !", "Data gagal disave !", "error")
         }
-      },
-      "columnDefs": [
-        {
-          "targets": [0, -1],
-          "orderable": false
-        }
-      ]
+      }
     })
+  }
+
+  // execute
+  datatablesShow('#datatables-ss1')
+
+  $('[btn-save]').click(() => {
+    siswaSave()
   })
 
-  
+  $('[btn-modal]').click(() => {
+    $(modalId).modal('show')
+  })
 }())

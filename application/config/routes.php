@@ -65,9 +65,8 @@ $route['dashboard'] = 'dashboard/DashboardController/index';
 # data_master
 $route['data_master/siswa/page'] = 'data_master/SiswaController/index';
 $route['data_master/siswa/listData'] = 'data_master/SiswaController/listData';
+$route['data_master/siswa/saveData'] = 'data_master/SiswaController/saveData';
 $route['data_master/siswa/page/status'] = 'data_master/SiswaController/status';
-
-
 
 $route['data_master/tahun_ajaran/page'] = 'data_master/TahunAjaranController/index';
 $route['data_master/tipe_tarif/page'] = 'data_master/TipeTarifController/index';

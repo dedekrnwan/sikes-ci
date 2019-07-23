@@ -57,10 +57,10 @@ class SiswaController extends CI_Controller
 			$row[] = $ld->nama_ortu;
 			$row[] = ($ld->active == 1) ? '<small class="label bg-green">Aktif</small>' : '<small class="label bg-red">Tidak Aktif</small>';
 			$row[] = '<td>
-								<a href="#" style="color:#f56954" data-toggle="tooltip" title="Edit" onclick="show_detail()">
+								<a btn-modal data-siswa_id="'.$ld->siswa_id.'" href="#" style="color:#f56954" data-toggle="tooltip" title="Edit">
 									<i class="fa fa-edit"></i>
 								</a>
-								<a href="'.base_url().'data_master/siswa/page/status" style="color:green" onclick="show_detail()">
+								<a href="' . base_url() . 'data_master/siswa/page/status" style="color:green">
 									<i class="fa fa-search"></i>
 								</a>
 							</td>';
@@ -73,5 +73,18 @@ class SiswaController extends CI_Controller
 			"data" => $data
 		];
 		echo json_encode($output);
+	}
+
+	public function saveData()
+	{
+		$post = $this->input->post();
+		$d = [];
+		foreach($post as $k => $v) {
+			$d[$k] = $v;
+		}
+		$affected = ($d['siswa_id'] == 0) ? $this->SiswaModel->insertSiswa($d) : $this->SiswaModel->saveSiswa($d);	
+
+		$res = ($affected) ? true : false;
+		echo json_encode($res);
 	}
 }

@@ -35,7 +35,7 @@
 								<div class="col-md-4 form-group">
 									<label>Kelas</label>
 									<select param-filter name="kelas" class="form-control">
-									<option value="0">-Pilih-</option>
+										<option value="0">-Pilih-</option>
 										<?php foreach ($listKelas as $kls) : ?>
 											<option value="<?= $kls ?>"><?= $kls ?></option>
 										<?php endforeach; ?>
@@ -60,7 +60,7 @@
 					<!-- /.box-header -->
 					<div class="box-body">
 						<div class="col-md-12" style="margin-bottom:20px">
-							<button type="button" class="btn btn-block btn-primary" onclick="show_detail()" style="width:15%">
+							<button btn-modal type="button" class="btn btn-block btn-primary" style="width:15%">
 								<i class="fa fa-plus"></i>
 								Tambah Data
 							</button>
@@ -97,7 +97,7 @@
 <!-- /.content-wrapper -->
 
 
-<div class="modal fade" id="modal-detail">
+<div class="modal fade" id="modal-siswa">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -106,61 +106,58 @@
 				<h4 class="modal-title">Detail Siswa</h4>
 			</div>
 			<div class="modal-body">
-				<form role="form">
-					<div class="box-body">
-						<div class="form-group">
-							<label>NIS</label>
-							<input type="text" class="form-control" placeholder="NIS">
+				<div id="box-siswa" class="box box-default">
+					<form role="form" id="form-siswa">
+						<input type="hidden" name="siswa_id" value="0">
+						<div class="box-body">
+							<div class="form-group">
+								<label>NIS</label>
+								<input name="nis" type="text" class="form-control" placeholder="NIS">
+							</div>
+							<div class="form-group">
+								<label>Nama</label>
+								<input name="nama" type="text" class="form-control" placeholder="Nama">
+							</div>
+							<div class="form-group">
+								<label>Jenis Kelamin</label>
+								<select name="jenis_kelamin" class="form-control">
+									<option value"L">L</option>
+									<option value"P">P</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label>Alamat</label>
+								<textarea name="alamat" class="form-control" placeholder="Alamat"></textarea>
+							</div>
+							<div class="form-group">
+								<label>Nama Orang Tua</label>
+								<input name="nama_ortu" type="text" class="form-control" placeholder="Nama Orang Tua">
+							</div>
+							<div class="form-group">
+								<label>No Orang Tua</label>
+								<input name="no_ortu" type="number" class="form-control" placeholder="No Orang Tua">
+							</div>
+							<div class="form-group">
+								<label>Email Orang Tua</label>
+								<input name="email_ortu" type="email" class="form-control" placeholder="Email Orang Tua">
+							</div>
+							<div class="form-group">
+								<label>Aktif</label>
+								<select name="active" class="form-control">
+									<option value="1">Ya</option>
+									<option value="0">Tidak</option>
+								</select>
+							</div>
 						</div>
-						<div class="form-group">
-							<label>Nama</label>
-							<input type="text" class="form-control" placeholder="Nama">
-						</div>
-						<div class="form-group">
-							<label>Jenis Kelamin</label>
-							<select class="form-control">
-								<option>L</option>
-								<option>P</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label>Alamat</label>
-							<textarea class="form-control" placeholder="Alamat"></textarea>
-						</div>
-						<div class="form-group">
-							<label>Nama Orang Tua</label>
-							<input type="text" class="form-control" placeholder="Nama Orang Tua">
-						</div>
-						<div class="form-group">
-							<label>No Orang Tua</label>
-							<input type="number" class="form-control" placeholder="No Orang Tua">
-						</div>
-						<div class="form-group">
-							<label>Email Orang Tua</label>
-							<input type="email" class="form-control" placeholder="Email Orang Tua">
-						</div>
-						<div class="form-group">
-							<label>Aktif</label>
-							<select class="form-control">
-								<option value="1">Ya</option>
-								<option value="0">Tidak</option>
-							</select>
-						</div>
-					</div>
-					<!-- /.box-body -->
-				</form>
+						<!-- /.box-body -->
+					</form>
+				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary">Save</button>
+				<button type="button" btn-save class="btn btn-primary">Save</button>
 			</div>
 		</div>
 		<!-- /.modal-content -->
 	</div>
 	<!-- /.modal-dialog -->
 </div>
-
-<script>
-	function show_detail() {
-		$('#modal-detail').modal('show')
-	}
-</script>

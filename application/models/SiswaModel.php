@@ -3,7 +3,8 @@
 include 'DatatablesSSDModel.php';
 class SiswaModel extends DatatablesSSDModel
 {
-  function __construct() {
+  function __construct()
+  {
     parent::__construct();
     $this->configSSD = [
       'table' => 'v_siswa',
@@ -20,5 +21,18 @@ class SiswaModel extends DatatablesSSDModel
     $res = $q->num_rows();
 
     return $res;
+  }
+
+  function insertSiswa($d)
+  {
+    $this->db->insert('siswa', $d);
+    return $this->db->affected_rows();
+  }
+
+  function updateSiswa($id, $d)
+  {
+    $this->db->where('siswa_id', $id);
+    $this->db->update('siswa', $d);
+    return $this->db->affected_rows();
   }
 }

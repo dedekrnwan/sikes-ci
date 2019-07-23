@@ -17,6 +17,31 @@ const removeLoading = (elm) => {
 
 // datatables
 let url, totalCol, tbl
+const datatablesShow = (datatablesId) => {
+	totalCol = parseInt($(datatablesId).find('tr:nth-child(1) th').length)
+	tbl = $(datatablesId).DataTable({
+		"PaginationType": "bootstrap",
+		"responsive": true,
+		"processing": true,
+		"searching": true,
+		"serverSide": true,
+		"deferRender": true,
+		"order": [],
+		"ajax": {
+			"url": url,
+			"type": "POST",
+			"data": (param) => {
+				param.query = jsonFilter
+			}
+		},
+		"columnDefs": [
+			{
+				"targets": [0, -1],
+				"orderable": false
+			}
+		]
+	})
+}
 
 // filter
 let queryFilter = {}
