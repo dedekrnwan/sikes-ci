@@ -23,13 +23,13 @@
 					<!-- /.box-header -->
 					<div class="box-body">
 						<div class="col-md-12" style="margin-bottom:20px">
-							<button type="button" class="btn btn-block btn-primary" onclick="show_detail()" style="width:15%">
+							<button type="button" class="btn btn-block btn-primary" onclick="taModal()" style="width:15%">
 								<i class="fa fa-plus"></i>
 								Tambah Data
 							</button>
 						</div>
 						<div class="col-md-12">
-							<table id="example1" class="table table-bordered table-striped table-hover">
+							<table id="datatables-ss1" class="table table-bordered table-striped table-hover">
 								<thead>
 									<tr>
 										<th>No</th>
@@ -38,24 +38,6 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>1</td>
-										<td>2018</td>
-										<td>
-											<a href="#" style="color:#f56954" data-toggle="tooltip" title="Edit" onclick="show_detail()">
-												<i class="fa fa-edit"></i>
-											</a>
-										</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>2019</td>
-										<td>
-											<a href="#" style="color:#f56954" data-toggle="tooltip" title="Edit" onclick="show_detail()">
-												<i class="fa fa-edit"></i>
-											</a>
-										</td>
-									</tr>
 								</tbody>
 							</table>
 						</div>
@@ -74,7 +56,7 @@
 <!-- /.content-wrapper -->
 
 
-<div class="modal fade" id="modal-detail">
+<div class="modal fade" id="modal-ta">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -83,27 +65,24 @@
 				<h4 class="modal-title">Detail Tahun Ajaran</h4>
 			</div>
 			<div class="modal-body">
-				<form role="form">
-					<div class="box-body">
-						<div class="form-group">
-							<label>Tahun Ajaran</label>
-							<input type="text" class="form-control" placeholder="Tahun Ajaran">
+				<div id="box-ta" class="box box-default">
+					<form id="form-ta" role="form">
+						<div class="box-body">
+							<input type="hidden" name="ta_id" value="0">
+							<div class="form-group">
+								<label>Tahun Ajaran</label>
+								<input name="ta" type="text" class="form-control" placeholder="Tahun Ajaran">
+							</div>
 						</div>
-					</div>
-					<!-- /.box-body -->
-				</form>
+						<!-- /.box-body -->
+					</form>
+				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary">Save</button>
+				<button type="button" class="btn btn-primary" onclick="taSave()">Save</button>
 			</div>
 		</div>
 		<!-- /.modal-content -->
 	</div>
 	<!-- /.modal-dialog -->
 </div>
-
-<script>
-	function show_detail() {
-		$('#modal-detail').modal('show')
-	}
-</script>

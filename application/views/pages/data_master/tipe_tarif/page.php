@@ -23,93 +23,22 @@
 					<!-- /.box-header -->
 					<div class="box-body">
 						<div class="col-md-12" style="margin-bottom:20px">
-							<button type="button" class="btn btn-block btn-primary" onclick="show_detail()" style="width:15%">
+							<button type="button" class="btn btn-block btn-primary" onclick="tarifTipeModal()" style="width:15%">
 								<i class="fa fa-plus"></i>
 								Tambah Data
 							</button>
 						</div>
 						<div class="col-md-12">
-							<table id="example1" class="table table-bordered table-striped table-hover">
+							<table id="datatables-ss1" class="table table-bordered table-striped table-hover">
 								<thead>
 									<tr>
 										<th>No</th>
+										<th>Tipe Transaksi</th>
 										<th>Tipe Tarif</th>
 										<th>Aksi</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>1</td>
-										<td>
-											<small class="label bg-blue">Bulanan</small>
-										</td>
-										<td>SPP Bulanan</td>
-										<td>
-											<a href="#" style="color:#f56954" data-toggle="tooltip" title="Edit" onclick="show_detail()">
-												<i class="fa fa-edit"></i>
-											</a>
-											<a href="#" style="color:#00c0ef" data-toggle="tooltip" title="Sync Data Tunggakan">
-												<i class="fa fa-refresh"></i>
-											</a>
-											<a href="<?= base_url() ?>data_master/tipe_tarif/page/detail" style="color:#00a65a" data-toggle="tooltip" title="Detail Data Per Kelas & TA">
-												<i class="fa fa-search"></i>
-											</a>
-										</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>
-											<small class="label bg-blue">Bulanan</small>
-										</td>
-										<td>Uang Gedung</td>
-										<td>
-											<a href="#" style="color:#f56954" data-toggle="tooltip" title="Edit" onclick="show_detail()">
-												<i class="fa fa-edit"></i>
-											</a>
-											<a href="#" style="color:#00c0ef" data-toggle="tooltip" title="Sync Data Tunggakan">
-												<i class="fa fa-refresh"></i>
-											</a>
-											<a href="<?= base_url() ?>data_master/tipe_tarif/page/detail" style="color:#00a65a" data-toggle="tooltip" title="Detail Data Per Kelas & TA">
-												<i class="fa fa-search"></i>
-											</a>
-										</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>
-											<small class="label bg-blue">Bulanan</small>
-										</td>
-										<td>Ekstrakulikuler</td>
-										<td>
-											<a href="#" style="color:#f56954" data-toggle="tooltip" title="Edit" onclick="show_detail()">
-												<i class="fa fa-edit"></i>
-											</a>
-											<a href="#" style="color:#00c0ef" data-toggle="tooltip" title="Sync Data Tunggakan">
-												<i class="fa fa-refresh"></i>
-											</a>
-											<a href="<?= base_url() ?>data_master/tipe_tarif/page/detail" style="color:#00a65a" data-toggle="tooltip" title="Detail Data Per Kelas & TA">
-												<i class="fa fa-search"></i>
-											</a>
-										</td>
-									</tr>
-									<tr>
-										<td>4</td>
-										<td>
-											<small class="label bg-green">Cicilan</small>
-										</td>
-										<td>Pendaftaran Siswa Baru (PSB)</td>
-										<td>
-											<a href="#" style="color:firebrick" onclick="show_detail()">
-												<i class="fa fa-edit"></i>
-											</a>
-											<a href="#" style="color:#00c0ef" data-toggle="tooltip" title="Sync Data Tunggakan">
-												<i class="fa fa-refresh"></i>
-											</a>
-											<a href="<?= base_url() ?>data_master/tipe_tarif/page/detail" style="color:#00a65a" data-toggle="tooltip" title="Detail Data Per Kelas & TA">
-												<i class="fa fa-search"></i>
-											</a>
-										</td>
-									</tr>
 								</tbody>
 							</table>
 						</div>
@@ -128,7 +57,7 @@
 <!-- /.content-wrapper -->
 
 
-<div class="modal fade" id="modal-detail">
+<div class="modal fade" id="modal-tarif_tipe">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -137,34 +66,33 @@
 				<h4 class="modal-title">Detail Tipe Tarif</h4>
 			</div>
 			<div class="modal-body">
-				<form role="form">
-					<div class="box-body">
-						<div class="form-group">
-							<label>Tipe Transaksi</label>
-							<select class="form-control">
-								<option value="1">Bulanan</option>
-								<option value="1">Cicilan</option>
-							</select>
+				<div id="box-tarif_tipe" class="box box-default">
+					<form id="form-tarif_tipe" role="form">
+						<div class="box-body">
+							<input type="hidden" name="tarif_tipe_id" value="0">
+							<div class="form-group">
+								<label>Tipe Transaksi</label>
+								<select name="transaction_type_id" class="form-control">
+									<option value="0">-Pilih-</option>
+									<?php foreach ($listTransactionType as $tt) : ?>
+										<option value="<?= $tt['transaction_type_id'] ?>"><?= $tt['transaction_type'] ?></option>
+									<?php endforeach; ?>
+								</select>
+							</div>
+							<div class="form-group">
+								<label>Tipe Tarif</label>
+								<input name="tarif_tipe" type="text" class="form-control" placeholder="Tipe Tarif">
+							</div>
 						</div>
-						<div class="form-group">
-							<label>Tipe Tarif</label>
-							<input type="text" class="form-control" placeholder="Tipe Tarif">
-						</div>
-					</div>
-					<!-- /.box-body -->
-				</form>
+						<!-- /.box-body -->
+					</form>
+				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary">Save</button>
+				<button type="button" class="btn btn-primary" onclick="tarifTipeSave()">Save</button>
 			</div>
 		</div>
 		<!-- /.modal-content -->
 	</div>
 	<!-- /.modal-dialog -->
 </div>
-
-<script>
-	function show_detail() {
-		$('#modal-detail').modal('show')
-	}
-</script>

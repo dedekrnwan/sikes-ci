@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-include 'DatatablesSSDModel.php';
+include_once 'DatatablesSSDModel.php';
 class SiswaModel extends DatatablesSSDModel
 {
   function __construct()
@@ -34,5 +34,13 @@ class SiswaModel extends DatatablesSSDModel
     $this->db->where('siswa_id', $id);
     $this->db->update('siswa', $d);
     return $this->db->affected_rows();
+  }
+
+  function getSiswaById($id) 
+  {
+    $q = $this->db->get_where('siswa', ['siswa_id' => $id]);
+    $res = $q->row_array();
+
+    return $res;
   }
 }

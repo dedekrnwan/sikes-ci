@@ -66,10 +66,18 @@ $route['dashboard'] = 'dashboard/DashboardController/index';
 $route['data_master/siswa/page'] = 'data_master/SiswaController/index';
 $route['data_master/siswa/listData'] = 'data_master/SiswaController/listData';
 $route['data_master/siswa/saveData'] = 'data_master/SiswaController/saveData';
+$route['data_master/siswa/getData'] = 'data_master/SiswaController/getData';
 $route['data_master/siswa/page/status'] = 'data_master/SiswaController/status';
 
 $route['data_master/tahun_ajaran/page'] = 'data_master/TahunAjaranController/index';
+$route['data_master/tahun_ajaran/listData'] = 'data_master/TahunAjaranController/listData';
+$route['data_master/tahun_ajaran/saveData'] = 'data_master/TahunAjaranController/saveData';
+$route['data_master/tahun_ajaran/getData'] = 'data_master/TahunAjaranController/getData';
+
 $route['data_master/tipe_tarif/page'] = 'data_master/TipeTarifController/index';
+$route['data_master/tipe_tarif/listData'] = 'data_master/TipeTarifController/listData';
+$route['data_master/tipe_tarif/saveData'] = 'data_master/TipeTarifController/saveData';
+$route['data_master/tipe_tarif/getData'] = 'data_master/TipeTarifController/getData';
 $route['data_master/tipe_tarif/page/detail'] = 'data_master/TipeTarifController/detail';
 
 #pembayaran

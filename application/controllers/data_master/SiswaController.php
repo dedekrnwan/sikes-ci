@@ -57,7 +57,7 @@ class SiswaController extends CI_Controller
 			$row[] = $ld->nama_ortu;
 			$row[] = ($ld->active == 1) ? '<small class="label bg-green">Aktif</small>' : '<small class="label bg-red">Tidak Aktif</small>';
 			$row[] = '<td>
-								<a btn-modal data-siswa_id="'.$ld->siswa_id.'" href="#" style="color:#f56954" data-toggle="tooltip" title="Edit">
+								<a class="btn-edit" style="color:#f56954" data-toggle="tooltip" title="Edit" onclick="siswaModal('.$ld->siswa_id.')">
 									<i class="fa fa-edit"></i>
 								</a>
 								<a href="' . base_url() . 'data_master/siswa/page/status" style="color:green">
@@ -82,9 +82,16 @@ class SiswaController extends CI_Controller
 		foreach($post as $k => $v) {
 			$d[$k] = $v;
 		}
-		$affected = ($d['siswa_id'] == 0) ? $this->SiswaModel->insertSiswa($d) : $this->SiswaModel->saveSiswa($d);	
+		$affected = ($d['siswa_id'] == 0) ? $this->SiswaModel->insertSiswa($d) : $this->SiswaModel->updateSiswa($d['siswa_id'], $d);	
 
 		$res = ($affected) ? true : false;
 		echo json_encode($res);
+	}
+
+	public function getData()
+	{
+		$id = $this->input->get('siswa_id');
+		$data = $this->SiswaModel->getSiswaById($id);
+		echo json_encode($data);
 	}
 }

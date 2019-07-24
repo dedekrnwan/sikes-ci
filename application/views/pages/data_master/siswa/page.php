@@ -60,7 +60,7 @@
 					<!-- /.box-header -->
 					<div class="box-body">
 						<div class="col-md-12" style="margin-bottom:20px">
-							<button btn-modal type="button" class="btn btn-block btn-primary" style="width:15%">
+							<button type="button" class="btn btn-block btn-primary" style="width:15%" onclick="siswaModal()">
 								<i class="fa fa-plus"></i>
 								Tambah Data
 							</button>
@@ -154,7 +154,7 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" btn-save class="btn btn-primary">Save</button>
+				<button type="button" class="btn btn-primary" onclick="siswaSave()">Save</button>
 			</div>
 		</div>
 		<!-- /.modal-content -->
