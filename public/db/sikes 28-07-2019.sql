@@ -19,7 +19,7 @@ USE `sikes`;
 -- Dumping structure for table sikes.message_sent
 CREATE TABLE IF NOT EXISTS `message_sent` (
   `message_sent_id` int(11) NOT NULL AUTO_INCREMENT,
-  `t_pembayaran_id` int(11) DEFAULT NULL,
+  `t_pembayaran_detail_id` int(11) DEFAULT NULL,
   `siswa_id` int(11) DEFAULT NULL,
   `no_ortu` varchar(20) DEFAULT NULL,
   `message_type` varchar(50) DEFAULT NULL,
@@ -28,13 +28,15 @@ CREATE TABLE IF NOT EXISTS `message_sent` (
   `date_modified` datetime DEFAULT NULL,
   `created_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`message_sent_id`),
-  KEY `t_pembayaran_id` (`t_pembayaran_id`),
+  KEY `t_pembayaran_id` (`t_pembayaran_detail_id`),
   KEY `siswa_id` (`siswa_id`),
   KEY `created_by` (`created_by`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Dumping data for table sikes.message_sent: ~0 rows (approximately)
+-- Dumping data for table sikes.message_sent: ~1 rows (approximately)
 /*!40000 ALTER TABLE `message_sent` DISABLE KEYS */;
+INSERT INTO `message_sent` (`message_sent_id`, `t_pembayaran_detail_id`, `siswa_id`, `no_ortu`, `message_type`, `message_text`, `date_added`, `date_modified`, `created_by`) VALUES
+	(1, 1, 1, '0838028301', 'pembayaran', 'Anda telah membayarankan', '2019-07-28 17:28:37', '2019-07-28 17:28:38', 1);
 /*!40000 ALTER TABLE `message_sent` ENABLE KEYS */;
 
 -- Dumping structure for table sikes.role
@@ -143,7 +145,7 @@ CREATE TABLE IF NOT EXISTS `tarif_nilai` (
   KEY `tarif_tipe_id` (`tarif_tipe_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
--- Dumping data for table sikes.tarif_nilai: ~1 rows (approximately)
+-- Dumping data for table sikes.tarif_nilai: ~2 rows (approximately)
 /*!40000 ALTER TABLE `tarif_nilai` DISABLE KEYS */;
 INSERT INTO `tarif_nilai` (`tarif_nilai_id`, `ta_id`, `kelas`, `tarif_tipe_id`, `nominal`, `nominal_min`, `date_started`, `date_ended`, `active`) VALUES
 	(1, 1, 1, 1, 200000, 400000, '2019-07-28', '2019-07-28', 0),
@@ -198,10 +200,12 @@ CREATE TABLE IF NOT EXISTS `t_pembayaran` (
   KEY `siswa_id` (`siswa_id`),
   KEY `tarif_nilai_id` (`tarif_nilai_id`),
   KEY `created_by` (`created_by`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Dumping data for table sikes.t_pembayaran: ~1 rows (approximately)
+-- Dumping data for table sikes.t_pembayaran: ~2 rows (approximately)
 /*!40000 ALTER TABLE `t_pembayaran` DISABLE KEYS */;
+INSERT INTO `t_pembayaran` (`t_pembayaran_id`, `siswa_id`, `tarif_nilai_id`, `bulan_ke`, `nominal`, `nominal_bayar`, `date_added`, `date_modified`, `created_by`) VALUES
+	(1, 1, 1, 1, 200000, 300000, '2019-07-28 15:11:03', '2019-07-28 15:11:04', NULL);
 /*!40000 ALTER TABLE `t_pembayaran` ENABLE KEYS */;
 
 -- Dumping structure for table sikes.t_pembayaran_detail
@@ -219,7 +223,7 @@ CREATE TABLE IF NOT EXISTS `t_pembayaran_detail` (
 -- Dumping data for table sikes.t_pembayaran_detail: ~3 rows (approximately)
 /*!40000 ALTER TABLE `t_pembayaran_detail` DISABLE KEYS */;
 INSERT INTO `t_pembayaran_detail` (`t_pembayaran_detail_id`, `t_pembayaran_id`, `nominal`, `date_added`, `created_by`) VALUES
-	(1, NULL, 200000, '2019-07-23 10:54:22', NULL),
+	(1, 1, 200000, '2019-07-23 10:54:22', NULL),
 	(2, NULL, 500000, '2019-07-23 10:54:22', NULL),
 	(3, NULL, 900000, '2019-06-23 10:54:22', NULL);
 /*!40000 ALTER TABLE `t_pembayaran_detail` ENABLE KEYS */;
@@ -240,6 +244,49 @@ CREATE TABLE IF NOT EXISTS `user` (
 INSERT INTO `user` (`user_id`, `role_id`, `username`, `password`, `active`) VALUES
 	(1, 1, 'admin', '5ebe2294ecd0e0f08eab7690d2a6ee69', 1);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
+
+-- Dumping structure for view sikes.v_message_sent
+-- Creating temporary table to overcome VIEW dependency errors
+CREATE TABLE `v_message_sent` (
+	`message_sent_id` INT(11) NOT NULL,
+	`t_pembayaran_detail_id` INT(11) NULL,
+	`siswa_id` INT(11) NULL,
+	`no_ortu` VARCHAR(20) NULL COLLATE 'latin1_swedish_ci',
+	`message_type` VARCHAR(50) NULL COLLATE 'latin1_swedish_ci',
+	`message_text` VARCHAR(255) NULL COLLATE 'latin1_swedish_ci',
+	`date_added` DATETIME NULL,
+	`date_modified` DATETIME NULL,
+	`created_by` INT(11) NULL,
+	`date_added2` VARCHAR(10) NULL COLLATE 'utf8mb4_general_ci',
+	`nama` VARCHAR(50) NULL COLLATE 'latin1_swedish_ci',
+	`nis` VARCHAR(50) NULL COLLATE 'latin1_swedish_ci',
+	`tarif_tipe` VARCHAR(50) NULL COLLATE 'latin1_swedish_ci',
+	`nominal` FLOAT NULL
+) ENGINE=MyISAM;
+
+-- Dumping structure for view sikes.v_pembayaran
+-- Creating temporary table to overcome VIEW dependency errors
+CREATE TABLE `v_pembayaran` (
+	`t_pembayaran_id` INT(11) NOT NULL,
+	`siswa_id` INT(11) NULL,
+	`tarif_nilai_id` INT(11) NULL,
+	`bulan_ke` INT(2) NULL,
+	`nominal` FLOAT NULL,
+	`nominal_bayar` FLOAT NULL,
+	`date_added` DATETIME NULL,
+	`date_modified` DATETIME NULL,
+	`created_by` INT(11) NULL,
+	`nama` VARCHAR(50) NULL COLLATE 'latin1_swedish_ci',
+	`nis` VARCHAR(50) NULL COLLATE 'latin1_swedish_ci',
+	`ta_id` INT(11) NULL,
+	`kelas` INT(11) NULL,
+	`ta` VARCHAR(50) NULL COLLATE 'latin1_swedish_ci',
+	`nominal_sisa` DOUBLE NULL,
+	`status` VARCHAR(11) NULL COLLATE 'utf8mb4_general_ci',
+	`tarif_tipe` VARCHAR(50) NULL COLLATE 'latin1_swedish_ci',
+	`transaction_type_id` INT(11) NULL,
+	`transaction_type` VARCHAR(50) NULL COLLATE 'latin1_swedish_ci'
+) ENGINE=MyISAM;
 
 -- Dumping structure for view sikes.v_siswa
 -- Creating temporary table to overcome VIEW dependency errors
@@ -293,6 +340,45 @@ CREATE TABLE `v_tarif_tipe` (
 	`akronim` VARCHAR(50) NULL COLLATE 'latin1_swedish_ci',
 	`transaction_type` VARCHAR(50) NULL COLLATE 'latin1_swedish_ci'
 ) ENGINE=MyISAM;
+
+-- Dumping structure for view sikes.v_message_sent
+-- Removing temporary table and create final VIEW structure
+DROP TABLE IF EXISTS `v_message_sent`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_message_sent` AS SELECT 
+	ms.*,
+	DATE_FORMAT(ms.date_added, "%Y-%m-%d") as `date_added2`,
+	sis.nama,
+	sis.nis,
+	tt.tarif_tipe,
+	tpd.nominal
+FROM message_sent ms 
+LEFT JOIN siswa sis ON sis.siswa_id = ms.siswa_id
+LEFT JOIN t_pembayaran_detail tpd ON tpd.t_pembayaran_detail_id = ms.t_pembayaran_detail_id
+LEFT JOIN t_pembayaran tp ON tp.t_pembayaran_id = tpd.t_pembayaran_id
+LEFT JOIN tarif_nilai tn ON tn.tarif_nilai_id = tp.tarif_nilai_id
+LEFT JOIN tarif_tipe tt ON tt.tarif_tipe_id = tn.tarif_tipe_id ;
+
+-- Dumping structure for view sikes.v_pembayaran
+-- Removing temporary table and create final VIEW structure
+DROP TABLE IF EXISTS `v_pembayaran`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_pembayaran` AS SELECT 
+	tp.*,
+	sis.nama,
+	sis.nis,
+	tn.ta_id,
+	tn.kelas,
+	ta.ta,
+	tp.nominal - tp.nominal_bayar AS `nominal_sisa`,
+	if(tp.nominal - tp.nominal_bayar <= 0, 'lunas', 'belum lunas') AS `status`,
+	ttp.tarif_tipe,
+	ttp.transaction_type_id,
+	tty.transaction_type
+FROM t_pembayaran tp 
+LEFT JOIN siswa sis ON sis.siswa_id = tp.siswa_id 
+LEFT JOIN tarif_nilai tn ON tn.tarif_nilai_id = tp.tarif_nilai_id
+LEFT JOIN ta ON ta.ta_id = tn.ta_id
+LEFT JOIN tarif_tipe ttp ON ttp.tarif_tipe_id = tn.tarif_tipe_id
+LEFT JOIN transaction_type tty ON tty.transaction_type_id = ttp.transaction_type_id ;
 
 -- Dumping structure for view sikes.v_siswa
 -- Removing temporary table and create final VIEW structure

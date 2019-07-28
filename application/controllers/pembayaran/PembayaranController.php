@@ -48,7 +48,7 @@ class PembayaranController extends CI_Controller
 			$row[] = $no;
 			$row[] = $ld->nis;
 			$row[] = $ld->nama;
-			$row[] = ($ld->status == 'bulanan') ? '<small class="label bg-green">'.$ld->transaction_type.'</small>' : '<small class="label bg-red">'.$ld->transaction_type.'</small>';
+			$row[] = ($ld->status == 'bulanan') ? '<small class="label bg-green">' . $ld->transaction_type . '</small>' : '<small class="label bg-red">' . $ld->transaction_type . '</small>';
 			$row[] = $ld->tarif_tipe;
 			$row[] = $ld->ta;
 			$row[] = $ld->kelas;

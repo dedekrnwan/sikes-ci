@@ -28,7 +28,17 @@ class SmsController extends CI_Controller
 		$query = json_decode($this->input->post('query'), true);
 		if (!empty($query)) {
 			foreach ($query as $k => $v) {
-				$cond[] = [$v['name'], $v['value'], 'where'];
+				if($k == 'message_type') {
+					$cond[] = [$v['name'], $v['value'], 'where'];
+				}
+				if($k == 'date_from') {
+					$date = date('Y-m-d', strtotime($v['value']));
+					$cond[] = ['date_added2 >=', $date, 'where'];
+				}
+				if($k == 'date_until') {
+					$date = date('Y-m-d', strtotime($v['value']));
+					$cond[] = ['date_added2 <=', $date, 'where'];
+				}			
 			}
 		}
 
