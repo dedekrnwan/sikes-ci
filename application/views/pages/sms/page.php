@@ -24,22 +24,22 @@
 							<div class="box-body">
 								<div class="col-md-3 form-group">
 									<label>Tipe SMS</label>
-									<select class="form-control">
-										<option>Pembayaran</option>
-										<option>Reminder</option>
+									<select param-filter name="message_type" class="form-control">
+										<option value="pembayaran">Pembayaran</option>
+										<option value="reminder">Reminder</option>
 									</select>
 								</div>
 								<div class="col-md-3 form-group">
 									<label>Dari Tanggal</label>
-									<input type="date" class="form-control">
+									<input param-filter name="date_from" type="date" class="form-control">
 								</div>
 								<div class="col-md-3 form-group">
-									<label>Dari Tanggal</label>
-									<input type="date" class="form-control">
+									<label>Smpai Tanggal</label>
+									<input param-filter name="date_until" type="date" class="form-control">
 								</div>
 								<div class="col-md-3 form-group">
 									<label></label>
-									<button type="button" class="btn btn-block btn-warning" style="width:50%">
+									<button btn-filter type="button" class="btn btn-block btn-warning" style="width:50%">
 										<i class="fa fa-search"></i> Filter
 									</button>
 								</div>
@@ -56,7 +56,7 @@
 					<!-- /.box-header -->
 					<div class="box-body">
 						<div class="col-md-12">
-							<table id="example1" class="table table-bordered table-striped table-hover">
+							<table id="datatables-ss1" class="table table-bordered table-striped table-hover">
 								<thead>
 									<tr>
 										<th>No</th>
@@ -71,32 +71,6 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>1</td>
-										<td>
-											<small class="label bg-green">Pembayaran</small>
-										</td>
-										<td>27-08-2019 09:00</td>
-										<td>1332</td>
-										<td>Linda Purnama</td>
-										<td>081231828311</td>
-										<td>SPP Bulanan</td>
-										<td>Rp. 900.000</td>
-										<td>Anda telah membayarankan</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>
-											<small class="label bg-red">Reminder</small>
-										</td>
-										<td>27-08-2019 09:00</td>
-										<td>1332</td>
-										<td>Linda Purnama</td>
-										<td>081231828311</td>
-										<td>OSIS</td>
-										<td>Rp. 900.000</td>
-										<td>Anda harus membayar Rp. 900.000 pada tanggal 19 agustus</td>
-									</tr>
 								</tbody>
 							</table>
 						</div>
@@ -113,72 +87,3 @@
 
 </div>
 <!-- /.content-wrapper -->
-
-
-<div class="modal fade" id="modal-detail">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title">Detail History SMS</h4>
-			</div>
-			<div class="modal-body">
-				<form role="form">
-					<div class="box-body">
-						<div class="form-group">
-							<label>NIS</label>
-							<input type="text" class="form-control" placeholder="NIS">
-						</div>
-						<div class="form-group">
-							<label>Nama</label>
-							<input type="text" class="form-control" placeholder="Nama">
-						</div>
-						<div class="form-group">
-							<label>Jenis Kelamin</label>
-							<select class="form-control">
-								<option>L</option>
-								<option>P</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label>Alamat</label>
-							<textarea class="form-control" placeholder="Alamat"></textarea>
-						</div>
-						<div class="form-group">
-							<label>Nama Orang Tua</label>
-							<input type="text" class="form-control" placeholder="Nama Orang Tua">
-						</div>
-						<div class="form-group">
-							<label>No Orang Tua</label>
-							<input type="number" class="form-control" placeholder="No Orang Tua">
-						</div>
-						<div class="form-group">
-							<label>Email Orang Tua</label>
-							<input type="email" class="form-control" placeholder="Email Orang Tua">
-						</div>
-						<div class="form-group">
-							<label>Aktif</label>
-							<select class="form-control">
-								<option value="1">Ya</option>
-								<option value="0">Tidak</option>
-							</select>
-						</div>
-					</div>
-					<!-- /.box-body -->
-				</form>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary">Save</button>
-			</div>
-		</div>
-		<!-- /.modal-content -->
-	</div>
-	<!-- /.modal-dialog -->
-</div>
-
-<script>
-	function show_detail() {
-		$('#modal-detail').modal('show')
-	}
-</script>

@@ -7,20 +7,56 @@ class SmsController extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		// $this->load->library('template');
-		// $this->load->model('User');
-		// $this->load->library('form_validation');
-		// if($this->session->has_userdata('user')){
-		//         redirect('admin/home');
-		// }
-		//
-		$this->data = [];
+		$this->load->model('MessageSentModel');
+		if (!$this->session->has_userdata('user_id')) {
+			redirect('auth/login');
+		}
 	}
 
 	public function index()
 	{
 		$dataHtml1['html']['page'] = $this->load->view('pages/sms/page', null, true);
 		$dataHtml2['html']['page'] = $this->load->view('pages/layout', $dataHtml1, true);
+		$dataHtml2['html']['scriptjs'] = 'sms';
 		$this->load->view('layout', $dataHtml2);
+	}
+
+	public function listData()
+	{
+		// filter
+		$cond = [];
+		$query = json_decode($this->input->post('query'), true);
+		if (!empty($query)) {
+			foreach ($query as $k => $v) {
+				$cond[] = [$v['name'], $v['value'], 'where'];
+			}
+		}
+
+		// list data
+		$listData = $this->MessageSentModel->get_datatables($cond);
+		$data = [];
+		$no = $_POST['start'];
+		foreach ($listData as $ld) {
+			$label = ($ld->message_type == 'pembayaran') ? 'green' : 'red';
+			$no++;
+			$row = [];
+			$row[] = $no;
+			$row[] = '<small class="label bg-'.$label.'">'.$ld->message_type.'</small>';
+			$row[] = $ld->date_added;
+			$row[] = $ld->nis;
+			$row[] = $ld->nama;
+			$row[] = $ld->no_ortu;
+			$row[] = $ld->tarif_tipe;
+			$row[] = 'Rp '.number_format($ld->nominal);
+			$row[] = $ld->message_text;
+			$data[] = $row;
+		}
+		$output = [
+			"draw" => $_POST['draw'],
+			"recordsFiltered" => $this->MessageSentModel->count_filtered($cond),
+			"recordsTotal" => $this->MessageSentModel->count_all($cond),
+			"data" => $data
+		];
+		echo json_encode($output);
 	}
 }

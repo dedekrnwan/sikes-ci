@@ -25,50 +25,54 @@
 							<div class="box-body">
 								<div class="col-md-4 form-group">
 									<label>NIS</label>
-									<input type="text" class="form-control" placeholder="Masukan NIS">
+									<input param-filter name="nis" type="text" class="form-control" placeholder="Masukan NIS">
 								</div>
 								<div class="col-md-4 form-group">
 									<label>Tahun Ajaran</label>
-									<select class="form-control">
-										<option>2018</option>
-										<option>2019</option>
+									<select param-filter name="ta_id" class="form-control">
+										<option value="0">-Pilih-</option>
+										<?php foreach ($listTahunAjaran as $ta) : ?>
+											<option value="<?= $ta['ta_id'] ?>"><?= $ta['ta'] ?></option>
+										<?php endforeach; ?>
 									</select>
 								</div>
 								<div class="col-md-4 form-group">
 									<label>Kelas</label>
-									<select class="form-control">
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
+									<select param-filter name="kelas" class="form-control">
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
 									</select>
 								</div>
 								<div class="col-md-4 form-group">
 									<label>Tipe Transaksi</label>
-									<select class="form-control">
-										<option>Cicilan</option>
-										<option>Bulanan</option>
+									<select param-filter name="transaction_type_id" class="form-control">
+										<option value="0">-Pilih-</option>
+										<?php foreach ($listTransactionType as $tt) : ?>
+											<option value="<?= $tt['transaction_type_id'] ?>"><?= $tt['transaction_type'] ?></option>
+										<?php endforeach; ?>
 									</select>
 								</div>
 								<div class="col-md-4 form-group">
 									<label>Bulan</label>
-									<select class="form-control">
-										<option>Jan</option>
-										<option>Feb</option>
-										<option>Mar</option>
-										<option>Apr</option>
-										<option>Mei</option>
-										<option>Jun</option>
-										<option>Jul</option>
-										<option>Agu</option>
-										<option>Sep</option>
-										<option>Okt</option>
-										<option>Nov</option>
-										<option>Des</option>
+									<select param-filter name="bulan_ke" class="form-control">
+										<option value="1">Jan</option>
+										<option value="2">Feb</option>
+										<option value="3">Mar</option>
+										<option value="4">Apr</option>
+										<option value="5">Mei</option>
+										<option value="6">Jun</option>
+										<option value="7">Jul</option>
+										<option value="8">Agu</option>
+										<option value="9">Sep</option>
+										<option value="10">Okt</option>
+										<option value="11">Nov</option>
+										<option value="12">Des</option>
 									</select>
 								</div>
 								<div class="col-md-4 form-group">
 									<label></label>
-									<button type="button" class="btn btn-block btn-warning" style="width:50%">
+									<button btn-filter type="button" class="btn btn-block btn-warning" style="width:50%">
 										<i class="fa fa-search"></i> Filter
 									</button>
 								</div>
@@ -85,7 +89,7 @@
 					<!-- /.box-header -->
 					<div class="box-body">
 						<div class="col-md-12">
-							<table id="example1" class="table table-bordered table-striped table-hover">
+							<table id="datatables-ss1" class="table table-bordered table-striped table-hover">
 								<thead>
 									<tr>
 										<th>No</th>
@@ -102,102 +106,6 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>1</td>
-										<td>1132</td>
-										<td>Linda Purnama</td>
-										<td>
-											<small class="label bg-blue">Bulanan</small>
-										</td>
-										<td>SPP Bulanan</td>
-										<td>2019</td>
-										<td>1</td>
-										<td>Jan</td>
-										<th>Rp 0</th>
-										<td>
-											<small class="label bg-green">Lunas</small>
-										</td>
-										<td>
-											<a href="#" style="color:#f56954" data-toggle="tooltip" title="Bayar" onclick="show_bayar_bulanan()">
-												<i class="fa fa-money"></i>
-											</a>
-											<a href="#" style="color:#00c0ef" data-toggle="tooltip" title="History Pembayaran" onclick="show_history_pembayaran()">
-												<i class="fa fa-history"></i>
-											</a>
-										</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>1132</td>
-										<td>Linda Purnama</td>
-										<td>
-											<small class="label bg-blue">Bulanan</small>
-										</td>
-										<td>SPP Bulanan</td>
-										<td>2019</td>
-										<td>1</td>
-										<td>Feb</td>
-										<th>Rp 0</th>
-										<td>
-											<small class="label bg-green">Lunas</small>
-										</td>
-										<td>
-											<a href="#" style="color:#f56954" data-toggle="tooltip" title="Bayar" onclick="show_bayar_bulanan()">
-												<i class="fa fa-money"></i>
-											</a>
-											<a href="#" style="color:#00c0ef" data-toggle="tooltip" title="History Pembayaran" onclick="show_history_pembayaran()">
-												<i class="fa fa-history"></i>
-											</a>
-										</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>1132</td>
-										<td>Linda Purnama</td>
-										<td>
-											<small class="label bg-blue">Bulanan</small>
-										</td>
-										<td>SPP Bulanan</td>
-										<td>2019</td>
-										<td>1</td>
-										<td>Mar</td>
-										<th>Rp 200.000</th>
-										<td>
-											<small class="label bg-yellow">Belum Lunas</small>
-										</td>
-										<td>
-											<a href="#" style="color:#f56954" data-toggle="tooltip" title="Bayar" onclick="show_bayar_bulanan()">
-												<i class="fa fa-money"></i>
-											</a>
-											<a href="#" style="color:#00c0ef" data-toggle="tooltip" title="History Pembayaran" onclick="show_history_pembayaran()">
-												<i class="fa fa-history"></i>
-											</a>
-										</td>
-									</tr>
-									<tr>
-										<td>4</td>
-										<td>1132</td>
-										<td>Linda Purnama</td>
-										<td>
-											<small class="label bg-green">Cicilan</small>
-										</td>
-										<td>Pendaftaran Siswa Baru</td>
-										<td>2019</td>
-										<td>1</td>
-										<td>-</td>
-										<th>Rp 1.200.000</th>
-										<td>
-											<small class="label bg-yellow">Belum Lunas</small>
-										</td>
-										<td>
-											<a href="#" style="color:#f56954" data-toggle="tooltip" title="Bayar" onclick="show_bayar_cicilan()">
-												<i class="fa fa-money"></i>
-											</a>
-											<a href="#" style="color:#00c0ef" data-toggle="tooltip" title="History Pembayaran" onclick="show_history_pembayaran()">
-												<i class="fa fa-history"></i>
-											</a>
-										</td>
-									</tr>
 								</tbody>
 							</table>
 						</div>
@@ -221,7 +129,7 @@
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title">Form Pembayaran <i><small>[Bulanan]</small></i></h4>
+				<h4 class="modal-title">Form Pembayaran <i><small>[Bulanan]</small></i></h4>
 			</div>
 			<div class="modal-body">
 				<form role="form">

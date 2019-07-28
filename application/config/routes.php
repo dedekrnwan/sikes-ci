@@ -97,7 +97,9 @@ $route['data_master/tipe_tarif/getDataTarifNilai'] = 'data_master/TipeTarifContr
 #pembayaran
 $route['pembayaran'] = 'pembayaran/PembayaranController/index';
 $route['pembayaran/page'] = 'pembayaran/PembayaranController/index';
+$route['pembayaran/listData'] = 'pembayaran/PembayaranController/listData';
 
 #sms
 $route['sms'] = 'sms/SmsController/index';
 $route['sms/page'] = 'sms/SmsController/index';
+$route['sms/listData'] = 'sms/SmsController/listData';
