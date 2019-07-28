@@ -7,6 +7,7 @@ class SiswaController extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('SiswaModel');
+		$this->load->model('SiswaStatusModel');
 		$this->load->model('TahunAjaranModel');
 		if (!$this->session->has_userdata('user_id')) {
 			redirect('auth/login');
@@ -22,13 +23,6 @@ class SiswaController extends CI_Controller
 		$dataHtml2['html']['page'] = $this->load->view('pages/layout', $dataHtml1, true);
 		$dataHtml2['html']['scriptjs'] = 'siswa';
 
-		$this->load->view('layout', $dataHtml2);
-	}
-
-	public function status()
-	{
-		$dataHtml1['html']['page'] = $this->load->view('pages/data_master/siswa/page_status', null, true);
-		$dataHtml2['html']['page'] = $this->load->view('pages/layout', $dataHtml1, true);
 		$this->load->view('layout', $dataHtml2);
 	}
 
@@ -53,6 +47,8 @@ class SiswaController extends CI_Controller
 			$row[] = $no;
 			$row[] = $ld->nis;
 			$row[] = $ld->nama;
+			$row[] = $ld->ta;
+			$row[] = $ld->kelas;
 			$row[] = $ld->jenis_kelamin;
 			$row[] = $ld->nama_ortu;
 			$row[] = ($ld->active == 1) ? '<small class="label bg-green">Aktif</small>' : '<small class="label bg-red">Tidak Aktif</small>';
@@ -60,7 +56,7 @@ class SiswaController extends CI_Controller
 								<a class="btn-edit" style="color:#f56954" data-toggle="tooltip" title="Edit" onclick="siswaModal('.$ld->siswa_id.')">
 									<i class="fa fa-edit"></i>
 								</a>
-								<a href="' . base_url() . 'data_master/siswa/page/status" style="color:green">
+								<a href="' . base_url() . 'data_master/siswa/page/status/'.$ld->siswa_id.'" style="color:green">
 									<i class="fa fa-search"></i>
 								</a>
 							</td>';
@@ -94,4 +90,73 @@ class SiswaController extends CI_Controller
 		$data = $this->SiswaModel->getSiswaById($id);
 		echo json_encode($data);
 	}
+
+
+	// Status
+	public function status($id)
+	{
+		$data['listTahunAjaran'] = $this->TahunAjaranModel->getTahunAjaran();
+		$data['siswa'] = $this->SiswaModel->getSiswaById($id);
+		
+		$dataHtml1['html']['page'] = $this->load->view('pages/data_master/siswa/page_status', $data, true);
+		$dataHtml2['html']['page'] = $this->load->view('pages/layout', $dataHtml1, true);
+		$dataHtml2['html']['scriptjs'] = 'siswa_status';
+
+		$this->load->view('layout', $dataHtml2);
+	}
+
+	public function listDataSiswaStatus($siswa_id)
+	{
+		// filter
+		$cond = [];
+		$cond[] = ['siswa_id', $siswa_id, 'where'];
+
+		// list data
+		$listData = $this->SiswaStatusModel->get_datatables($cond);
+		$data = [];
+		$no = $_POST['start'];
+		foreach ($listData as $ld) {
+			$no++;
+			$row = [];
+			$row[] = $no;
+			$row[] = $ld->ta;
+			$row[] = $ld->kelas;
+			$row[] = ($ld->active == 1) ? '<small class="label bg-green">Aktif</small>' : '<small class="label bg-red">Tidak Aktif</small>';
+			$row[] = '<td>
+								<a class="btn-edit" style="color:#f56954" data-toggle="tooltip" title="Edit" onclick="siswaStatusEdit('.$ld->siswa_status_id.')">
+									<i class="fa fa-edit"></i>
+								</a>
+							</td>';
+			$data[] = $row;
+		}
+		$output = [
+			"draw" => $_POST['draw'],
+			"recordsFiltered" => $this->SiswaStatusModel->count_filtered($cond),
+			"recordsTotal" => $this->SiswaStatusModel->count_all($cond),
+			"data" => $data
+		];
+		echo json_encode($output);
+	}
+
+	public function saveDataSiswaStatus()
+	{
+		$post = $this->input->post();
+		$d = [];
+		foreach($post as $k => $v) {
+			$d[$k] = $v;
+		}
+		$affected = ($d['siswa_status_id'] == 0) ? $this->SiswaStatusModel->insertSiswaStatus($d) : $this->SiswaStatusModel->updateSiswaStatus($d['siswa_status_id'], $d);	
+
+		$res = ($affected) ? true : false;
+		echo json_encode($res);
+	}
+
+	public function getDataSiswaStatus()
+	{
+		$id = $this->input->get('siswa_status_id');
+		$data = $this->SiswaStatusModel->getSiswaStatusById($id);
+		echo json_encode($data);
+	}
+
+	
 }

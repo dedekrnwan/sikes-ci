@@ -72,6 +72,8 @@
 										<th>No</th>
 										<th>NIS</th>
 										<th>Nama</th>
+										<th>TA</th>
+										<th>Kelas</th>
 										<th>Jenis Kelamin</th>
 										<th>Nama Orang Tua</th>
 										<th>Status</th>

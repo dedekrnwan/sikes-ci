@@ -1,6 +1,10 @@
+const underConstruct = () => {
+	swal("Under constructon !");
+}
+
 // ajax setup
 $.ajaxSetup({
-	error: () => { alert('some error technical') }
+	error: () => { 	swal("Some error technical, please contact developer !") }
 })
 
 // loading

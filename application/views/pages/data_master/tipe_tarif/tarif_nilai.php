@@ -18,18 +18,18 @@
 			<div class="col-xs-12">
 				<div class="box">
 					<div class="box-header">
-						<h3 class="box-title">Data Detail Tipe Tarif - SPP Bulanan</h3>
+						<h3 class="box-title">Data Detail Tipe Tarif - <?= $tarifTipe['tarif_tipe'] ?></h3>
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body">
 						<div class="col-md-12" style="margin-bottom:20px">
-							<button type="button" class="btn btn-block btn-primary" onclick="show_add()" style="width:15%">
+							<button type="button" class="btn btn-block btn-primary" onclick="tarifNilaiAdd()" style="width:15%">
 								<i class="fa fa-plus"></i>
 								Tambah Data
 							</button>
 						</div>
 						<div class="col-md-12">
-							<table id="example1" class="table table-bordered table-striped table-hover">
+							<table id="datatables-ss1" class="table table-bordered table-striped table-hover">
 								<thead>
 									<tr>
 										<th>No</th>
@@ -41,34 +41,6 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>1</td>
-										<td>2019</td>
-										<td>1</td>
-										<td>Rp 200.000</td>
-										<td>
-											<small class="label bg-green">Aktif</small>
-										</td>
-										<td>
-											<a href="#" style="color:#f56954" data-toggle="tooltip" title="Edit" onclick="show_detail()">
-												<i class="fa fa-edit"></i>
-											</a>
-										</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>2019</td>
-										<td>2</td>
-										<td>Rp 300.000</td>
-										<td>
-											<small class="label bg-green">Aktif</small>
-										</td>
-										<td>
-											<a href="#" style="color:#f56954" data-toggle="tooltip" title="Edit" onclick="show_detail()">
-												<i class="fa fa-edit"></i>
-											</a>
-										</td>
-									</tr>
 								</tbody>
 							</table>
 						</div>
@@ -86,7 +58,7 @@
 </div>
 <!-- /.content-wrapper -->
 
-<div class="modal fade" id="modal-add">
+<div class="modal fade" id="modal-tarif_nilai_add">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -95,33 +67,39 @@
 				<h4 class="modal-title">Tambah Data</h4>
 			</div>
 			<div class="modal-body">
-				<form role="form">
-					<div class="box-body">
-						<div class="form-group">
-							<label>Tahun Ajaran</label>
-							<select class="form-control">
-								<option value="1">2018</option>
-								<option value="0">2019</option>
-							</select>
+				<div id="box-tarif_nilai_add" class="box box-default">
+					<form id="form-tarif_nilai_add" role="form">
+						<input type="hidden" name="tarif_nilai_id">
+						<input type="hidden" name="tarif_tipe_id" value="<?= $tarifTipe['tarif_tipe_id'] ?>">
+						<div class="box-body">
+							<div class="form-group">
+								<label>Tahun Ajaran</label>
+								<select name="ta_id" class="form-control">
+									<option value="0">-Pilih-</option>
+									<?php foreach ($listTahunAjaran as $ta) : ?>
+										<option value="<?= $ta['ta_id'] ?>"><?= $ta['ta'] ?></option>
+									<?php endforeach; ?>
+								</select>
+							</div>
+							<div class="form-group">
+								<label>Kelas</label>
+								<select name="kelas" class="form-control">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label>Nominal</label>
+								<input name="nominal" type="number" class="form-control" placeholder="Masukan Nominal">
+							</div>
 						</div>
-						<div class="form-group">
-							<label>Kelas</label>
-							<select class="form-control">
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label>Nominal</label>
-							<input type="number" class="form-control" placeholder="Masukan Nominal">
-						</div>
-					</div>
-					<!-- /.box-body -->
-				</form>
+						<!-- /.box-body -->
+					</form>
+				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary">Save</button>
+				<button type="button" class="btn btn-primary" onclick="tarifNilaiSave('add')">Save</button>
 			</div>
 		</div>
 		<!-- /.modal-content -->
@@ -129,7 +107,7 @@
 	<!-- /.modal-dialog -->
 </div>
 
-<div class="modal fade" id="modal-detail">
+<div class="modal fade" id="modal-tarif_nilai_edit">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -138,21 +116,25 @@
 				<h4 class="modal-title">Detail Data</h4>
 			</div>
 			<div class="modal-body">
-				<form role="form">
-					<div class="box-body">
-						<div class="form-group">
-							<label>Aktif</label>
-							<select class="form-control">
-								<option value="1">Ya</option>
-								<option value="0">Tidak</option>
-							</select>
+				<div id="box-tarif_nilai_edit" class="box box-default">
+					<form id="form-tarif_nilai_edit" role="form">
+						<input type="hidden" name="tarif_nilai_id">
+						<input type="hidden" name="tarif_tipe_id" value="<?= $tarifTipe['tarif_tipe_id'] ?>">
+						<div class="box-body">
+							<div class="form-group">
+								<label>Aktif</label>
+								<select name="active" class="form-control">
+									<option value="1">Ya</option>
+									<option value="0">Tidak</option>
+								</select>
+							</div>
 						</div>
-					</div>
-					<!-- /.box-body -->
-				</form>
+						<!-- /.box-body -->
+					</form>
+				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary">Save</button>
+				<button type="button" class="btn btn-primary" onclick="tarifNilaiSave('edit')">Save</button>
 			</div>
 		</div>
 		<!-- /.modal-content -->

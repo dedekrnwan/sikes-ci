@@ -63,22 +63,36 @@ $route['dashboard/page'] = 'dashboard/DashboardController/index';
 $route['dashboard'] = 'dashboard/DashboardController/index';
 
 # data_master
+// siswa
 $route['data_master/siswa/page'] = 'data_master/SiswaController/index';
 $route['data_master/siswa/listData'] = 'data_master/SiswaController/listData';
 $route['data_master/siswa/saveData'] = 'data_master/SiswaController/saveData';
 $route['data_master/siswa/getData'] = 'data_master/SiswaController/getData';
-$route['data_master/siswa/page/status'] = 'data_master/SiswaController/status';
 
+// siswa status
+$route['data_master/siswa/page/status/(:any)'] = 'data_master/SiswaController/status/$1';
+$route['data_master/siswa/listDataSiswaStatus/(:any)'] = 'data_master/SiswaController/listDataSiswaStatus/$1';
+$route['data_master/siswa/saveDataSiswaStatus'] = 'data_master/SiswaController/saveDataSiswaStatus';
+$route['data_master/siswa/getDataSiswaStatus'] = 'data_master/SiswaController/getDataSiswaStatus';
+
+// tahun ajaran
 $route['data_master/tahun_ajaran/page'] = 'data_master/TahunAjaranController/index';
 $route['data_master/tahun_ajaran/listData'] = 'data_master/TahunAjaranController/listData';
 $route['data_master/tahun_ajaran/saveData'] = 'data_master/TahunAjaranController/saveData';
 $route['data_master/tahun_ajaran/getData'] = 'data_master/TahunAjaranController/getData';
 
+// tipe tarif
 $route['data_master/tipe_tarif/page'] = 'data_master/TipeTarifController/index';
 $route['data_master/tipe_tarif/listData'] = 'data_master/TipeTarifController/listData';
 $route['data_master/tipe_tarif/saveData'] = 'data_master/TipeTarifController/saveData';
 $route['data_master/tipe_tarif/getData'] = 'data_master/TipeTarifController/getData';
-$route['data_master/tipe_tarif/page/detail'] = 'data_master/TipeTarifController/detail';
+
+// tarif_nilai
+$route['data_master/tipe_tarif/page/tarif_nilai/(:any)'] = 'data_master/TipeTarifController/tarif_nilai/$1';
+$route['data_master/tipe_tarif/listDataTarifNilai/(:any)'] = 'data_master/TipeTarifController/listDataTarifNilai/$1';
+$route['data_master/tipe_tarif/saveDataTarifNilai'] = 'data_master/TipeTarifController/saveDataTarifNilai';
+$route['data_master/tipe_tarif/getDataTarifNilai'] = 'data_master/TipeTarifController/getDataTarifNilai';
+
 
 #pembayaran
 $route['pembayaran'] = 'pembayaran/PembayaranController/index';

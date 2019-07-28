@@ -18,18 +18,18 @@
 			<div class="col-xs-12">
 				<div class="box">
 					<div class="box-header">
-						<h3 class="box-title">Detail Status Siswa - Linda Purnama <small class="label bg-red">NIS: 1132</small></h3>
+						<h3 class="box-title">Detail Status Siswa - <?= $siswa['nama'] ?> <small class="label bg-red">NIS: <?= $siswa['nis'] ?></small></h3>
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body">
 						<div class="col-md-12" style="margin-bottom:20px">
-							<button type="button" class="btn btn-block btn-primary" onclick="show_add()" style="width:15%">
+							<button type="button" class="btn btn-block btn-primary" onclick="siswaStatusAdd()" style="width:15%">
 								<i class="fa fa-plus"></i>
 								Tambah Data
 							</button>
 						</div>
 						<div class="col-md-12">
-							<table id="example1" class="table table-bordered table-striped table-hover">
+							<table id="datatables-ss1" class="table table-bordered table-striped table-hover">
 								<thead>
 									<tr>
 										<th>No</th>
@@ -40,32 +40,6 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>1</td>
-										<td>2019</td>
-										<td>1</td>
-										<td>
-											<small class="label bg-green">Tidak Aktif</small>
-										</td>
-										<td>
-											<a href="#" style="color:#f56954" data-toggle="tooltip" title="Edit" onclick="show_detail()">
-												<i class="fa fa-edit"></i>
-											</a>
-										</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>2019</td>
-										<td>2</td>
-										<td>
-											<small class="label bg-green">Aktif</small>
-										</td>
-										<td>
-											<a href="#" style="color:#f56954" data-toggle="tooltip" title="Edit" onclick="show_detail()">
-												<i class="fa fa-edit"></i>
-											</a>
-										</td>
-									</tr>
 								</tbody>
 							</table>
 						</div>
@@ -83,7 +57,7 @@
 </div>
 <!-- /.content-wrapper -->
 
-<div class="modal fade" id="modal-add">
+<div class="modal fade" id="modal-siswa_status_add">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -92,29 +66,35 @@
 				<h4 class="modal-title">Tambah Data</h4>
 			</div>
 			<div class="modal-body">
-				<form role="form">
-					<div class="box-body">
-						<div class="form-group">
-							<label>Tahun Ajaran</label>
-							<select class="form-control">
-								<option value="2018">2018</option>
-								<option value="2019">2019</option>
-							</select>
+				<div id="box-siswa_status_add" class="box box-default">
+					<form id="form-siswa_status_add" role="form">
+						<input type="hidden" name="siswa_status_id" value="0">
+						<input type="hidden" name="siswa_id" value="<?= $siswa['siswa_id'] ?>">
+						<div class="box-body">
+							<div class="form-group">
+								<label>Tahun Ajaran</label>
+								<select name="ta_id" class="form-control">
+									<option value="0">-Pilih-</option>
+									<?php foreach ($listTahunAjaran as $ta) : ?>
+										<option value="<?= $ta['ta_id'] ?>"><?= $ta['ta'] ?></option>
+									<?php endforeach; ?>
+								</select>
+							</div>
+							<div class="form-group">
+								<label>Kelas</label>
+								<select name="kelas" class="form-control">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+								</select>
+							</div>
 						</div>
-						<div class="form-group">
-							<label>Kelas</label>
-							<select class="form-control">
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-							</select>
-						</div>
-					</div>
-					<!-- /.box-body -->
-				</form>
+						<!-- /.box-body -->
+					</form>
+				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary">Save</button>
+				<button type="button" class="btn btn-primary" onclick="siswaStatusSave('add')">Save</button>
 			</div>
 		</div>
 		<!-- /.modal-content -->
@@ -122,7 +102,7 @@
 	<!-- /.modal-dialog -->
 </div>
 
-<div class="modal fade" id="modal-detail">
+<div class="modal fade" id="modal-siswa_status_edit">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -131,34 +111,28 @@
 				<h4 class="modal-title">Detail Data</h4>
 			</div>
 			<div class="modal-body">
-				<form role="form">
-					<div class="box-body">
-						<div class="form-group">
-							<label>Aktif</label>
-							<select class="form-control">
-								<option value="1">Ya</option>
-								<option value="0">Tidak</option>
-							</select>
+				<div id="box-siswa_status_edit" class="box box-default">
+					<form id="form-siswa_status_edit" role="form">
+						<input type="hidden" name="siswa_status_id" value="0">
+						<input type="hidden" name="siswa_id" value="<?= $siswa['siswa_id'] ?>">
+						<div class="box-body">
+							<div class="form-group">
+								<label>Aktif</label>
+								<select name="active" class="form-control">
+									<option value="1">Ya</option>
+									<option value="0">Tidak</option>
+								</select>
+							</div>
 						</div>
-					</div>
-					<!-- /.box-body -->
-				</form>
+						<!-- /.box-body -->
+					</form>
+				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary">Save</button>
+				<button type="button" class="btn btn-primary" onclick="siswaStatusSave('edit')">Save</button>
 			</div>
 		</div>
 		<!-- /.modal-content -->
 	</div>
 	<!-- /.modal-dialog -->
 </div>
-
-<script>
-	function show_add() {
-		$('#modal-add').modal('show')
-	}
-
-	function show_detail() {
-		$('#modal-detail').modal('show')
-	}
-</script>
