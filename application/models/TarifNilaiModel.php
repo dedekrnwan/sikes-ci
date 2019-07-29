@@ -52,4 +52,12 @@ class TarifNilaiModel extends DatatablesSSDModel
 
     return $res;
   }
+
+  function getTarifNilaiByTarifTipeId($tarfif_tipe_id)
+  {
+    $q = $this->db->get_where('v_tarif_nilai', ['tarif_tipe_id' => $tarfif_tipe_id, 'active' => 1]);
+    $res = $q->result_array();
+
+    return $res;
+  }
 }

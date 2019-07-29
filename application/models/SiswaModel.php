@@ -43,4 +43,12 @@ class SiswaModel extends DatatablesSSDModel
 
     return $res;
   }
+
+  function getSiswaByParam($param)
+  {
+    $q = $this->db->get_where('v_siswa', $param);
+    $res = $q->result_array();
+
+    return $res;
+  }
 }

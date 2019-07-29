@@ -13,4 +13,43 @@ class PembayaranModel extends DatatablesSSDModel
       'order' => ['t_pembayaran_id' => 'asc']
     ];
   }
+
+  function countPembayaran()
+  {
+    $this->db->select('*');
+    $q = $this->db->get('t_pembayaran');
+    $res = $q->num_rows();
+
+    return $res;
+  }
+
+  function insertPembayaran($d)
+  {
+    $this->db->insert('t_pembayaran', $d);
+    return $this->db->affected_rows();
+  }
+
+  function updatePembayaran($id, $d)
+  {
+    $this->db->where('t_pembayaran_id', $id);
+    $this->db->update('t_pembayaran', $d);
+    return $this->db->affected_rows();
+  }
+
+  function getPembayaranById($id) 
+  {
+    $q = $this->db->get_where('t_pembayaran', ['t_pembayaran_id' => $id]);
+    $res = $q->row_array();
+
+    return $res;
+  }
+
+  function getPembayaranByParam($param)
+  {
+    $q = $this->db->get_where('v_pembayaran', $param);
+    $res = $q->result_array();
+
+    return $res;
+  }
+
 }
