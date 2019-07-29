@@ -13,6 +13,7 @@ class TipeTarifController extends CI_Controller
 		$this->load->model('TahunAjaranModel');
 		$this->load->model('SiswaModel');
 		$this->load->model('PembayaranModel');
+		$this->load->model('SyncTarifModel');
 		if (!$this->session->has_userdata('user_id')) {
 			redirect('auth/login');
 		}
@@ -164,74 +165,101 @@ class TipeTarifController extends CI_Controller
 		foreach ($dTarifNilai as $tn) {
 			$param = ['ta_id' => $tn['ta_id'], 'kelas' => $tn['kelas'], 'active' => 1];
 			$dSiswa = $this->SiswaModel->getSiswaByParam($param);
-			
+
 			// bulanan
-			if($tn['transaction_type_id'] == 1) {
+			if ($tn['transaction_type_id'] == 1) {
 				$this->tarifBulanan($dSiswa, $tn);
-			// cicilan
-			}	else {
+				// cicilan
+			} else {
 				$this->tarifCicilan($dSiswa, $tn);
 			}
 		}
 		echo json_encode(true);
 	}
 
-	private function tarifBulanan($dSiswa, $tn) {
+	private function tarifBulanan($dSiswa, $tn)
+	{
 		$date1 = $this->detectDate($tn['date_started'], 'bef');
 		$date2 = $this->detectDate($tn['date_ended'], 'end');
-		
+
 		$loop = true;
-		while($loop) {
+		while ($loop) {
 			$d = date('Y-m-d', $date1);
 			$dExpl = explode('-', $d);
 
-			foreach($dSiswa as $sis) {
-				$dPmbyr = [
-					'siswa_id' => $sis['siswa_id'],
-					'tarif_nilai_id' => $tn['tarif_nilai_id'],
-					'tahun' => $dExpl[0],
-					'bulan_ke' => $dExpl[1],
-					'nominal' => $tn['nominal'],
-					'nominal_min' => $tn['nominal_min'],
-					'nominal_bayar' => 0,
-					'date_added' => date('Y-m-d H:i:s'),
-					'date_modified' => date('Y-m-d H:i:s'),
-					'created_by' => $this->session->userdata('user_id')
-				];
-				$ins = $this->PembayaranModel->insertPembayaran($dPmbyr);
+			foreach ($dSiswa as $sis) {
+				$check = $this->checkSyncTarif($sis['siswa_id'], $tn['tarif_nilai_id']);
+				if (!$check) {
+					$this->insertPembayaran($sis['siswa_id'], $tn, $dExpl[0], $dExpl[1]);
+					$this->insertSyncTarif($sis['siswa_id'], $tn);
+				}
 			}
-			
+
 			$date1 = strtotime('+1 MONTH', $date1);
 			$loop = ($date1 < $date2) ? true : false;
 		}
 	}
 
-	private function tarifCicilan($dSiswa, $tn) {
-		foreach($dSiswa as $sis) {
-			$dPmbyr = [
-				'siswa_id' => $sis['siswa_id'],
-				'tarif_nilai_id' => $tn['tarif_nilai_id'],
-				'tahun' => 0,
-				'bulan_ke' => 0,
-				'nominal' => $tn['nominal'],
-				'nominal_min' => $tn['nominal_min'],
-				'nominal_bayar' => 0,
-				'date_added' => date('Y-m-d H:i:s'),
-				'date_modified' => date('Y-m-d H:i:s'),
-				'created_by' => $this->session->userdata('user_id')
-			];
-			$ins = $this->PembayaranModel->insertPembayaran($dPmbyr);
+	private function tarifCicilan($dSiswa, $tn)
+	{
+		foreach ($dSiswa as $sis) {
+			$check = $this->checkSyncTarif($sis['siswa_id'], $tn['tarif_nilai_id']);
+			if (!$check) {
+				$this->insertPembayaran($sis['siswa_id'], $tn);
+				$this->insertSyncTarif($sis['siswa_id'], $tn);
+			}
 		}
 	}
 
-	private function detectDate($date, $type) {
+	private function detectDate($date, $type)
+	{
 		$expl = explode('-', $date);
-		if($type = 'bef') {
+		if ($type = 'bef') {
 			$m = ($expl[2] > 10) ? $expl[1] + 1 : $expl[1];
 		} else {
 			$m = ($expl[2] < 10) ? $expl[1] - 1 : $expl[1];
 		}
-		$date = $expl[0].'-'.$m.'-10';
+		$date = $expl[0] . '-' . $m . '-10';
 		return strtotime($date);
+	}
+
+	private function insertPembayaran($siswa_id, $tn, $thn = 0, $bln = 0)
+	{
+		$dPmbyr = [
+			'siswa_id' => $siswa_id,
+			'tarif_nilai_id' => $tn['tarif_nilai_id'],
+			'tahun' => $thn,
+			'bulan_ke' => $bln,
+			'nominal' => $tn['nominal'],
+			'nominal_min' => $tn['nominal_min'],
+			'nominal_bayar' => 0,
+			'date_added' => date('Y-m-d H:i:s'),
+			'date_modified' => date('Y-m-d H:i:s'),
+			'created_by' => $this->session->userdata('user_id')
+		];
+		$ins = $this->PembayaranModel->insertPembayaran($dPmbyr);
+	}
+
+	private function checkSyncTarif($siswa_id, $tarif_nilai_id)
+	{
+		$param = [
+			'siswa_id' => $siswa_id,
+			'tarif_nilai_id' => $tarif_nilai_id,
+			'status' => 1
+		];
+		$check = $this->SyncTarifModel->getSyncTarifByParam($param);
+		return $check;
+	}
+
+	private function insertSyncTarif($siswa_id, $tn)
+	{
+		$dSyncTarif = [
+			'siswa_id' => $siswa_id,
+			'tarif_nilai_id' => $tn['tarif_nilai_id'],
+			'status' => 1,
+			'date_added' => date('Y-m-d H:i:s'),
+			'created_by' => $this->session->userdata('user_id')
+		];
+		$ins = $this->SyncTarifModel->insertSyncTarif($dSyncTarif);
 	}
 }
