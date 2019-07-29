@@ -47,7 +47,7 @@ class TipeTarifController extends CI_Controller
 								<a class="btn-edit" style="color:#f56954" data-toggle="tooltip" title="Edit" onclick="tarifTipeModal(' . $ld->tarif_tipe_id . ')">
 									<i class="fa fa-edit"></i>
 								</a>
-								<a style="color:#00c0ef" data-toggle="tooltip" title="Sync Data Tunggakan" onclick="underConstruct()">
+								<a style="color:#00c0ef" data-toggle="tooltip" title="Sync Data Tunggakan" onclick="syncTarif('.$ld->tarif_tipe_id.')">
 									<i class="fa fa-refresh"></i>
 								</a>
 								<a href="'.base_url().'data_master/tipe_tarif/page/tarif_nilai/'.$ld->tarif_tipe_id.'" style="color:#00a65a" data-toggle="tooltip" title="Detail Data Per Kelas & TA">
@@ -104,6 +104,8 @@ class TipeTarifController extends CI_Controller
 		$cond = [];
 		$cond[] = ['tarif_tipe_id', $tarif_tipe_id, 'where'];
 
+		$nomin = ($this->TarifTipeModel->getTarifTipeById($tarif_tipe_id)['transaction_type_id'] == 2) ? true : false;
+
 		// list data
 		$listData = $this->TarifNilaiModel->get_datatables($cond);
 		$data = [];
@@ -115,6 +117,7 @@ class TipeTarifController extends CI_Controller
 			$row[] = $ld->ta;
 			$row[] = $ld->kelas;
 			$row[] = 'Rp '.number_format($ld->nominal);
+			if($nomin) $row[] = 'Rp '.number_format($ld->nominal_min);
 			$row[] = ($ld->active == 1) ? '<small class="label bg-green">Aktif</small>' : '<small class="label bg-red">Tidak Aktif</small>';
 			$row[] = '<td>
 								<a class="btn-edit" style="color:#f56954" data-toggle="tooltip" title="Edit" onclick="tarifNilaiEdit(' . $ld->tarif_nilai_id . ')">
@@ -150,5 +153,11 @@ class TipeTarifController extends CI_Controller
 		$id = $this->input->get('tarif_nilai_id');
 		$data = $this->TarifNilaiModel->getTarifNilaiById($id);
 		echo json_encode($data);
+	}
+
+	// Sync Tarif
+	public function sync($tarif_tipe_id) {
+		sleep(10);
+		echo json_encode(true);
 	}
 }

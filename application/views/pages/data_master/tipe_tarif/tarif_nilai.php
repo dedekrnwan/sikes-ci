@@ -36,6 +36,9 @@
 										<th>Tahun Ajaran</th>
 										<th>Kelas</th>
 										<th>Nominal</th>
+										<?php if ($tarifTipe['transaction_type_id'] == 2) : ?>
+											<th>Nominal Min</th>
+										<?php endif; ?>
 										<th>Status</th>
 										<th>Aksi</th>
 									</tr>
@@ -93,6 +96,12 @@
 								<label>Nominal</label>
 								<input name="nominal" type="number" class="form-control" placeholder="Masukan Nominal">
 							</div>
+							<?php if ($tarifTipe['transaction_type_id'] == 2) : ?>
+								<div class="form-group">
+									<label>Nominal Minimal</label>
+									<input name="nominal_min" type="number" class="form-control" placeholder="Masukan Nominal">
+								</div>
+							<?php endif; ?>
 						</div>
 						<!-- /.box-body -->
 					</form>

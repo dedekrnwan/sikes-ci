@@ -16,7 +16,7 @@
 	<section class="content">
 		<div class="row">
 			<div class="col-xs-12">
-				<div class="box">
+				<div id="box-tarif_tipe_table" class="box">
 					<div class="box-header">
 						<h3 class="box-title">Data Tipe Tarif</h3>
 					</div>

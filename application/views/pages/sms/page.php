@@ -25,6 +25,7 @@
 								<div class="col-md-3 form-group">
 									<label>Tipe SMS</label>
 									<select param-filter name="message_type" class="form-control">
+										<option value="0">-Pilih-</option>
 										<option value="pembayaran">Pembayaran</option>
 										<option value="reminder">Reminder</option>
 									</select>

@@ -86,6 +86,7 @@ $route['data_master/tipe_tarif/page'] = 'data_master/TipeTarifController/index';
 $route['data_master/tipe_tarif/listData'] = 'data_master/TipeTarifController/listData';
 $route['data_master/tipe_tarif/saveData'] = 'data_master/TipeTarifController/saveData';
 $route['data_master/tipe_tarif/getData'] = 'data_master/TipeTarifController/getData';
+$route['data_master/tipe_tarif/sync/(:any)'] = 'data_master/TipeTarifController/sync/$1';
 
 // tarif_nilai
 $route['data_master/tipe_tarif/page/tarif_nilai/(:any)'] = 'data_master/TipeTarifController/tarif_nilai/$1';
