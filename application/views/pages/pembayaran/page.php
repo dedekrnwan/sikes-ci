@@ -82,7 +82,7 @@
 			</div>
 
 			<div class="col-xs-12">
-				<div class="box">
+				<div id="box-pembayaran_table" class="box">
 					<div class="box-header">
 						<h3 class="box-title">List Data Pemayaran</h3>
 					</div>
@@ -179,7 +179,7 @@
 	<!-- /.modal-dialog -->
 </div>
 
-<div class="modal fade" id="modal-history-pembayaran">
+<div class="modal fade" id="modal-history_pembayaran">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -188,29 +188,22 @@
 				<h4 class="modal-title">History Pembayaran</h4>
 			</div>
 			<div class="modal-body">
-				<form role="form">
-					<div class="box-body">
-						<div class="col-md-12">
-							<table id="example1" class="table table-bordered table-striped table-hover">
-								<thead>
-									<tr>
-										<th>No</th>
-										<th>Tgl Pembayaran</th>
-										<th>Nominal</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>1</td>
-										<td>15-07-2019 09:00:00</td>
-										<td>Rp 200.000</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
+				<div class="box-body">
+					<div class="col-md-12">
+						<table id="datatables-ss1" class="table table-bordered table-striped table-hover">
+							<thead>
+								<tr>
+									<th>No</th>
+									<th>Tgl Pembayaran</th>
+									<th>Nominal</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
 					</div>
-					<!-- /.box-body -->
-				</form>
+				</div>
+				<!-- /.box-body -->
 			</div>
 			<div class="modal-footer">
 			</div>
@@ -219,19 +212,3 @@
 	</div>
 	<!-- /.modal-dialog -->
 </div>
-
-
-
-<script>
-	function show_bayar_bulanan() {
-		$('#modal-bayar-bulanan').modal('show')
-	}
-
-	function show_bayar_cicilan() {
-		$('#modal-bayar-cicilan').modal('show')
-	}
-
-	function show_history_pembayaran() {
-		$('#modal-history-pembayaran').modal('show')
-	}
-</script>

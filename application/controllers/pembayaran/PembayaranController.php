@@ -10,6 +10,7 @@ class PembayaranController extends CI_Controller
 		$this->load->model('PembayaranModel');
 		$this->load->model('TahunAjaranModel');
 		$this->load->model('TransactionTypeModel');
+		$this->load->model('PembayaranDetailModel');
 		if (!$this->session->has_userdata('user_id')) {
 			redirect('auth/login');
 		}
@@ -48,18 +49,18 @@ class PembayaranController extends CI_Controller
 			$row[] = $no;
 			$row[] = $ld->nis;
 			$row[] = $ld->nama;
-			$row[] = ($ld->status == 'bulanan') ? '<small class="label bg-green">' . $ld->transaction_type . '</small>' : '<small class="label bg-red">' . $ld->transaction_type . '</small>';
+			$row[] = ($ld->status == 'bulanan') ? '<small class="label bg-green">' . $ld->transaction_type . '</small>' : '<small class="label bg-blue">' . $ld->transaction_type . '</small>';
 			$row[] = $ld->tarif_tipe;
 			$row[] = $ld->ta;
 			$row[] = $ld->kelas;
 			$row[] = $ld->bulan_ke;
-			$row[] = $ld->nominal_sisa;
+			$row[] = 'Rp '.number_format($ld->nominal_sisa);
 			$row[] = ($ld->status == 'lunas') ? '<small class="label bg-green">Lunas</small>' : '<small class="label bg-red">Belum Lunas</small>';
 			$row[] = '<td>
 								<a style="color:#f56954" data-toggle="tooltip" title="Bayar" onclick="underConstruct()" onclicks="show_bayar_bulanan()">
 									<i class="fa fa-money"></i>
 								</a>
-								<a style="color:#00c0ef" data-toggle="tooltip" title="History Pembayaran" onclick="underConstruct()" onclicks="show_history_pembayaran()">
+								<a style="color:#00c0ef" data-toggle="tooltip" title="History Pembayaran" onclick="historyPembayaran('.$ld->t_pembayaran_id.')">
 									<i class="fa fa-history"></i>
 								</a>
 							</td>';
@@ -72,5 +73,22 @@ class PembayaranController extends CI_Controller
 			"data" => $data
 		];
 		echo json_encode($output);
+	}
+
+	public function getHistory() {
+		$id = $this->input->get('t_pembayaran_id');
+		$dHistory = $this->PembayaranDetailModel->getPembayaranDetailByParam(['t_pembayaran_id' => $id]);
+		
+		$res = '';
+		$no = 0;
+		foreach($dHistory as $dh) {
+			$no++;
+			$res .= '<tr>';	
+			$res .= '<td>'.$no.'</td>';
+			$res .= '<td>'.$dh['date_added'].'</td>';
+			$res .= '<td>Rp '.number_format($dh['nominal']).'</td>';
+			$res .= '</tr>';
+		}
+		echo $res;
 	}
 }
