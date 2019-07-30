@@ -138,7 +138,7 @@
 						<div class="box-body">
 							<div class="form-group">
 								<label>Nominal</label>
-								<input name="nominal" type="text" class="form-control" placeholder="Masukan Nominal">
+								<input name="nominal" type="number" class="form-control" placeholder="Masukan Nominal">
 							</div>
 						</div>
 						<!-- /.box-body -->

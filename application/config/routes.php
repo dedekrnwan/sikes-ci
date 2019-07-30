@@ -101,6 +101,7 @@ $route['pembayaran/page'] = 'pembayaran/PembayaranController/index';
 $route['pembayaran/listData'] = 'pembayaran/PembayaranController/listData';
 $route['pembayaran/getHistory'] = 'pembayaran/PembayaranController/getHistory';
 $route['pembayaran/getPembayaran'] = 'pembayaran/PembayaranController/getPembayaran';
+$route['pembayaran/savePembayaran'] = 'pembayaran/PembayaranController/savePembayaran';
 
 #sms
 $route['sms'] = 'sms/SmsController/index';

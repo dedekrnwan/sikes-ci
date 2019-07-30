@@ -103,7 +103,11 @@ class PembayaranController extends CI_Controller
 	{
 		$id = $this->input->get('t_pembayaran_id');
 		$d = $this->PembayaranModel->getPembayaranByParam(['t_pembayaran_id' => $id])[0];
-		$res = ($d['transaction_type_id'] == 2 && $d['nominal_bayar'] == 0) ? $d['nominal_min'] : 0;
+		if($d['transaction_type_id'] == 1) {
+			$res = $d['nominal'];
+		} else {
+			$res = ($d['nominal_bayar'] == 0) ? $d['nominal_min'] : 0;
+		}
 
 		echo json_encode($res);
 	}
@@ -118,12 +122,23 @@ class PembayaranController extends CI_Controller
 		}
 
 		// check nominal
-		$check = $this->PembayaranModel->getPembayaranByParam(['t_pembayaran_id' => $d['t_pembayaran_id']])[0];
-		if($check['nominal_sisa'] < $d['nominal']) $res = false;
-
-		$affected = ($d['t_pembayaran'] == 0)
-			? $this->SiswaStatusModel->insertSiswaStatus($d)
-			: $this->SiswaStatusModel->updateSiswaStatus($d['siswa_status_id'], $d);
+		$id = $d['t_pembayaran_id'];
+		$check = $this->PembayaranModel->getPembayaranByParam(['t_pembayaran_id' => $id])[0];
+		if($check['nominal_sisa'] < $d['nominal']) {
+			$res = false;
+		} else {
+			$dPmbyrDet = [
+				't_pembayaran_id' => $id,
+				'nominal' => $d['nominal'],
+				'date_added' => date('Y-m-d H:i:s'),
+				'created_by' => $this->session->userdata('user_id')
+			];
+			$dPmbyr = [
+				'nominal_bayar' => $check['nominal_bayar'] + $d['nominal']
+			];
+			$affected = $this->PembayaranDetailModel->insertPembayaranDetail($dPmbyrDet);
+			$affected = $this->PembayaranModel->updatePembayaran($id, $dPmbyr);
+		}
 
 		$res = ($affected) ? true : false;
 		echo json_encode($res);
