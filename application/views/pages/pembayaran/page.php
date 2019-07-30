@@ -123,55 +123,30 @@
 </div>
 <!-- /.content-wrapper -->
 
-<div class="modal fade" id="modal-bayar-bulanan">
+<div class="modal fade" id="modal-pembayaran">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title">Form Pembayaran <i><small>[Bulanan]</small></i></h4>
+				<h4 class="modal-title">Form Pembayaran</h4>
 			</div>
 			<div class="modal-body">
-				<form role="form">
-					<div class="box-body">
-						<div class="form-group">
-							<label>Nominal</label>
-							<input type="text" class="form-control" disabled placeholder="Masukan Nominal" value="5000000">
+				<div id="box-pembayaran" class="box box-default">
+					<form id="form-pembayaran" role="form">
+						<input type="hidden" name="t_pembayaran_id">
+						<div class="box-body">
+							<div class="form-group">
+								<label>Nominal</label>
+								<input name="nominal" type="text" class="form-control" placeholder="Masukan Nominal">
+							</div>
 						</div>
-					</div>
-					<!-- /.box-body -->
-				</form>
+						<!-- /.box-body -->
+					</form>
+				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary">Submit</button>
-			</div>
-		</div>
-		<!-- /.modal-content -->
-	</div>
-	<!-- /.modal-dialog -->
-</div>
-
-<div class="modal fade" id="modal-bayar-cicilan">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title">Form Pembayaran <i><small>[Cicilan]</small></i></h4>
-			</div>
-			<div class="modal-body">
-				<form role="form">
-					<div class="box-body">
-						<div class="form-group">
-							<label>Nominal</label>
-							<input type="text" class="form-control" disabled placeholder="Masukan Nominal">
-						</div>
-					</div>
-					<!-- /.box-body -->
-				</form>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary">Submit</button>
+				<button type="button" class="btn btn-primary" onclick="pembayaranSave()">Submit</button>
 			</div>
 		</div>
 		<!-- /.modal-content -->

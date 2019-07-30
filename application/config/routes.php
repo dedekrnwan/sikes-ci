@@ -100,6 +100,7 @@ $route['pembayaran'] = 'pembayaran/PembayaranController/index';
 $route['pembayaran/page'] = 'pembayaran/PembayaranController/index';
 $route['pembayaran/listData'] = 'pembayaran/PembayaranController/listData';
 $route['pembayaran/getHistory'] = 'pembayaran/PembayaranController/getHistory';
+$route['pembayaran/getPembayaran'] = 'pembayaran/PembayaranController/getPembayaran';
 
 #sms
 $route['sms'] = 'sms/SmsController/index';

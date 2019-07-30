@@ -46,24 +46,30 @@ class PembayaranController extends CI_Controller
 		foreach ($listData as $ld) {
 			$no++;
 			$row = [];
+
+			// btn aksi
+			$byrBtn = ($ld->nominal_sisa != 0) ?
+				'<a style="color:#f56954" data-toggle="tooltip" title="Bayar" 
+					onclick="pembayaranModal(' . $ld->t_pembayaran_id . ')">
+					<i class="fa fa-money"></i>
+				</a>' : '';
+			$historyBtn = ($ld->nominal_bayar != 0) ?
+				'<a style="color:#00c0ef" data-toggle="tooltip" title="History Pembayaran" 
+					onclick="historyPembayaran(' . $ld->t_pembayaran_id . ')">
+					<i class="fa fa-history"></i>
+				</a>' : '';
+
 			$row[] = $no;
 			$row[] = $ld->nis;
 			$row[] = $ld->nama;
-			$row[] = ($ld->status == 'bulanan') ? '<small class="label bg-green">' . $ld->transaction_type . '</small>' : '<small class="label bg-blue">' . $ld->transaction_type . '</small>';
+			$row[] = ($ld->transaction_type == 'bulanan') ? '<small class="label bg-green">' . $ld->transaction_type . '</small>' : '<small class="label bg-blue">' . $ld->transaction_type . '</small>';
 			$row[] = $ld->tarif_tipe;
 			$row[] = $ld->ta;
 			$row[] = $ld->kelas;
 			$row[] = $ld->bulan_ke;
-			$row[] = 'Rp '.number_format($ld->nominal_sisa);
+			$row[] = 'Rp ' . number_format($ld->nominal_sisa);
 			$row[] = ($ld->status == 'lunas') ? '<small class="label bg-green">Lunas</small>' : '<small class="label bg-red">Belum Lunas</small>';
-			$row[] = '<td>
-								<a style="color:#f56954" data-toggle="tooltip" title="Bayar" onclick="underConstruct()" onclicks="show_bayar_bulanan()">
-									<i class="fa fa-money"></i>
-								</a>
-								<a style="color:#00c0ef" data-toggle="tooltip" title="History Pembayaran" onclick="historyPembayaran('.$ld->t_pembayaran_id.')">
-									<i class="fa fa-history"></i>
-								</a>
-							</td>';
+			$row[] = '<td>' . $byrBtn . $historyBtn . '</td>';
 			$data[] = $row;
 		}
 		$output = [
@@ -75,20 +81,51 @@ class PembayaranController extends CI_Controller
 		echo json_encode($output);
 	}
 
-	public function getHistory() {
+	public function getHistory()
+	{
 		$id = $this->input->get('t_pembayaran_id');
 		$dHistory = $this->PembayaranDetailModel->getPembayaranDetailByParam(['t_pembayaran_id' => $id]);
-		
+
 		$res = '';
 		$no = 0;
-		foreach($dHistory as $dh) {
+		foreach ($dHistory as $dh) {
 			$no++;
-			$res .= '<tr>';	
-			$res .= '<td>'.$no.'</td>';
-			$res .= '<td>'.$dh['date_added'].'</td>';
-			$res .= '<td>Rp '.number_format($dh['nominal']).'</td>';
+			$res .= '<tr>';
+			$res .= '<td>' . $no . '</td>';
+			$res .= '<td>' . $dh['date_added'] . '</td>';
+			$res .= '<td>Rp ' . number_format($dh['nominal']) . '</td>';
 			$res .= '</tr>';
 		}
 		echo $res;
+	}
+
+	public function getPembayaran()
+	{
+		$id = $this->input->get('t_pembayaran_id');
+		$d = $this->PembayaranModel->getPembayaranByParam(['t_pembayaran_id' => $id])[0];
+		$res = ($d['transaction_type_id'] == 2 && $d['nominal_bayar'] == 0) ? $d['nominal_min'] : 0;
+
+		echo json_encode($res);
+	}
+
+	public function savePembayaran()
+	{
+		$res = true;
+		$post = $this->input->post();
+		$d = [];
+		foreach ($post as $k => $v) {
+			$d[$k] = $v;
+		}
+
+		// check nominal
+		$check = $this->PembayaranModel->getPembayaranByParam(['t_pembayaran_id' => $d['t_pembayaran_id']])[0];
+		if($check['nominal_sisa'] < $d['nominal']) $res = false;
+
+		$affected = ($d['t_pembayaran'] == 0)
+			? $this->SiswaStatusModel->insertSiswaStatus($d)
+			: $this->SiswaStatusModel->updateSiswaStatus($d['siswa_status_id'], $d);
+
+		$res = ($affected) ? true : false;
+		echo json_encode($res);
 	}
 }
