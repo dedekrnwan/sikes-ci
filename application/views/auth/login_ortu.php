@@ -10,7 +10,7 @@
 
 <body class="hold-transition login-page bg-custom">
   <div class="col-md-4 col-md-offset-4" style="margin-top: 70px">
-    <div id="box-login" class="box box-danger">
+    <div id="box-login" class="box box-warning">
       <div class="box-header text-center">
         <h3 class="box-title" style="font-size: 30px;">
           <b>SIKES</b>
@@ -19,19 +19,19 @@
       </div>
       <div class="box-body">
         <form id="form-login">
-          <input type="hidden" name="type" value="admin">
+          <input type="hidden" name="type" value="ortu">
           <div class="form-group has-feedback">
-            <input type="text" name="username" class="form-control" placeholder="Username">
+            <input type="text" name="username" class="form-control" placeholder="NIS">
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">
-            <input type="password" name="password" class="form-control" placeholder="Password">
+            <input type="date" name="password" class="form-control" placeholder="Tgl Lahir">
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
           <div class="row mb-1">
             <!-- /.col -->
             <div class="col-xs-12">
-              <button btn-login type="button" class="btn btn-block btn-flat btn-danger">
+              <button btn-login type="button" class="btn btn-block btn-flat btn-warning">
                 <i class="fa fa-mail-forward"></i> Login
               </button>
               <!-- <button type="button" class="btn btn-primary btn-block btn-flat">Sign In</button> -->
@@ -41,7 +41,7 @@
           <div class="row mb-2">
             <!-- /.col -->
             <div class="col-xs-12 text-center">
-              <a href="<?= base_url() ?>auth/loginOrtu"><i><small>Klik disini untuk login sebagai orang tua siswa</small></i></a>
+              <a href="<?= base_url() ?>auth/login"><i><small>Klik disini untuk login sebagai admin</small></i></a>
             </div>
             <!-- /.col -->
           </div>

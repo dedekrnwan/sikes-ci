@@ -11,7 +11,7 @@ class PembayaranController extends CI_Controller
 		$this->load->model('TahunAjaranModel');
 		$this->load->model('TransactionTypeModel');
 		$this->load->model('PembayaranDetailModel');
-		if (!$this->session->has_userdata('user_id')) {
+		if (!($this->session->has_userdata('user_id') || $this->session->has_userdata('siswa_id'))) {
 			redirect('auth/login');
 		}
 	}
@@ -39,6 +39,11 @@ class PembayaranController extends CI_Controller
 			}
 		}
 
+		// siswa
+		if ($this->session->has_userdata('nis')) {
+			$cond[] = ['nis', $this->session->userdata('nis'), 'where'];
+		}
+
 		// list data
 		$listData = $this->PembayaranModel->get_datatables($cond);
 		$data = [];
@@ -48,7 +53,7 @@ class PembayaranController extends CI_Controller
 			$row = [];
 
 			// btn aksi
-			$byrBtn = ($ld->nominal_sisa != 0) ?
+			$byrBtn = ($ld->nominal_sisa != 0 && $this->session->has_userdata('user_id')) ?
 				'<a style="color:#f56954" data-toggle="tooltip" title="Bayar" 
 					onclick="pembayaranModal(' . $ld->t_pembayaran_id . ')">
 					<i class="fa fa-money"></i>
@@ -103,7 +108,7 @@ class PembayaranController extends CI_Controller
 	{
 		$id = $this->input->get('t_pembayaran_id');
 		$d = $this->PembayaranModel->getPembayaranByParam(['t_pembayaran_id' => $id])[0];
-		if($d['transaction_type_id'] == 1) {
+		if ($d['transaction_type_id'] == 1) {
 			$res = $d['nominal'];
 		} else {
 			$res = ($d['nominal_bayar'] == 0) ? $d['nominal_min'] : 0;
@@ -114,6 +119,7 @@ class PembayaranController extends CI_Controller
 
 	public function savePembayaran()
 	{
+		if (!$this->session->has_userdata('user_id')) echo json_encode(false);
 		$res = true;
 		$post = $this->input->post();
 		$d = [];
@@ -124,7 +130,7 @@ class PembayaranController extends CI_Controller
 		// check nominal
 		$id = $d['t_pembayaran_id'];
 		$check = $this->PembayaranModel->getPembayaranByParam(['t_pembayaran_id' => $id])[0];
-		if($check['nominal_sisa'] < $d['nominal']) {
+		if ($check['nominal_sisa'] < $d['nominal']) {
 			$res = false;
 		} else {
 			$dPmbyrDet = [

@@ -23,10 +23,12 @@
 					<div class="box-body">
 						<form role="form">
 							<div class="box-body">
-								<div class="col-md-4 form-group">
-									<label>NIS</label>
-									<input param-filter name="nis" type="text" class="form-control" placeholder="Masukan NIS">
-								</div>
+								<?php if ($this->session->has_userdata('user_id')) : ?>
+									<div class="col-md-4 form-group">
+										<label>NIS</label>
+										<input param-filter name="nis" type="text" class="form-control" placeholder="Masukan NIS">
+									</div>
+								<?php endif; ?>
 								<div class="col-md-4 form-group">
 									<label>Tahun Ajaran</label>
 									<select param-filter name="ta_id" class="form-control">
