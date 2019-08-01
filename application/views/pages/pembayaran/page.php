@@ -77,6 +77,9 @@
 									<button btn-filter type="button" class="btn btn-block btn-warning" style="width:50%">
 										<i class="fa fa-search"></i> Filter
 									</button>
+									<button type="button" class="btn btn-block btn-danger" onclick="sendMsg()" style="width:50%">
+										<i class="fa fa-send"></i> Try Sms
+									</button>
 								</div>
 						</form>
 					</div>

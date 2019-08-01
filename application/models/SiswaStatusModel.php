@@ -34,4 +34,12 @@ class SiswaStatusModel extends DatatablesSSDModel
 
     return $res;
   }
+
+  function countValidate($id)
+  {
+    $q = $this->db->get_where('siswa_status', ['siswa_id' => $id, 'active' => 1]);
+    $res = $q->num_rows();
+
+    return $res;
+  }
 }

@@ -3,6 +3,7 @@
   // define
   const boxId = '#box-login'
   const formId = '#form-login'
+  const type = $(formId).find('input[name="type"]').val()
 
   // collection
   const loginSubmit = () => {
@@ -16,7 +17,7 @@
         removeLoading(boxId)
         if (res === 'true') {
           swal("Berhasil !", "Login berhasil !", "success").then((v) => {
-            window.location.href = (data.type == 'admin') ? `${base_url}/dashboard` : `${base_url}/pembayaran/page`
+            window.location.href = (type === 'admin') ? `${base_url}/dashboard` : `${base_url}/pembayaran/page`
           })
         } else {
           swal("Gagal !", "Login gagal, username atau password salah !", "error")

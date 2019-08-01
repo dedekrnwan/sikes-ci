@@ -144,9 +144,38 @@ class PembayaranController extends CI_Controller
 			];
 			$affected = $this->PembayaranDetailModel->insertPembayaranDetail($dPmbyrDet);
 			$affected = $this->PembayaranModel->updatePembayaran($id, $dPmbyr);
+			$msg = $this->sendMsgBayar($id, $d['nominal']);
 		}
 
 		$res = ($affected) ? true : false;
 		echo json_encode($res);
+	}
+
+	/*
+		$number = 6287xxx,
+		$msg = String
+	*/
+	private function sendMsg($number, $msg)
+	{
+		$cSess = curl_init();
+		$user = 'mcholismalik';
+		$key = 'ce4285a6d3081d9d54d8345a427d43e6';
+
+		$msg = urlencode(stripslashes(utf8_encode($msg)));
+		$url = "http://sms241.xyz/sms/smsreguler.php?username=$user&key=$key&number=$number&message=$msg"; 
+		
+		curl_setopt($cSess, CURLOPT_URL, $url);
+		curl_setopt($cSess, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($cSess, CURLOPT_HEADER, false);
+		$result = curl_exec($cSess);
+		curl_close($cSess);
+
+		return $result;
+	}
+
+	private function sendMsgBayar($t_pembayaran_id, $nominal) {
+		$d = $this->PembayaranModel->getPembayaranByParam(['t_pembayaran_id' => $t_pembayaran_id])[0];
+		$msg = 'Pembayaran '.$d['tarif_tipe'].' yang dilakukan oleh siswa bernama '.$d['nama'].'('.$d['nis'].') sebesar Rp '.number_format($nominal).' telah kami terima';
+		$this->sendMsg($d['no_ortu'], $msg);
 	}
 }

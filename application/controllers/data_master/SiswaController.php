@@ -53,10 +53,10 @@ class SiswaController extends CI_Controller
 			$row[] = $ld->nama_ortu;
 			$row[] = ($ld->active == 1) ? '<small class="label bg-green">Aktif</small>' : '<small class="label bg-red">Tidak Aktif</small>';
 			$row[] = '<td>
-								<a class="btn-edit" style="color:#f56954" data-toggle="tooltip" title="Edit" onclick="siswaModal('.$ld->siswa_id.')">
+								<a class="btn-edit" style="color:#f56954" data-toggle="tooltip" title="Edit" onclick="siswaModal(' . $ld->siswa_id . ')">
 									<i class="fa fa-edit"></i>
 								</a>
-								<a href="' . base_url() . 'data_master/siswa/page/status/'.$ld->siswa_id.'" style="color:green">
+								<a href="' . base_url() . 'data_master/siswa/page/status/' . $ld->siswa_id . '" style="color:green">
 									<i class="fa fa-search"></i>
 								</a>
 							</td>';
@@ -75,10 +75,10 @@ class SiswaController extends CI_Controller
 	{
 		$post = $this->input->post();
 		$d = [];
-		foreach($post as $k => $v) {
+		foreach ($post as $k => $v) {
 			$d[$k] = $v;
 		}
-		$affected = ($d['siswa_id'] == 0) ? $this->SiswaModel->insertSiswa($d) : $this->SiswaModel->updateSiswa($d['siswa_id'], $d);	
+		$affected = ($d['siswa_id'] == 0) ? $this->SiswaModel->insertSiswa($d) : $this->SiswaModel->updateSiswa($d['siswa_id'], $d);
 
 		$res = ($affected) ? true : false;
 		echo json_encode($res);
@@ -97,7 +97,7 @@ class SiswaController extends CI_Controller
 	{
 		$data['listTahunAjaran'] = $this->TahunAjaranModel->getTahunAjaran();
 		$data['siswa'] = $this->SiswaModel->getSiswaById($id);
-		
+
 		$dataHtml1['html']['page'] = $this->load->view('pages/data_master/siswa/page_status', $data, true);
 		$dataHtml2['html']['page'] = $this->load->view('pages/layout', $dataHtml1, true);
 		$dataHtml2['html']['scriptjs'] = 'siswa_status';
@@ -123,7 +123,7 @@ class SiswaController extends CI_Controller
 			$row[] = $ld->kelas;
 			$row[] = ($ld->active == 1) ? '<small class="label bg-green">Aktif</small>' : '<small class="label bg-red">Tidak Aktif</small>';
 			$row[] = '<td>
-								<a class="btn-edit" style="color:#f56954" data-toggle="tooltip" title="Edit" onclick="siswaStatusEdit('.$ld->siswa_status_id.')">
+								<a class="btn-edit" style="color:#f56954" data-toggle="tooltip" title="Edit" onclick="siswaStatusEdit(' . $ld->siswa_status_id . ')">
 									<i class="fa fa-edit"></i>
 								</a>
 							</td>';
@@ -142,10 +142,16 @@ class SiswaController extends CI_Controller
 	{
 		$post = $this->input->post();
 		$d = [];
-		foreach($post as $k => $v) {
+		foreach ($post as $k => $v) {
 			$d[$k] = $v;
 		}
-		$affected = ($d['siswa_status_id'] == 0) ? $this->SiswaStatusModel->insertSiswaStatus($d) : $this->SiswaStatusModel->updateSiswaStatus($d['siswa_status_id'], $d);	
+
+		if ($d['siswa_status_id'] == 0) {
+			$affected = $this->SiswaStatusModel->insertSiswaStatus($d);
+		} else {
+			$vld = ($d['active'] == 1) ? $this->validateActivate($d['siswa_id']) : true;
+			$affected = ($vld) ? $this->SiswaStatusModel->updateSiswaStatus($d['siswa_status_id'], $d) : 0;
+		}
 
 		$res = ($affected) ? true : false;
 		echo json_encode($res);
@@ -158,5 +164,10 @@ class SiswaController extends CI_Controller
 		echo json_encode($data);
 	}
 
-	
+	private function validateActivate($id)
+	{
+		$count = $this->SiswaStatusModel->countValidate($id);
+		$res = ($count == 0) ? true : false;
+		return $res;
+	}
 }
