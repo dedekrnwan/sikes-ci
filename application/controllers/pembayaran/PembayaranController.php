@@ -3,7 +3,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class PembayaranController extends CI_Controller
 {
-	protected $data;
 	public function __construct()
 	{
 		parent::__construct();
@@ -11,6 +10,8 @@ class PembayaranController extends CI_Controller
 		$this->load->model('TahunAjaranModel');
 		$this->load->model('TransactionTypeModel');
 		$this->load->model('PembayaranDetailModel');
+		$this->load->model('MessageSentModel');
+		$this->load->model('ConfigModel');
 		if (!($this->session->has_userdata('user_id') || $this->session->has_userdata('siswa_id'))) {
 			redirect('auth/login');
 		}
@@ -117,6 +118,11 @@ class PembayaranController extends CI_Controller
 		echo json_encode($res);
 	}
 
+	public function getBalanceSms() {
+		$d['balanceSms'] = 'Rp '.number_format($this->ConfigModel->getConfig()['balance_sms']);
+		echo json_encode($d);
+	}
+
 	public function savePembayaran()
 	{
 		if (!$this->session->has_userdata('user_id')) echo json_encode(false);
@@ -142,15 +148,44 @@ class PembayaranController extends CI_Controller
 			$dPmbyr = [
 				'nominal_bayar' => $check['nominal_bayar'] + $d['nominal']
 			];
-			$affected = $this->PembayaranDetailModel->insertPembayaranDetail($dPmbyrDet);
+			$last_id = $this->PembayaranDetailModel->insertPembayaranDetail($dPmbyrDet);
 			$affected = $this->PembayaranModel->updatePembayaran($id, $dPmbyr);
-			$msg = $this->sendMsgBayar($id, $d['nominal']);
+			$affected = $this->sendMsgBayar($last_id, $check, $d['nominal']);
 		}
 
 		$res = ($affected) ? true : false;
 		echo json_encode($res);
 	}
 
+	private function sendMsgBayar($last_id, $d, $nominal)
+	{
+		// send msg
+		$bulan = ($d['transaction_type'] == 'bulanan') ? 'bulan ke ' . $d['bulan_ke'] : '';
+		$msg = 'Pembayaran untuk ' . $d['tarif_tipe'] . ' ' . $bulan . ' yang dilakukan oleh siswa bernama ' . $d['nama'] . '(' . $d['nis'] . ') sebesar Rp ' . number_format($nominal) . ' telah kami terima';
+		$this->sendMsg($d['no_ortu'], $msg);
+
+		// upd balance
+		$getBlnc = $this->checkBalanceSms();
+		$dBlnc = ['balance_sms' => $getBlnc];
+		$upd = $this->ConfigModel->updateConfig($dBlnc);
+
+		// ins msg sent
+		$dMsgSent = [
+			't_pembayaran_detail_id' => $last_id,
+			'siswa_id' => $d['siswa_id'],
+			'no_ortu' => $d['no_ortu'],
+			'message_type' => 'pembayaran',
+			'message_text' => $msg,
+			'date_added' => date('Y-m-d H:i:s'),
+			'date_modified' => date('Y-m-d H:i:s'),
+			'created_by' => $this->session->userdata('user_id')
+		];
+		$res = $this->MessageSentModel->insertMessageSent($dMsgSent);
+		return $res;
+	}
+
+
+	/*** TOOLS ***/
 	/*
 		$number = 6287xxx,
 		$msg = String
@@ -162,8 +197,8 @@ class PembayaranController extends CI_Controller
 		$key = 'ce4285a6d3081d9d54d8345a427d43e6';
 
 		$msg = urlencode(stripslashes(utf8_encode($msg)));
-		$url = "http://sms241.xyz/sms/smsreguler.php?username=$user&key=$key&number=$number&message=$msg"; 
-		
+		$url = "http://sms241.xyz/sms/smsreguler.php?username=$user&key=$key&number=$number&message=$msg";
+
 		curl_setopt($cSess, CURLOPT_URL, $url);
 		curl_setopt($cSess, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($cSess, CURLOPT_HEADER, false);
@@ -173,9 +208,32 @@ class PembayaranController extends CI_Controller
 		return $result;
 	}
 
-	private function sendMsgBayar($t_pembayaran_id, $nominal) {
-		$d = $this->PembayaranModel->getPembayaranByParam(['t_pembayaran_id' => $t_pembayaran_id])[0];
-		$msg = 'Pembayaran '.$d['tarif_tipe'].' yang dilakukan oleh siswa bernama '.$d['nama'].'('.$d['nis'].') sebesar Rp '.number_format($nominal).' telah kami terima';
-		$this->sendMsg($d['no_ortu'], $msg);
+	private function checkBalanceSms()
+	{
+		$apikey      = 'ce4285a6d3081d9d54d8345a427d43e6'; // api key 
+		$urlendpoint = 'http://sms241.xyz/sms/api_sms_reguler_balance_json.php'; // url endpoint api
+
+		$senddata = array('apikey' => $apikey);
+
+		// get balance  
+		$data = json_encode($senddata);
+		$curlHandle = curl_init($urlendpoint);
+		curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, "POST");
+		curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $data);
+		curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt(
+			$curlHandle,
+			CURLOPT_HTTPHEADER,
+			array(
+				'Content-Type: application/json',
+				'Content-Length: ' . strlen($data)
+			)
+		);
+		curl_setopt($curlHandle, CURLOPT_TIMEOUT, 5);
+		curl_setopt($curlHandle, CURLOPT_CONNECTTIMEOUT, 5);
+		$responjson = curl_exec($curlHandle);
+		curl_close($curlHandle);
+		$responjson = json_decode($responjson, true);
+		return $responjson['balance_respon'][0]['Balance'];
 	}
 }

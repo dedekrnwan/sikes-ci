@@ -29,8 +29,8 @@ const pembayaranModal = (id) => {
     beforeSend: () => { addLoading(boxTblId) },
     success: (res) => {
       let d = JSON.parse(res)
+      $(formId).find('input[name="t_pembayaran_id"]').val(id)
       if (d !== 0) {
-        $(formId).find('input[name="t_pembayaran_id"]').val(id)
         $(formId).find('input[name="nominal"]').val(d).attr('readonly', true)
       }
       removeLoading(boxTblId)
@@ -53,6 +53,7 @@ const pembayaranSave = () => {
         swal("Berhasil !", "Pembayaran berhasil dilakukan !", "success").then((v) => {
           $(modalId).modal('hide')
           tbl.ajax.reload(null, false)
+          balanceSms()
         })
       } else {
         swal("Gagal !", "Pembayaran gagal dilakukan !", "error")
@@ -61,7 +62,19 @@ const pembayaranSave = () => {
   })
 }
 
+const balanceSms = () => {
+  $.ajax({
+    type: 'GET',
+    url: `${base_url}pembayaran/getBalanceSms`,
+    success: (res) => {
+      let d = JSON.parse(res)
+      $('.balanceSms').text(`Saldo SMS : ${d.balanceSms}`)
+    }
+  })
+}
+
 // execute
+balanceSms()
 datatablesShow('#datatables-ss1')
 
 

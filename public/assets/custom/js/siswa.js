@@ -41,7 +41,7 @@ const siswaModal = (id = null) => {
         $(formId).find('input[name="nis"]').val(d.nis)
         $(formId).find('input[name="nama"]').val(d.nama)
         $(formId).find('select[name="jenis_kelamin"]').val(d.jenis_kelamin)
-        $(formId).find('input[name="alamat"]').val(d.alamat)
+        $(formId).find('textarea[name="alamat"]').val(d.alamat)
         $(formId).find('input[name="nama_ortu"]').val(d.nama_ortu)
         $(formId).find('input[name="no_ortu"]').val(d.no_ortu)
         $(formId).find('input[name="email_ortu"]').val(d.email_ortu)

@@ -16,6 +16,19 @@
 CREATE DATABASE IF NOT EXISTS `sikes` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `sikes`;
 
+-- Dumping structure for table sikes.config
+CREATE TABLE IF NOT EXISTS `config` (
+  `config_id` int(11) NOT NULL AUTO_INCREMENT,
+  `balance_sms` int(11) DEFAULT NULL,
+  PRIMARY KEY (`config_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+-- Dumping data for table sikes.config: ~0 rows (approximately)
+/*!40000 ALTER TABLE `config` DISABLE KEYS */;
+INSERT INTO `config` (`config_id`, `balance_sms`) VALUES
+	(1, 49684);
+/*!40000 ALTER TABLE `config` ENABLE KEYS */;
+
 -- Dumping structure for table sikes.message_sent
 CREATE TABLE IF NOT EXISTS `message_sent` (
   `message_sent_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -31,10 +44,15 @@ CREATE TABLE IF NOT EXISTS `message_sent` (
   KEY `t_pembayaran_id` (`t_pembayaran_detail_id`),
   KEY `siswa_id` (`siswa_id`),
   KEY `created_by` (`created_by`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
--- Dumping data for table sikes.message_sent: ~1 rows (approximately)
+-- Dumping data for table sikes.message_sent: ~2 rows (approximately)
 /*!40000 ALTER TABLE `message_sent` DISABLE KEYS */;
+INSERT INTO `message_sent` (`message_sent_id`, `t_pembayaran_detail_id`, `siswa_id`, `no_ortu`, `message_type`, `message_text`, `date_added`, `date_modified`, `created_by`) VALUES
+	(1, 13, 11, '6287820988075', 'pembayaran', 'Pembayaran Pendaftaran  yang dilakukan oleh siswa bernama Helmi Fauzi(13115) sebesar Rp 500,000 telah kami terima', '2019-08-01 14:05:36', '2019-08-01 14:05:36', 1),
+	(2, 17, 11, '6287820988075', 'pembayaran', 'Pembayaran untuk Pendaftaran  yang dilakukan oleh siswa bernama Helmi Fauzi(13115) sebesar Rp 300,000 telah kami terima', '2019-08-01 14:12:12', '2019-08-01 14:12:12', 1),
+	(3, 18, 12, '6287820988075', 'pembayaran', 'Pembayaran untuk Pendaftaran  yang dilakukan oleh siswa bernama Rian Priyanto(12114) sebesar Rp 100,000 telah kami terima', '2019-08-01 14:38:30', '2019-08-01 14:38:30', 1),
+	(4, 19, 10, '6287820988075', 'pembayaran', 'Pembayaran untuk Pendaftaran  yang dilakukan oleh siswa bernama Linda Purnama(12115) sebesar Rp 450,000 telah kami terima', '2019-08-01 14:47:16', '2019-08-01 14:47:16', 1);
 /*!40000 ALTER TABLE `message_sent` ENABLE KEYS */;
 
 -- Dumping structure for table sikes.role
@@ -70,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `siswa` (
 /*!40000 ALTER TABLE `siswa` DISABLE KEYS */;
 INSERT INTO `siswa` (`siswa_id`, `nis`, `ttl`, `nama`, `jenis_kelamin`, `alamat`, `nama_ortu`, `no_ortu`, `email_ortu`, `active`) VALUES
 	(9, '13114', '1998-08-27', 'M Cholis Malik', 'L', 'Jl. Raya Bekasi rt 02/013', 'Sulistiyawati', '6287820988075', 'sulis@gmail.com', 1),
-	(10, '12115', '1998-08-27', 'Linda Purnama', 'P', 'Jl. Cirebon raya', 'Aisyah', '6287820988075', 'aisyah@gmail.com', 1),
+	(10, '12115', '1998-08-27', 'Linda Purnama', 'P', 'Jl. Deket DSLan', 'Aisyah', '6287820988075', 'aisyah@gmail.com', 1),
 	(11, '13115', '1998-08-27', 'Helmi Fauzi', 'L', 'Jl. Kemayoran', 'Parjo', '6287820988075', 'parjo@gmail.com', 1),
 	(12, '12114', '1998-08-27', 'Rian Priyanto', 'L', 'Jl. Cipinang Muara', 'Pardi', '6287820988075', 'pardi@gmail.com', 1);
 /*!40000 ALTER TABLE `siswa` ENABLE KEYS */;
@@ -221,13 +239,13 @@ CREATE TABLE IF NOT EXISTS `t_pembayaran` (
 /*!40000 ALTER TABLE `t_pembayaran` DISABLE KEYS */;
 INSERT INTO `t_pembayaran` (`t_pembayaran_id`, `siswa_id`, `tarif_nilai_id`, `tahun`, `bulan_ke`, `nominal`, `nominal_min`, `nominal_bayar`, `date_added`, `date_modified`, `created_by`) VALUES
 	(37, 10, 1, 2019, 8, 1000000, NULL, 1000000, '2019-07-29 11:35:41', '2019-07-29 11:35:41', 1),
-	(38, 12, 1, 2019, 8, 1000000, NULL, 0, '2019-07-29 11:35:41', '2019-07-29 11:35:41', 1),
+	(38, 12, 1, 2019, 8, 1000000, NULL, 1000000, '2019-07-29 11:35:41', '2019-07-29 11:35:41', 1),
 	(39, 9, 2, 2019, 8, 1500000, NULL, 1500000, '2019-07-29 11:35:41', '2019-07-29 11:35:41', 1),
 	(40, 11, 2, 2019, 8, 1500000, NULL, 1500000, '2019-07-29 11:35:41', '2019-07-29 11:35:41', 1),
-	(41, 10, 5, 0, 0, 3000000, 1000000, 1000000, '2019-07-30 06:25:54', '2019-07-30 06:25:54', 1),
-	(42, 12, 5, 0, 0, 3000000, 1000000, 1000000, '2019-07-30 06:25:54', '2019-07-30 06:25:54', 1),
-	(43, 9, 6, 0, 0, 5000000, 2000000, 2000000, '2019-07-30 06:25:54', '2019-07-30 06:25:54', 1),
-	(44, 11, 6, 0, 0, 5000000, 2000000, 2000000, '2019-07-30 06:25:54', '2019-07-30 06:25:54', 1);
+	(41, 10, 5, 0, 0, 3000000, 1000000, 1450000, '2019-07-30 06:25:54', '2019-07-30 06:25:54', 1),
+	(42, 12, 5, 0, 0, 3000000, 1000000, 1100000, '2019-07-30 06:25:54', '2019-07-30 06:25:54', 1),
+	(43, 9, 6, 0, 0, 5000000, 2000000, 2700000, '2019-07-30 06:25:54', '2019-07-30 06:25:54', 1),
+	(44, 11, 6, 0, 0, 5000000, 2000000, 2800000, '2019-07-30 06:25:54', '2019-07-30 06:25:54', 1);
 /*!40000 ALTER TABLE `t_pembayaran` ENABLE KEYS */;
 
 -- Dumping structure for table sikes.t_pembayaran_detail
@@ -240,9 +258,9 @@ CREATE TABLE IF NOT EXISTS `t_pembayaran_detail` (
   PRIMARY KEY (`t_pembayaran_detail_id`),
   KEY `created_by` (`created_by`),
   KEY `pembayaran_id` (`t_pembayaran_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 
--- Dumping data for table sikes.t_pembayaran_detail: ~3 rows (approximately)
+-- Dumping data for table sikes.t_pembayaran_detail: ~13 rows (approximately)
 /*!40000 ALTER TABLE `t_pembayaran_detail` DISABLE KEYS */;
 INSERT INTO `t_pembayaran_detail` (`t_pembayaran_detail_id`, `t_pembayaran_id`, `nominal`, `date_added`, `created_by`) VALUES
 	(1, 37, 1000000, '2019-07-29 17:14:26', 1),
@@ -251,7 +269,15 @@ INSERT INTO `t_pembayaran_detail` (`t_pembayaran_detail_id`, `t_pembayaran_id`, 
 	(8, 39, 1500000, '2019-08-01 11:42:31', 1),
 	(9, 40, 1500000, '2019-08-01 11:43:58', 1),
 	(10, 41, 1000000, '2019-08-01 11:45:57', 1),
-	(11, 42, 1000000, '2019-08-01 11:47:58', 1);
+	(11, 42, 1000000, '2019-08-01 11:47:58', 1),
+	(12, 38, 1000000, '2019-08-01 13:54:40', 1),
+	(13, 44, 500000, '2019-08-01 14:05:36', 1),
+	(14, 43, 500000, '2019-08-01 14:09:26', 1),
+	(15, 43, 100000, '2019-08-01 14:10:25', 1),
+	(16, 43, 100000, '2019-08-01 14:10:35', 1),
+	(17, 44, 300000, '2019-08-01 14:12:12', 1),
+	(18, 42, 100000, '2019-08-01 14:38:29', 1),
+	(19, 41, 450000, '2019-08-01 14:47:15', 1);
 /*!40000 ALTER TABLE `t_pembayaran_detail` ENABLE KEYS */;
 
 -- Dumping structure for table sikes.user

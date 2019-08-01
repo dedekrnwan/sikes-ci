@@ -77,9 +77,6 @@
 									<button btn-filter type="button" class="btn btn-block btn-warning" style="width:50%">
 										<i class="fa fa-search"></i> Filter
 									</button>
-									<button type="button" class="btn btn-block btn-danger" onclick="sendMsg()" style="width:50%">
-										<i class="fa fa-send"></i> Try Sms
-									</button>
 								</div>
 						</form>
 					</div>
@@ -89,7 +86,7 @@
 			<div class="col-xs-12">
 				<div id="box-pembayaran_table" class="box">
 					<div class="box-header">
-						<h3 class="box-title">List Data Pemayaran</h3>
+						<h3 class="box-title">List Data Pemayaran - <small class="label bg-yellow balanceSms">Saldo SMS : 0</small></h3>
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body">

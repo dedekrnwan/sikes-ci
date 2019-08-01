@@ -49,7 +49,7 @@ class PembayaranDetailModel extends CI_Model
   function insertPembayaranDetail($d)
   {
     $this->db->insert('t_pembayaran_detail', $d);
-    return $this->db->affected_rows();
+    return $this->db->insert_id();
   }
 
   function updatePembayaranDetail($id, $d)

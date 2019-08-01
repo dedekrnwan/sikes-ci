@@ -35,7 +35,7 @@ class MessageSentModel extends DatatablesSSDModel
   function insertMessageSent($d)
   {
     $this->db->insert('message_sent', $d);
-    return $this->db->affected_rows();
+    return $this->db->insert_id();
   }
 
   function updateMessageSent($id, $d)
