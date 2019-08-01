@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `config` (
   PRIMARY KEY (`config_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Dumping data for table sikes.config: ~0 rows (approximately)
+-- Dumping data for table sikes.config: ~1 rows (approximately)
 /*!40000 ALTER TABLE `config` DISABLE KEYS */;
 INSERT INTO `config` (`config_id`, `balance_sms`) VALUES
 	(1, 49684);
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `message_sent` (
   KEY `created_by` (`created_by`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
--- Dumping data for table sikes.message_sent: ~2 rows (approximately)
+-- Dumping data for table sikes.message_sent: ~4 rows (approximately)
 /*!40000 ALTER TABLE `message_sent` DISABLE KEYS */;
 INSERT INTO `message_sent` (`message_sent_id`, `t_pembayaran_detail_id`, `siswa_id`, `no_ortu`, `message_type`, `message_text`, `date_added`, `date_modified`, `created_by`) VALUES
 	(1, 13, 11, '6287820988075', 'pembayaran', 'Pembayaran Pendaftaran  yang dilakukan oleh siswa bernama Helmi Fauzi(13115) sebesar Rp 500,000 telah kami terima', '2019-08-01 14:05:36', '2019-08-01 14:05:36', 1),
@@ -190,16 +190,17 @@ CREATE TABLE IF NOT EXISTS `tarif_tipe` (
   `transaction_type_id` int(11) DEFAULT NULL,
   `tarif_tipe` varchar(50) DEFAULT NULL,
   `akronim` varchar(50) DEFAULT NULL,
+  `active` int(1) DEFAULT '0',
   PRIMARY KEY (`tarif_tipe_id`),
   KEY `transaction_type_id` (`transaction_type_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table sikes.tarif_tipe: ~3 rows (approximately)
 /*!40000 ALTER TABLE `tarif_tipe` DISABLE KEYS */;
-INSERT INTO `tarif_tipe` (`tarif_tipe_id`, `transaction_type_id`, `tarif_tipe`, `akronim`) VALUES
-	(1, 1, 'SPP Bulanan', ''),
-	(2, 1, 'OSIS', ''),
-	(3, 2, 'Pendaftaran', NULL);
+INSERT INTO `tarif_tipe` (`tarif_tipe_id`, `transaction_type_id`, `tarif_tipe`, `akronim`, `active`) VALUES
+	(1, 1, 'SPP Bulanan', '', 0),
+	(2, 1, 'OSIS', '', 1),
+	(3, 2, 'Pendaftaran', NULL, 1);
 /*!40000 ALTER TABLE `tarif_tipe` ENABLE KEYS */;
 
 -- Dumping structure for table sikes.transaction_type
@@ -260,7 +261,7 @@ CREATE TABLE IF NOT EXISTS `t_pembayaran_detail` (
   KEY `pembayaran_id` (`t_pembayaran_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 
--- Dumping data for table sikes.t_pembayaran_detail: ~13 rows (approximately)
+-- Dumping data for table sikes.t_pembayaran_detail: ~15 rows (approximately)
 /*!40000 ALTER TABLE `t_pembayaran_detail` DISABLE KEYS */;
 INSERT INTO `t_pembayaran_detail` (`t_pembayaran_detail_id`, `t_pembayaran_id`, `nominal`, `date_added`, `created_by`) VALUES
 	(1, 37, 1000000, '2019-07-29 17:14:26', 1),
@@ -395,6 +396,7 @@ CREATE TABLE `v_tarif_tipe` (
 	`transaction_type_id` INT(11) NULL,
 	`tarif_tipe` VARCHAR(50) NULL COLLATE 'latin1_swedish_ci',
 	`akronim` VARCHAR(50) NULL COLLATE 'latin1_swedish_ci',
+	`active` INT(1) NULL,
 	`transaction_type` VARCHAR(50) NULL COLLATE 'latin1_swedish_ci'
 ) ENGINE=MyISAM;
 

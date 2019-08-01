@@ -46,6 +46,7 @@ class TipeTarifController extends CI_Controller
 				? '<small class="label bg-green">' . $ld->transaction_type . '</small>'
 				: '<small class="label bg-blue">' . $ld->transaction_type . '</small>';
 			$row[] = $ld->tarif_tipe;
+			$row[] = ($ld->active == 1) ? '<small class="label bg-green">Aktif</small>' : '<small class="label bg-red">Tidak Aktif</small>';
 			$row[] = '<td>
 								<a class="btn-edit" style="color:#f56954" data-toggle="tooltip" title="Edit" onclick="tarifTipeModal(' . $ld->tarif_tipe_id . ')">
 									<i class="fa fa-edit"></i>

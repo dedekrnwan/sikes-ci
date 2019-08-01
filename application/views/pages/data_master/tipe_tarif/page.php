@@ -35,6 +35,7 @@
 										<th>No</th>
 										<th>Tipe Transaksi</th>
 										<th>Tipe Tarif</th>
+										<th>Status</th>
 										<th>Aksi</th>
 									</tr>
 								</thead>
@@ -82,6 +83,13 @@
 							<div class="form-group">
 								<label>Tipe Tarif</label>
 								<input name="tarif_tipe" type="text" class="form-control" placeholder="Tipe Tarif">
+							</div>
+							<div class="form-group">
+								<label>Aktif</label>
+								<select name="active" class="form-control">
+									<option value="1">Ya</option>
+									<option value="0">Tidak</option>
+								</select>
 							</div>
 						</div>
 						<!-- /.box-body -->
