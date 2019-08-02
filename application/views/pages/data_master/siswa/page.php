@@ -128,6 +128,10 @@
 								</select>
 							</div>
 							<div class="form-group">
+								<label>TTL</label>
+								<input name="ttl" type="date" class="form-control" placeholder="TTL">
+							</div>
+							<div class="form-group">
 								<label>Alamat</label>
 								<textarea name="alamat" class="form-control" placeholder="Alamat"></textarea>
 							</div>

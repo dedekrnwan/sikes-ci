@@ -76,7 +76,11 @@ class SiswaController extends CI_Controller
 		$post = $this->input->post();
 		$d = [];
 		foreach ($post as $k => $v) {
-			$d[$k] = $v;
+			if($k == 'ttl') { 
+				$d[$k] = date('Y-m-d', strtotime($v));
+			} else {
+				$d[$k] = $v;
+			}
 		}
 		$affected = ($d['siswa_id'] == 0) ? $this->SiswaModel->insertSiswa($d) : $this->SiswaModel->updateSiswa($d['siswa_id'], $d);
 
