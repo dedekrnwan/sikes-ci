@@ -162,7 +162,7 @@ class PembayaranController extends CI_Controller
 		// send msg
 		$bulan = ($d['transaction_type'] == 'bulanan') ? 'bulan ke ' . $d['bulan_ke'] : '';
 		$msg = 'Pembayaran untuk ' . $d['tarif_tipe'] . ' ' . $bulan . ' yang dilakukan oleh siswa bernama ' . $d['nama'] . '(' . $d['nis'] . ') sebesar Rp ' . number_format($nominal) . ' telah kami terima';
-		$this->sendMsg($d['no_ortu'], $msg);
+		// $this->sendMsg($d['no_ortu'], $msg);
 
 		// upd balance
 		$getBlnc = $this->checkBalanceSms();
