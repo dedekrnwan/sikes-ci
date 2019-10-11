@@ -151,8 +151,8 @@ class TipeTarifController extends CI_Controller
 
 		$d = [];
 		foreach ($post as $k => $v) {
-			if($k == 'date_started') $v = date('Y-m-d', strtotime($v));
-			if($k == 'date_ended') $v = date('Y-m-d', strtotime($v));
+			if($k == 'date_started') $v = $this->detectDate(date('Y-m-d', strtotime($v)), 'bef', 'date');
+			if($k == 'date_ended') $v = $this->detectDate(date('Y-m-d', strtotime($v)), 'af', 'date');
 			$d[$k] = $v;
 		}
 		
@@ -206,8 +206,8 @@ class TipeTarifController extends CI_Controller
 
 	private function tarifBulanan($dSiswa, $tn)
 	{
-		$date1 = $this->detectDate($tn['date_started'], 'bef');
-		$date2 = $this->detectDate($tn['date_ended'], 'end');
+		$date1 = strtotime($tn['date_started']);
+		$date2 = strtotime($tn['date_ended']);
 
 		$loop = true;
 		while ($loop) {
@@ -218,7 +218,7 @@ class TipeTarifController extends CI_Controller
 				$check = $this->checkSyncTarif($sis['siswa_id'], $tn['tarif_nilai_id'], $dExpl[0], $dExpl[1]);
 				if (!$check) {
 					$this->insertPembayaran($sis['siswa_id'], $tn, $dExpl[0], $dExpl[1]);
-					$this->insertSyncTarif($sis['siswa_id'], $tn);
+					$this->insertSyncTarif($sis['siswa_id'], $tn, $dExpl[0], $dExpl[1]);
 				}
 			}
 
@@ -238,16 +238,16 @@ class TipeTarifController extends CI_Controller
 		}
 	}
 
-	private function detectDate($date, $type)
+	private function detectDate($date, $type, $returnType = 'str')
 	{
 		$expl = explode('-', $date);
-		if ($type = 'bef') {
+		if ($type == 'bef') {
 			$m = ($expl[2] > 10) ? $expl[1] + 1 : $expl[1];
 		} else {
 			$m = ($expl[2] < 10) ? $expl[1] - 1 : $expl[1];
 		}
 		$date = $expl[0] . '-' . $m . '-10';
-		return strtotime($date);
+		return ($returnType = 'date') ? $date : strtotime($date);
 	}
 
 	private function insertPembayaran($siswa_id, $tn, $thn = 0, $bln = 0)
@@ -272,8 +272,6 @@ class TipeTarifController extends CI_Controller
 		$param = [
 			'siswa_id' => $siswa_id,
 			'tarif_nilai_id' => $tarif_nilai_id,
-			'tahun' => $thn,
-			'bulan_ke' => $bln,
 			'status' => 1
 		];
 
@@ -283,7 +281,7 @@ class TipeTarifController extends CI_Controller
 		return $check;
 	}
 
-	private function insertSyncTarif($siswa_id, $tn)
+	private function insertSyncTarif($siswa_id, $tn, $thn=null, $bln=null)
 	{
 		$dSyncTarif = [
 			'siswa_id' => $siswa_id,
@@ -292,6 +290,9 @@ class TipeTarifController extends CI_Controller
 			'date_added' => date('Y-m-d H:i:s'),
 			'created_by' => $this->session->userdata('user_id')
 		];
+
+		if ($thn != null) $dSyncTarif['tahun'] = $thn;
+		if ($bln != null) $dSyncTarif['bulan_ke'] = $bln;
 		$ins = $this->SyncTarifModel->insertSyncTarif($dSyncTarif);
 	}
 }
