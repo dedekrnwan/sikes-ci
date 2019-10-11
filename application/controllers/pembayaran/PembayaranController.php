@@ -153,7 +153,7 @@ class PembayaranController extends CI_Controller
 			];
 			$last_id = $this->PembayaranDetailModel->insertPembayaranDetail($dPmbyrDet);
 			$affected = $this->PembayaranModel->updatePembayaran($id, $dPmbyr);
-			$affected = $this->sendMsgBayar($last_id, $check, $d['nominal']);
+			$this->sendMsgBayar($last_id, $check, $d['nominal']);
 		}
 
 		$res = ($affected) ? true : false;
