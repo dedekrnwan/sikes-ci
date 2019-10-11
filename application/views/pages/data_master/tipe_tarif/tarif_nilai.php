@@ -39,6 +39,8 @@
 										<?php if ($tarifTipe['transaction_type_id'] == 2) : ?>
 											<th>Nominal Min</th>
 										<?php endif; ?>
+										<th>Date Started</th>
+										<th>Date Ended</th>
 										<th>Status</th>
 										<th>Aksi</th>
 									</tr>
@@ -96,6 +98,16 @@
 								<label>Nominal</label>
 								<input name="nominal" type="number" class="form-control" placeholder="Masukan Nominal">
 							</div>
+							<?php if ($tarifTipe['transaction_type_id'] == 1) : ?>
+								<div class="form-group">
+									<label>Date Started</label>
+									<input name="date_started" type="date" class="form-control">
+								</div>
+								<div class="form-group">
+									<label>Date Ended</label>
+									<input name="date_ended" type="date" class="form-control">
+								</div>
+							<?php endif; ?>
 							<?php if ($tarifTipe['transaction_type_id'] == 2) : ?>
 								<div class="form-group">
 									<label>Nominal Minimal</label>

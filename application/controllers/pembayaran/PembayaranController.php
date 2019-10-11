@@ -33,13 +33,13 @@ class PembayaranController extends CI_Controller
 	{
 		// filter
 		$cond = [];
+		$cond[] = ['active', 1, 'where'];
 		$query = json_decode($this->input->post('query'), true);
 		if (!empty($query)) {
 			foreach ($query as $k => $v) {
 				$cond[] = [$v['name'], $v['value'], 'where'];
 			}
 		}
-
 		// siswa
 		if ($this->session->has_userdata('nis')) {
 			$cond[] = ['nis', $this->session->userdata('nis'), 'where'];
@@ -109,10 +109,11 @@ class PembayaranController extends CI_Controller
 	{
 		$id = $this->input->get('t_pembayaran_id');
 		$d = $this->PembayaranModel->getPembayaranByParam(['t_pembayaran_id' => $id])[0];
+		$res['transaction_type_id'] = $d['transaction_type_id'];
 		if ($d['transaction_type_id'] == 1) {
-			$res = $d['nominal'];
+			$res['nominal'] = $d['nominal'];
 		} else {
-			$res = ($d['nominal_bayar'] == 0) ? $d['nominal_min'] : 0;
+			$res['nominal'] = ($d['nominal_bayar'] == 0) ? $d['nominal_min'] : 0;
 		}
 
 		echo json_encode($res);
@@ -162,7 +163,7 @@ class PembayaranController extends CI_Controller
 		// send msg
 		$bulan = ($d['transaction_type'] == 'bulanan') ? 'bulan ke ' . $d['bulan_ke'] : '';
 		$msg = 'Pembayaran untuk ' . $d['tarif_tipe'] . ' ' . $bulan . ' yang dilakukan oleh siswa bernama ' . $d['nama'] . '(' . $d['nis'] . ') sebesar Rp ' . number_format($nominal) . ' telah kami terima';
-		// $this->sendMsg($d['no_ortu'], $msg);
+		$this->sendMsg($d['no_ortu'], $msg);
 
 		// upd balance
 		$getBlnc = $this->checkBalanceSms();

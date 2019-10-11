@@ -41,6 +41,7 @@
 								<div class="col-md-4 form-group">
 									<label>Kelas</label>
 									<select param-filter name="kelas" class="form-control">
+										<option value="">-Pilih-</option>
 										<option value="1">1</option>
 										<option value="2">2</option>
 										<option value="3">3</option>
@@ -58,18 +59,19 @@
 								<div class="col-md-4 form-group">
 									<label>Bulan</label>
 									<select param-filter name="bulan_ke" class="form-control">
-										<option value="1">Jan</option>
-										<option value="2">Feb</option>
-										<option value="3">Mar</option>
-										<option value="4">Apr</option>
-										<option value="5">Mei</option>
-										<option value="6">Jun</option>
-										<option value="7">Jul</option>
-										<option value="8">Agu</option>
-										<option value="9">Sep</option>
-										<option value="10">Okt</option>
-										<option value="11">Nov</option>
-										<option value="12">Des</option>
+										<option value="">-Pilih-</option>
+										<option value="1">Jan (1)</option>
+										<option value="2">Feb (2)</option>
+										<option value="3">Mar (3)</option>
+										<option value="4">Apr (4)</option>
+										<option value="5">Mei (5)</option>
+										<option value="6">Jun (6)</option>
+										<option value="7">Jul (7)</option>
+										<option value="8">Agu (8)</option>
+										<option value="9">Sep (9)</option>
+										<option value="10">Okt (10)</option>
+										<option value="11">Nov (11)</option>
+										<option value="12">Des (12)</option>
 									</select>
 								</div>
 								<div class="col-md-4 form-group">
@@ -86,7 +88,7 @@
 			<div class="col-xs-12">
 				<div id="box-pembayaran_table" class="box">
 					<div class="box-header">
-						<h3 class="box-title">List Data Pemayaran - <small class="label bg-yellow balanceSms">Saldo SMS : 0</small></h3>
+						<h3 class="box-title">List Data Pembayaran - <small class="label bg-yellow balanceSms">Saldo SMS : 0</small></h3>
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body">

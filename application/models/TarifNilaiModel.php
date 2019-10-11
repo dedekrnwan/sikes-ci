@@ -8,8 +8,8 @@ class TarifNilaiModel extends DatatablesSSDModel
     parent::__construct();
     $this->configSSD = [
       'table' => 'v_tarif_nilai',
-      'column_order' => [null, 'ta', 'kelas', 'nominal', 'active'],
-      'column_search' => ['ta', 'kelas', 'nominal', 'active'],
+      'column_order' => [null, 'ta', 'kelas', 'nominal', 'date_started', 'date_ended', 'active'],
+      'column_search' => ['ta', 'kelas', 'nominal', 'date_started', 'date_ended', 'active'],
       'order' => ['tarif_nilai_id' => 'asc']
     ];
   }
@@ -57,6 +57,14 @@ class TarifNilaiModel extends DatatablesSSDModel
   {
     $q = $this->db->get_where('v_tarif_nilai', ['tarif_tipe_id' => $tarfif_tipe_id, 'active' => 1]);
     $res = $q->result_array();
+
+    return $res;
+  }
+
+  function getTarifNilaiByParam($param)
+  {
+    $q = $this->db->get_where('tarif_nilai', $param);
+    $res = $q->num_rows();
 
     return $res;
   }

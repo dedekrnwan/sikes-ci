@@ -30,8 +30,10 @@ const pembayaranModal = (id) => {
     success: (res) => {
       let d = JSON.parse(res)
       $(formId).find('input[name="t_pembayaran_id"]').val(id)
-      if (d !== 0) {
-        $(formId).find('input[name="nominal"]').val(d).attr('readonly', true)
+      if(d.transaction_type_id == 1) {
+        $(formId).find('input[name="nominal"]').val(d.nominal).attr('readonly', true)
+      } else {
+        $(formId).find('input[name="nominal"]').val(d.nominal).attr('readonly', false)
       }
       removeLoading(boxTblId)
     }
