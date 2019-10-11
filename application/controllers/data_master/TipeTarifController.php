@@ -223,7 +223,7 @@ class TipeTarifController extends CI_Controller
 			}
 
 			$date1 = strtotime('+1 MONTH', $date1);
-			$loop = ($date1 < $date2) ? true : false;
+			$loop = ($date1 <= $date2) ? true : false;
 		}
 	}
 
@@ -247,7 +247,7 @@ class TipeTarifController extends CI_Controller
 			$m = ($expl[2] < 10) ? $expl[1] - 1 : $expl[1];
 		}
 		$date = $expl[0] . '-' . $m . '-10';
-		return ($returnType = 'date') ? $date : strtotime($date);
+		return ($returnType == 'date') ? $date : strtotime($date);
 	}
 
 	private function insertPembayaran($siswa_id, $tn, $thn = 0, $bln = 0)
