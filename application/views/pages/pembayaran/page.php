@@ -57,6 +57,15 @@
 									</select>
 								</div>
 								<div class="col-md-4 form-group">
+									<label>Tarif Tipe</label>
+									<select param-filter name="tarif_tipe_id" class="form-control">
+										<option value="0">-Pilih-</option>
+										<?php foreach ($listTarifTipe as $tt) : ?>
+											<option value="<?= $tt['tarif_tipe_id'] ?>"><?= $tt['tarif_tipe'] ?></option>
+										<?php endforeach; ?>
+									</select>
+								</div>
+								<div class="col-md-4 form-group">
 									<label>Bulan</label>
 									<select param-filter name="bulan_ke" class="form-control">
 										<option value="">-Pilih-</option>
@@ -76,7 +85,7 @@
 								</div>
 								<div class="col-md-4 form-group">
 									<label></label>
-									<button btn-filter type="button" class="btn btn-block btn-warning" style="width:50%">
+									<button btn-filter type="button" class="btn btn-block btn-primary" style="width:50%">
 										<i class="fa fa-search"></i> Filter
 									</button>
 								</div>

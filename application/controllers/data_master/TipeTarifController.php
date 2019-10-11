@@ -156,7 +156,7 @@ class TipeTarifController extends CI_Controller
 			$d[$k] = $v;
 		}
 		
-		if(array_key_exist('active', $d) && $d['active'] == 1) {
+		if(array_key_exists('active', $d) && $d['active'] == 1) {
 			$dCheck = $this->TarifNilaiModel->getTarifNilaiById($d['tarif_tipe_id']);
 			$params = [
 				'ta_id' => $dCheck['ta_id'],

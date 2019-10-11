@@ -9,6 +9,7 @@ class PembayaranController extends CI_Controller
 		$this->load->model('PembayaranModel');
 		$this->load->model('TahunAjaranModel');
 		$this->load->model('TransactionTypeModel');
+		$this->load->model('TarifTipeModel');
 		$this->load->model('PembayaranDetailModel');
 		$this->load->model('MessageSentModel');
 		$this->load->model('ConfigModel');
@@ -21,6 +22,7 @@ class PembayaranController extends CI_Controller
 	{
 		$data['listTahunAjaran'] = $this->TahunAjaranModel->getTahunAjaran();
 		$data['listTransactionType'] = $this->TransactionTypeModel->getTransactionType();
+		$data['listTarifTipe'] = $this->TarifTipeModel->getTarifTipe();
 
 		$dataHtml1['html']['page'] = $this->load->view('pages/pembayaran/page', $data, true);
 		$dataHtml2['html']['page'] = $this->load->view('pages/layout', $dataHtml1, true);
