@@ -155,9 +155,8 @@ class TipeTarifController extends CI_Controller
 			if($k == 'date_ended') $v = $this->detectDate(date('Y-m-d', strtotime($v)), 'af', 'date');
 			$d[$k] = $v;
 		}
-		
 		if(array_key_exists('active', $d) && $d['active'] == 1) {
-			$dCheck = $this->TarifNilaiModel->getTarifNilaiById($d['tarif_tipe_id']);
+			$dCheck = $this->TarifNilaiModel->getTarifNilaiById($d['tarif_nilai_id']);	
 			$params = [
 				'ta_id' => $dCheck['ta_id'],
 				'kelas' => $dCheck['kelas'],
@@ -167,6 +166,7 @@ class TipeTarifController extends CI_Controller
 			$check = $this->TarifNilaiModel->getTarifNilaiByParam($params);
 			if($check >= 1) $permission = false;
 		} 
+
 
 		$affected = 0;
 		if($permission == true) {
