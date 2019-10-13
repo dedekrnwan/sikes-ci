@@ -96,14 +96,22 @@ $route['data_master/tipe_tarif/saveDataTarifNilai'] = 'data_master/TipeTarifCont
 $route['data_master/tipe_tarif/getDataTarifNilai'] = 'data_master/TipeTarifController/getDataTarifNilai';
 
 
-#pembayaran
-$route['pembayaran'] = 'pembayaran/PembayaranController/index';
-$route['pembayaran/page'] = 'pembayaran/PembayaranController/index';
-$route['pembayaran/listData'] = 'pembayaran/PembayaranController/listData';
-$route['pembayaran/getHistory'] = 'pembayaran/PembayaranController/getHistory';
-$route['pembayaran/getPembayaran'] = 'pembayaran/PembayaranController/getPembayaran';
-$route['pembayaran/savePembayaran'] = 'pembayaran/PembayaranController/savePembayaran';
-$route['pembayaran/getBalanceSms'] = 'pembayaran/PembayaranController/getBalanceSms';
+#keuangan
+// pembayaran
+$route['pembayaran/page'] = 'keuangan/PembayaranController/index';
+$route['pembayaran/listData'] = 'keuangan/PembayaranController/listData';
+$route['pembayaran/getHistory'] = 'keuangan/PembayaranController/getHistory';
+$route['pembayaran/getPembayaran'] = 'keuangan/PembayaranController/getPembayaran';
+$route['pembayaran/savePembayaran'] = 'keuangan/PembayaranController/savePembayaran';
+$route['pembayaran/getBalanceSms'] = 'keuangan/PembayaranController/getBalanceSms';
+
+// jurnal
+$route['jurnal/page'] = 'keuangan/JurnalController/index';
+$route['jurnal/listData'] = 'keuangan/JurnalController/listData';
+$route['jurnal/getData'] = 'keuangan/JurnalController/getData';
+$route['jurnal/saveData'] = 'keuangan/JurnalController/saveData';
+$route['jurnal/getSummary/(:any)'] = 'keuangan/JurnalController/getSummary/$1';
+
 
 #sms
 $route['sms'] = 'sms/SmsController/index';

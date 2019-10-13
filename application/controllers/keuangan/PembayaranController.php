@@ -13,6 +13,7 @@ class PembayaranController extends CI_Controller
 		$this->load->model('PembayaranDetailModel');
 		$this->load->model('MessageSentModel');
 		$this->load->model('ConfigModel');
+		$this->load->model('JurnalModel');
 		if (!($this->session->has_userdata('user_id') || $this->session->has_userdata('siswa_id'))) {
 			redirect('auth/login');
 		}
@@ -24,7 +25,7 @@ class PembayaranController extends CI_Controller
 		$data['listTransactionType'] = $this->TransactionTypeModel->getTransactionType();
 		$data['listTarifTipe'] = $this->TarifTipeModel->getTarifTipe();
 
-		$dataHtml1['html']['page'] = $this->load->view('pages/pembayaran/page', $data, true);
+		$dataHtml1['html']['page'] = $this->load->view('pages/keuangan/page_pembayaran', $data, true);
 		$dataHtml2['html']['page'] = $this->load->view('pages/layout', $dataHtml1, true);
 		$dataHtml2['html']['scriptjs'] = 'pembayaran';
 
@@ -121,8 +122,9 @@ class PembayaranController extends CI_Controller
 		echo json_encode($res);
 	}
 
-	public function getBalanceSms() {
-		$d['balanceSms'] = 'Rp '.number_format($this->ConfigModel->getConfig()['balance_sms']);
+	public function getBalanceSms()
+	{
+		$d['balanceSms'] = 'Rp ' . number_format($this->ConfigModel->getConfig()['balance_sms']);
 		echo json_encode($d);
 	}
 
@@ -153,6 +155,18 @@ class PembayaranController extends CI_Controller
 			];
 			$last_id = $this->PembayaranDetailModel->insertPembayaranDetail($dPmbyrDet);
 			$affected = $this->PembayaranModel->updatePembayaran($id, $dPmbyr);
+
+			// save jurnal
+			$dJurnal = [
+				'jurnal_type' => 'in',
+				'total' => $d['nominal'],
+				'keterangan' => '(' . $check['nis'] . ') ' . $check['nama'] . ' membayar ' . $check['tarif_tipe'] . ' untuk ta ' . $check['ta'] . ' kelas ' . $check['kelas'],
+				'date_added' => date('Y-m-d'),
+				'active' => 1
+			];
+			$this->JurnalModel->insertJurnal($dJurnal);
+
+			// send message
 			$this->sendMsgBayar($last_id, $check, $d['nominal']);
 		}
 
@@ -186,7 +200,6 @@ class PembayaranController extends CI_Controller
 		$res = $this->MessageSentModel->insertMessageSent($dMsgSent);
 		return $res;
 	}
-
 
 	/*** TOOLS ***/
 	/*

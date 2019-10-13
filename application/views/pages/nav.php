@@ -38,10 +38,15 @@
 					</a>
 				</li>
 			<?php endif; ?>
-			<li class="header">KELOLA PEMBAYARAN</li>
+			<li class="header">KEUANGAN</li>
 			<li>
 				<a href="<?= base_url() ?>pembayaran/page">
-					<i class="fa fa-money"></i> <span>Data Pembayaran</span>
+					<i class="fa fa-money"></i> <span>Pembayaran</span>
+				</a>
+			</li>
+			<li>
+				<a href="<?= base_url() ?>jurnal/page">
+					<i class="fa fa-random"></i> <span>Jurnal</span>
 				</a>
 			</li>
 			<?php if ($this->session->has_userdata('user_id')) : ?>
