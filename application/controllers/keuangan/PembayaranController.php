@@ -171,8 +171,8 @@ class PembayaranController extends CI_Controller
 			$this->sendMsgBayar($last_id, $check, $d['nominal']);
 		}
 
-		$res = ($affected) ? true : false;
-		echo json_encode($res);
+		// $res = ($affected) ? true : false;
+		echo json_encode(true);
 	}
 
 	private function sendMsgBayar($last_id, $d, $nominal)
