@@ -23,7 +23,7 @@
 					<!-- /.box-header -->
 					<div class="box-body">
 						<div class="col-md-12" style="margin-bottom:20px">
-							<button type="button" class="btn btn-block btn-primary" onclick="siswaStatusAdd()" style="width:15%">
+							<button type="button" class="btn btn-sm btn-block btn-primary" onclick="siswaStatusAdd()" style="width:15%">
 								<i class="fa fa-plus"></i>
 								Tambah Data
 							</button>

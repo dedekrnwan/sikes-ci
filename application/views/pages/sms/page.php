@@ -32,15 +32,15 @@
 								</div>
 								<div class="col-md-3 form-group">
 									<label>Dari Tanggal</label>
-									<input param-filter name="date_from" type="date" class="form-control">
+									<input param-filter name="date_from" type="text" class="form-control datepicker">
 								</div>
 								<div class="col-md-3 form-group">
 									<label>Smpai Tanggal</label>
-									<input param-filter name="date_until" type="date" class="form-control">
+									<input param-filter name="date_until" type="text" class="form-control datepicker">
 								</div>
 								<div class="col-md-3 form-group">
 									<label></label>
-									<button btn-filter type="button" class="btn btn-block btn-warning" style="width:50%">
+									<button btn-filter type="button" class="btn btn-sm btn-block btn-warning" style="width:50%">
 										<i class="fa fa-search"></i> Filter
 									</button>
 								</div>
@@ -69,6 +69,7 @@
 										<th>Tipe Tarif</th>
 										<th>Nominal Pembayaran</th>
 										<th>Teks SMS</th>
+										<th>Aksi</th>
 									</tr>
 								</thead>
 								<tbody>

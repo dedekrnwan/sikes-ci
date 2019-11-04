@@ -23,7 +23,7 @@
 					<!-- /.box-header -->
 					<div class="box-body">
 						<div class="col-md-12" style="margin-bottom:20px">
-							<button type="button" class="btn btn-block btn-primary" onclick="tarifTipeModal()" style="width:15%">
+							<button type="button" class="btn btn-sm btn-block btn-primary" onclick="tarifTipeModal()" style="width:15%">
 								<i class="fa fa-plus"></i>
 								Tambah Data
 							</button>
@@ -35,7 +35,6 @@
 										<th>No</th>
 										<th>Tipe Transaksi</th>
 										<th>Tipe Tarif</th>
-										<th>Status</th>
 										<th>Aksi</th>
 									</tr>
 								</thead>
@@ -83,13 +82,6 @@
 							<div class="form-group">
 								<label>Tipe Tarif</label>
 								<input name="tarif_tipe" type="text" class="form-control" placeholder="Tipe Tarif">
-							</div>
-							<div class="form-group">
-								<label>Aktif</label>
-								<select name="active" class="form-control">
-									<option value="1">Ya</option>
-									<option value="0">Tidak</option>
-								</select>
 							</div>
 						</div>
 						<!-- /.box-body -->

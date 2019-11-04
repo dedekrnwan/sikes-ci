@@ -17,7 +17,7 @@ class SiswaModel extends DatatablesSSDModel
   function countSiswa()
   {
     $this->db->select('*');
-    $q = $this->db->get('siswa');
+    $q = $this->db->get('v_siswa');
     $res = $q->num_rows();
 
     return $res;
@@ -36,10 +36,11 @@ class SiswaModel extends DatatablesSSDModel
     return $this->db->affected_rows();
   }
 
-  function getSiswaById($id) 
+  function getSiswaById($id)
   {
     $q = $this->db->get_where('siswa', ['siswa_id' => $id]);
     $res = $q->row_array();
+    $res['ttl'] = date('m-d-Y', strtotime($res['ttl']));
 
     return $res;
   }

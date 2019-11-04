@@ -51,13 +51,15 @@ class SiswaController extends CI_Controller
 			$row[] = $ld->kelas;
 			$row[] = $ld->jenis_kelamin;
 			$row[] = $ld->nama_ortu;
-			$row[] = ($ld->active == 1) ? '<small class="label bg-green">Aktif</small>' : '<small class="label bg-red">Tidak Aktif</small>';
 			$row[] = '<td>
 								<a class="btn-edit" style="color:#f56954" data-toggle="tooltip" title="Edit" onclick="siswaModal(' . $ld->siswa_id . ')">
 									<i class="fa fa-edit"></i>
 								</a>
 								<a href="' . base_url() . 'data_master/siswa/page/status/' . $ld->siswa_id . '" style="color:green">
 									<i class="fa fa-search"></i>
+								</a>
+								<a class="btn-delete" style="color:#f1c40f" data-toggle="tooltip" title="Delete" onclick="deleteRow(\'siswa_id\', ' . $ld->siswa_id . ', \'siswa\')">
+									<i class="fa fa-trash"></i>
 								</a>
 							</td>';
 			$data[] = $row;

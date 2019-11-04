@@ -44,12 +44,12 @@
 					<i class="fa fa-money"></i> <span>Pembayaran</span>
 				</a>
 			</li>
-			<li>
-				<a href="<?= base_url() ?>jurnal/page">
-					<i class="fa fa-random"></i> <span>Jurnal</span>
-				</a>
-			</li>
 			<?php if ($this->session->has_userdata('user_id')) : ?>
+				<li>
+					<a href="<?= base_url() ?>jurnal/page">
+						<i class="fa fa-random"></i> <span>Jurnal</span>
+					</a>
+				</li>
 				<li class="header">SMS Service</li>
 				<li>
 					<a href="<?= base_url() ?>sms/page">

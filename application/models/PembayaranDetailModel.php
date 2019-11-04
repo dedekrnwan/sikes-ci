@@ -6,7 +6,7 @@ class PembayaranDetailModel extends CI_Model
   {
     $month = date('m');
     $q = $this->db->select_sum('nominal')
-      ->from('t_pembayaran_detail')
+      ->from('v_pembayaran_detail')
       ->where("DATE_FORMAT(date_added,'%m') =", $month)
       ->get();
 
@@ -19,7 +19,7 @@ class PembayaranDetailModel extends CI_Model
     $today = date('Y-m-d');
     $month = date('m', strtotime('-1 months', strtotime($today))); 
     $q = $this->db->select_sum('nominal')
-      ->from('t_pembayaran_detail')
+      ->from('v_pembayaran_detail')
       ->where("DATE_FORMAT(date_added,'%m') =", $month)
       ->get();
 
@@ -30,7 +30,7 @@ class PembayaranDetailModel extends CI_Model
   function sumAll()
   {
     $q = $this->db->select_sum('nominal')
-      ->from('t_pembayaran_detail')
+      ->from('v_pembayaran_detail')
       ->get();
 
     $res = number_format($q->row_array()['nominal']);

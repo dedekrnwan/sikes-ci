@@ -25,7 +25,7 @@
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">
-            <input type="date" name="password" class="form-control" placeholder="Tgl Lahir">
+            <input type="text" name="password" class="form-control datepicker" placeholder="Tgl Lahir">
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
           <div class="row mb-1">

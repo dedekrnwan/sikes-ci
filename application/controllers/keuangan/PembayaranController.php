@@ -36,7 +36,6 @@ class PembayaranController extends CI_Controller
 	{
 		// filter
 		$cond = [];
-		$cond[] = ['active', 1, 'where'];
 		$query = json_decode($this->input->post('query'), true);
 		if (!empty($query)) {
 			foreach ($query as $k => $v) {
@@ -158,9 +157,11 @@ class PembayaranController extends CI_Controller
 
 			// save jurnal
 			$dJurnal = [
+				'tarif_tipe_id' => $check['tarif_tipe_id'],
+				'tarif_nilai_id' => $check['tarif_nilai_id'],
 				'jurnal_type' => 'in',
 				'total' => $d['nominal'],
-				'keterangan' => '(' . $check['nis'] . ') ' . $check['nama'] . ' membayar ' . $check['tarif_tipe'] . ' untuk ta ' . $check['ta'] . ' kelas ' . $check['kelas'],
+				'keterangan' => '(' . $check['nis'] . ') ' . $check['nama'] . ' membayar ' . $check['tarif_tipe'] . ' untuk ta ' . $check['ta'] . ' kelas ' . $check['kelas']. ' bulan ke '.$check['bulan_ke'],
 				'date_added' => date('Y-m-d'),
 				'active' => 1
 			];
@@ -209,8 +210,8 @@ class PembayaranController extends CI_Controller
 	private function sendMsg($number, $msg)
 	{
 		$cSess = curl_init();
-		$user = 'mcholismalik';
-		$key = 'ce4285a6d3081d9d54d8345a427d43e6';
+		$user = 'AvrielDG';
+		$key = 'd14206dae11253222bdaa88d910f585e';
 
 		$msg = urlencode(stripslashes(utf8_encode($msg)));
 		$url = "http://sms241.xyz/sms/smsreguler.php?username=$user&key=$key&number=$number&message=$msg";
@@ -226,7 +227,7 @@ class PembayaranController extends CI_Controller
 
 	private function checkBalanceSms()
 	{
-		$apikey      = 'ce4285a6d3081d9d54d8345a427d43e6'; // api key 
+		$apikey      = 'd14206dae11253222bdaa88d910f585e'; // api key 
 		$urlendpoint = 'http://sms241.xyz/sms/api_sms_reguler_balance_json.php'; // url endpoint api
 
 		$senddata = array('apikey' => $apikey);

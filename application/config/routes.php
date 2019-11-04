@@ -53,6 +53,9 @@ $route['default_controller'] = 'DefaultController';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+#general 
+$route['default/delete'] = 'DefaultController/delete';
+
 # auth
 $route['auth/login'] = 'auth/AuthController/login';
 $route['auth/loginOrtu'] = 'auth/AuthController/loginOrtu';

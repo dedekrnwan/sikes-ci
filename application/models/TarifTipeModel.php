@@ -17,7 +17,7 @@ class TarifTipeModel extends DatatablesSSDModel
   function countTarifTipe()
   {
     $this->db->select('*');
-    $q = $this->db->get('tarif_tipe');
+    $q = $this->db->get('v_tarif_tipe');
     $res = $q->num_rows();
 
     return $res;

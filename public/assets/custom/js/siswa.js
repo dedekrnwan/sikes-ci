@@ -37,10 +37,12 @@ const siswaModal = (id = null) => {
       beforeSend: () => { addLoading(boxId) },
       success: (res) => {
         let d = JSON.parse(res)
+        console.log(d)
         $(formId).find('input[name="siswa_id"]').val(d.siswa_id)
         $(formId).find('input[name="nis"]').val(d.nis)
         $(formId).find('input[name="nama"]').val(d.nama)
         $(formId).find('select[name="jenis_kelamin"]').val(d.jenis_kelamin)
+        $(formId).find('input[name="ttl"]').val(d.ttl)
         $(formId).find('textarea[name="alamat"]').val(d.alamat)
         $(formId).find('input[name="nama_ortu"]').val(d.nama_ortu)
         $(formId).find('input[name="no_ortu"]').val(d.no_ortu)

@@ -42,11 +42,10 @@ class TipeTarifController extends CI_Controller
 			$no++;
 			$row = [];
 			$row[] = $no;
+			$row[] = $ld->tarif_tipe;
 			$row[] = ($ld->transaction_type == 'bulanan')
 				? '<small class="label bg-green">' . $ld->transaction_type . '</small>'
 				: '<small class="label bg-blue">' . $ld->transaction_type . '</small>';
-			$row[] = $ld->tarif_tipe;
-			$row[] = ($ld->active == 1) ? '<small class="label bg-green">Aktif</small>' : '<small class="label bg-red">Tidak Aktif</small>';
 			$row[] = '<td>
 								<a class="btn-edit" style="color:#f56954" data-toggle="tooltip" title="Edit" onclick="tarifTipeModal(' . $ld->tarif_tipe_id . ')">
 									<i class="fa fa-edit"></i>
@@ -57,6 +56,9 @@ class TipeTarifController extends CI_Controller
 								<a href="' . base_url() . 'data_master/tipe_tarif/page/tarif_nilai/' . $ld->tarif_tipe_id . '" style="color:#00a65a" data-toggle="tooltip" title="Detail Data Per Kelas & TA">
 									<i class="fa fa-search"></i>
 								</a>
+								<a class="btn-delete" style="color:#f1c40f" data-toggle="tooltip" title="Delete" onclick="deleteRow(\'tarif_tipe_id\', ' . $ld->tarif_tipe_id . ', \'tarif_tipe\')">
+								  <i class="fa fa-trash"></i>
+							  </a>
 							</td>';
 			$data[] = $row;
 		}
@@ -77,10 +79,10 @@ class TipeTarifController extends CI_Controller
 			$d[$k] = $v;
 		}
 
-		$affected = ($d['tarif_tipe_id'] == 0) 
-		? $this->TarifTipeModel->insertTarifTipe($d) 
-		: $this->TarifTipeModel->updateTarifTipe($d['tarif_tipe_id'], $d);
-		
+		$affected = ($d['tarif_tipe_id'] == 0)
+			? $this->TarifTipeModel->insertTarifTipe($d)
+			: $this->TarifTipeModel->updateTarifTipe($d['tarif_tipe_id'], $d);
+
 		$res = ($affected) ? true : false;
 		echo json_encode($res);
 	}
@@ -127,11 +129,10 @@ class TipeTarifController extends CI_Controller
 			if ($nomin) $row[] = 'Rp ' . number_format($ld->nominal_min);
 			$row[] = $ld->date_started;
 			$row[] = $ld->date_ended;
-			$row[] = ($ld->active == 1) ? '<small class="label bg-green">Aktif</small>' : '<small class="label bg-red">Tidak Aktif</small>';
 			$row[] = '<td>
-								<a class="btn-edit" style="color:#f56954" data-toggle="tooltip" title="Edit" onclick="tarifNilaiEdit(' . $ld->tarif_nilai_id . ')">
-									<i class="fa fa-edit"></i>
-								</a>
+								<a class="btn-delete" style="color:#f1c40f" data-toggle="tooltip" title="Delete" onclick="deleteRow(\'tarif_nilai_id\', ' . $ld->tarif_nilai_id . ', \'tarif_nilai\')">
+								  <i class="fa fa-trash"></i>
+							  </a>
 							</td>';
 			$data[] = $row;
 		}
@@ -151,12 +152,12 @@ class TipeTarifController extends CI_Controller
 
 		$d = [];
 		foreach ($post as $k => $v) {
-			if($k == 'date_started') $v = $this->detectDate(date('Y-m-d', strtotime($v)), 'bef', 'date');
-			if($k == 'date_ended') $v = $this->detectDate(date('Y-m-d', strtotime($v)), 'af', 'date');
+			if ($k == 'date_started') $v = $this->detectDate(date('Y-m-d', strtotime($v)), 'bef', 'date');
+			if ($k == 'date_ended') $v = $this->detectDate(date('Y-m-d', strtotime($v)), 'af', 'date');
 			$d[$k] = $v;
 		}
-		if(array_key_exists('active', $d) && $d['active'] == 1) {
-			$dCheck = $this->TarifNilaiModel->getTarifNilaiById($d['tarif_nilai_id']);	
+		if (array_key_exists('active', $d) && $d['active'] == 1) {
+			$dCheck = $this->TarifNilaiModel->getTarifNilaiById($d['tarif_nilai_id']);
 			$params = [
 				'ta_id' => $dCheck['ta_id'],
 				'kelas' => $dCheck['kelas'],
@@ -164,15 +165,15 @@ class TipeTarifController extends CI_Controller
 				'active' => 1
 			];
 			$check = $this->TarifNilaiModel->getTarifNilaiByParam($params);
-			if($check >= 1) $permission = false;
-		} 
+			if ($check >= 1) $permission = false;
+		}
 
 
 		$affected = 0;
-		if($permission == true) {
-			$affected = ($d['tarif_nilai_id'] == 0) 
-			? $this->TarifNilaiModel->insertTarifNilai($d) 
-			: $this->TarifNilaiModel->updateTarifNilai($d['tarif_nilai_id'], $d);
+		if ($permission == true) {
+			$affected = ($d['tarif_nilai_id'] == 0)
+				? $this->TarifNilaiModel->insertTarifNilai($d)
+				: $this->TarifNilaiModel->updateTarifNilai($d['tarif_nilai_id'], $d);
 		}
 		$res = ($affected) ? true : false;
 		echo json_encode($res);
@@ -281,7 +282,7 @@ class TipeTarifController extends CI_Controller
 		return $check;
 	}
 
-	private function insertSyncTarif($siswa_id, $tn, $thn=null, $bln=null)
+	private function insertSyncTarif($siswa_id, $tn, $thn = null, $bln = null)
 	{
 		$dSyncTarif = [
 			'siswa_id' => $siswa_id,

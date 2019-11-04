@@ -1,13 +1,10 @@
+// collection
 const underConstruct = () => {
-	swal("Under constructon !");
+	swal("Under constructon !")
 }
 
-// ajax setup
-$.ajaxSetup({
-	error: () => { 	swal("Some error technical, please contact developer !") }
-})
+$.ajaxSetup({ error: () => { swal("Some error technical, please contact developer !") } })
 
-// loading
 const addLoading = (elm) => {
 	const loader = `<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>`
 	const box = $(elm)
@@ -54,7 +51,7 @@ $('[param-filter]').change((e) => {
 	let name = $(e.target).attr('name')
 	let value = $(e.target).val()
 	queryFilter[name] = { "name": name, "value": value }
-	if(value == 0) delete queryFilter[name]
+	if (value == 0) delete queryFilter[name]
 	console.log(queryFilter)
 })
 
@@ -63,3 +60,34 @@ $('[btn-filter]').click(() => {
 	tbl.ajax.reload(null, false)
 	console.log(jsonFilter)
 })
+
+
+const deleteRow = (key, val, table) => {
+	swal({
+		title: "Yakin akan menghapus data ?",
+		text: "Data terkait akan ikut terhapus secara permanen !",
+		icon: "warning",
+		buttons: true,
+		dangerMode: true,
+	}).then(v => {
+		if (v) {
+			$.ajax({
+				type: 'POST',
+				url: `${base_url}default/delete`,
+				data: { key, val, table },
+				success: (res) => {
+					if (res === 'true') {
+						swal("Berhasil !", "Data berhasil dihapus !", "success").then(v => {
+							tbl.ajax.reload(null, false)
+						})
+					} else {
+						swal("Gagal !", "Data gagal dihapus, harap cek kembali data terkait !", "error")
+					}
+				}
+			})
+		}
+	})
+}
+
+// plugins
+$('.datepicker').datepicker()

@@ -7,7 +7,7 @@ class TahunAjaranModel extends DatatablesSSDModel
   {
     parent::__construct();
     $this->configSSD = [
-      'table' => 'ta',
+      'table' => 'v_ta',
       'column_order' => [null, 'ta'],
       'column_search' => ['ta'],
       'order' => ['ta_id' => 'asc']
@@ -17,7 +17,7 @@ class TahunAjaranModel extends DatatablesSSDModel
   function countTahunAjaran()
   {
     $this->db->select('*');
-    $q = $this->db->get('ta');
+    $q = $this->db->get('v_ta');
     $res = $q->num_rows();
 
     return $res;

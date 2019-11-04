@@ -7,7 +7,7 @@ class JurnalModel extends DatatablesSSDModel
   {
     parent::__construct();
     $this->configSSD = [
-      'table' => 't_jurnal',
+      'table' => 'v_jurnal',
       'column_order' => [null, 'jurnal_type', 'total', 'keterangan', 'date_added'],
       'column_search' => ['jurnal_type', 'total', 'keterangan', 'date_added'],
       'order' => ['t_jurnal_id' => 'asc']
@@ -59,12 +59,12 @@ class JurnalModel extends DatatablesSSDModel
 
     $param['jurnal_type'] = 'in';
     $d['total_in'] = $this->db->select('sum(total) as `total`')
-      ->get_where('t_jurnal', $param)
+      ->get_where('v_jurnal', $param)
       ->row_array()['total'];
 
     $param['jurnal_type'] = 'out';
     $d['total_out'] = $this->db->select('sum(total) as `total`')
-      ->get_where('t_jurnal', $param)
+      ->get_where('v_jurnal', $param)
       ->row_array()['total'];
 
     $d['total_balance'] = $d['total_in'] - $d['total_out'];
@@ -77,7 +77,7 @@ class JurnalModel extends DatatablesSSDModel
 
   function getJurnalByParam($param)
   {
-    $q = $this->db->get_where('t_jurnal', $param);
+    $q = $this->db->get_where('v_jurnal', $param);
     $res = $q->result_array();
 
     return $res;

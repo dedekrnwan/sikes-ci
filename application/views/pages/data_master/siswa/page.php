@@ -43,7 +43,7 @@
 								</div>
 								<div class="col-md-4 form-group">
 									<label></label>
-									<button btn-filter type="button" class="btn btn-block btn-warning" style="width:50%">
+									<button btn-filter type="button" class="btn btm-sm btn-block btn-warning" style="width:50%">
 										<i class="fa fa-search"></i> Filter
 									</button>
 								</div>
@@ -60,7 +60,7 @@
 					<!-- /.box-header -->
 					<div class="box-body">
 						<div class="col-md-12" style="margin-bottom:20px">
-							<button type="button" class="btn btn-block btn-primary" style="width:15%" onclick="siswaModal()">
+							<button type="button" class="btn btn-sm btn-block btn-primary" style="width:15%" onclick="siswaModal()">
 								<i class="fa fa-plus"></i>
 								Tambah Data
 							</button>
@@ -76,7 +76,6 @@
 										<th>Kelas</th>
 										<th>Jenis Kelamin</th>
 										<th>Nama Orang Tua</th>
-										<th>Status</th>
 										<th>Aksi</th>
 									</tr>
 								</thead>
@@ -129,7 +128,7 @@
 							</div>
 							<div class="form-group">
 								<label>TTL</label>
-								<input name="ttl" type="date" class="form-control" placeholder="TTL">
+								<input name="ttl" type="text" class="form-control datepicker" placeholder="TTL">
 							</div>
 							<div class="form-group">
 								<label>Alamat</label>
@@ -146,13 +145,6 @@
 							<div class="form-group">
 								<label>Email Orang Tua</label>
 								<input name="email_ortu" type="email" class="form-control" placeholder="Email Orang Tua">
-							</div>
-							<div class="form-group">
-								<label>Aktif</label>
-								<select name="active" class="form-control">
-									<option value="1">Ya</option>
-									<option value="0">Tidak</option>
-								</select>
 							</div>
 						</div>
 						<!-- /.box-body -->

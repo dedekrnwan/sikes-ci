@@ -40,6 +40,9 @@ class TahunAjaranController extends CI_Controller
 								<a class="btn-edit" style="color:#f56954" data-toggle="tooltip" title="Edit" onclick="taModal('.$ld->ta_id.')">
 									<i class="fa fa-edit"></i>
 								</a>
+								<a class="btn-delete" style="color:#f1c40f" data-toggle="tooltip" title="Delete" onclick="deleteRow(\'ta_id\', ' . $ld->ta_id . ', \'ta\')">
+									<i class="fa fa-trash"></i>
+								</a>
 							</td>';
 			$data[] = $row;
 		}

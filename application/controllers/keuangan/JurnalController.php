@@ -46,10 +46,12 @@ class JurnalController extends CI_Controller
 			$row[] = 'Rp ' . number_format($ld->total);
 			$row[] = $ld->keterangan;
 			$row[] = $ld->date_added;
-			$row[] = ($ld->active == 1) ? '<small class="label bg-green">Aktif</small>' : '<small class="label bg-red">Tidak Aktif</small>';
 			$row[] = '<td>
 								<a class="btn-edit" style="color:#f56954" data-toggle="tooltip" title="Edit" onclick="jurnalModal(' . $ld->t_jurnal_id . ')">
 									<i class="fa fa-edit"></i>
+								</a>
+								<a class="btn-delete" style="color:#f1c40f" data-toggle="tooltip" title="Delete" onclick="deleteRow(\'jurnal_id\', ' . $ld->t_jurnal_id . ', \'jurnal\')">
+									<i class="fa fa-trash"></i>
 								</a>
 							</td>';
 			$data[] = $row;

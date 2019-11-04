@@ -33,11 +33,11 @@
                 </div>
                 <div class="col-md-4 form-group">
                   <label>Tanggal</label>
-                  <input param-filter name="date_added" type="date" class="form-control">
+                  <input param-filter name="date_added" type="text" class="form-control datepicker">
                 </div>
                 <div class="col-md-4 form-group">
                   <label></label>
-                  <button btn-filter-jurnal type="button" class="btn btn-block btn-warning" style="width:50%">
+                  <button btn-filter-jurnal type="button" class="btn btn-sm btn-block btn-warning" style="width:50%">
                     <i class="fa fa-search"></i> Filter
                   </button>
                 </div>
@@ -58,7 +58,7 @@
           <!-- /.box-header -->
           <div class="box-body">
             <div class="col-md-12" style="margin-bottom:20px">
-              <button type="button" class="btn btn-block btn-primary" style="width:15%" onclick="jurnalModal()">
+              <button type="button" class="btn btn-sm btn-block btn-primary" style="width:15%" onclick="jurnalModal()">
                 <i class="fa fa-plus"></i>
                 Tambah Data
               </button>
@@ -72,7 +72,6 @@
                     <th>Total</th>
                     <th>Keterangan</th>
                     <th>Date Added</th>
-                    <th>Status</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
@@ -125,15 +124,7 @@
               </div>
               <div class="form-group">
                 <label>Tanggal</label>
-                <input name="date_added" type="date" class="form-control" placeholder="Masukan Tanggal">
-              </div>
-              <div class="form-group">
-                <label>Active</label>
-                <select name="active" class="form-control">
-                  <option value="">-Pilih-</option>
-                  <option value="1">Aktif</option>
-                  <option value="0">Tidak Aktif</option>
-                </select>
+                <input name="date_added" type="text" class="form-control datepicker" placeholder="Masukan Tanggal">
               </div>
             </div>
             <!-- /.box-body -->

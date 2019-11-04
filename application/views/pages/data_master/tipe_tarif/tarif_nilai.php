@@ -23,7 +23,7 @@
 					<!-- /.box-header -->
 					<div class="box-body">
 						<div class="col-md-12" style="margin-bottom:20px">
-							<button type="button" class="btn btn-block btn-primary" onclick="tarifNilaiAdd()" style="width:15%">
+							<button type="button" class="btn btn-sm btn-block btn-primary" onclick="tarifNilaiAdd()" style="width:15%">
 								<i class="fa fa-plus"></i>
 								Tambah Data
 							</button>
@@ -41,7 +41,6 @@
 										<?php endif; ?>
 										<th>Date Started</th>
 										<th>Date Ended</th>
-										<th>Status</th>
 										<th>Aksi</th>
 									</tr>
 								</thead>
@@ -101,11 +100,11 @@
 							<?php if ($tarifTipe['transaction_type_id'] == 1) : ?>
 								<div class="form-group">
 									<label>Date Started</label>
-									<input name="date_started" type="date" class="form-control">
+									<input name="date_started" type="text" class="form-control datepicker">
 								</div>
 								<div class="form-group">
 									<label>Date Ended</label>
-									<input name="date_ended" type="date" class="form-control">
+									<input name="date_ended" type="text" class="form-control datepicker">
 								</div>
 							<?php endif; ?>
 							<?php if ($tarifTipe['transaction_type_id'] == 2) : ?>

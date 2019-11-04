@@ -59,6 +59,9 @@ class SmsController extends CI_Controller
 			$row[] = $ld->tarif_tipe;
 			$row[] = 'Rp '.number_format($ld->nominal);
 			$row[] = $ld->message_text;
+			$row[] = '<a class="btn-delete" style="color:#f1c40f" data-toggle="tooltip" title="Delete" onclick="deleteRow(\'message_sent_id\', ' . $ld->message_sent_id . ', \'message_sent\')">
+									<i class="fa fa-trash"></i>
+								</a>';
 			$data[] = $row;
 		}
 		$output = [
