@@ -214,7 +214,7 @@ class PembayaranController extends CI_Controller
 		$key = 'd14206dae11253222bdaa88d910f585e';
 
 		$msg = urlencode(stripslashes(utf8_encode($msg)));
-		$url = "http://sms241.xyz/sms/smsreguler.php?username=$user&key=$key&number=$number&message=$msg";
+		$url = "http://sms241.xyz/sms/smsmasking.php?username=$user&key=$key&number=$number&message=$msg";
 
 		curl_setopt($cSess, CURLOPT_URL, $url);
 		curl_setopt($cSess, CURLOPT_RETURNTRANSFER, true);
@@ -228,7 +228,7 @@ class PembayaranController extends CI_Controller
 	private function checkBalanceSms()
 	{
 		$apikey      = 'd14206dae11253222bdaa88d910f585e'; // api key 
-		$urlendpoint = 'http://sms241.xyz/sms/api_sms_reguler_balance_json.php'; // url endpoint api
+		$urlendpoint = 'http://sms241.xyz/sms/api_sms_masking_balance_json.php'; // url endpoint api
 
 		$senddata = array('apikey' => $apikey);
 
