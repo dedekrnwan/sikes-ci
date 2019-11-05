@@ -251,6 +251,7 @@ class PembayaranController extends CI_Controller
 		$responjson = curl_exec($curlHandle);
 		curl_close($curlHandle);
 		$responjson = json_decode($responjson, true);
-		return $responjson['balance_respon'][0]['balance'];
+		$arr = $responjson['balance_respon'][0];
+		return $arr['balance'];
 	}
 }
