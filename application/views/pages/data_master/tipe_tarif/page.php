@@ -35,7 +35,7 @@
 										<th>No</th>
 										<th>Tipe Transaksi</th>
 										<th>Tipe Tarif</th>
-										<th>Aksi</th>
+										<th></th>
 									</tr>
 								</thead>
 								<tbody>

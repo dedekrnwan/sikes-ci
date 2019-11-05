@@ -41,7 +41,7 @@
 										<?php endif; ?>
 										<th>Date Started</th>
 										<th>Date Ended</th>
-										<th>Aksi</th>
+										<th></th>
 									</tr>
 								</thead>
 								<tbody>

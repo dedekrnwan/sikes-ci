@@ -67,6 +67,49 @@ const jurnalSummary = () => {
   })
 }
 
+// print
+const printShow = () => {
+	printJS({
+		printable: 'printPage',
+		type: 'html',
+    style: `
+    #datatables-title, .totalIn, .totalOut, .totalBalance {
+      font-family: arial, sans-serif;
+      font-size: 15px;
+    }
+
+    .form-control, label, a, li, .dataTables_info {
+      display: none; 
+    }
+
+		table {
+			font-family: arial, sans-serif;
+			border-collapse: collapse;
+			width: 100%;
+		}
+	
+		td:not(:last-child), th:not(:last-child) { /* I just added ':not(:last-child)' here */
+			border: 1px solid #dddddd;
+			text-align: left;
+			padding: 8px;
+		}
+
+		td:(:last-child), th:(:last-child) {
+			/* Hide the text. */
+			text-indent: 100%;
+			white-space: nowrap;
+			overflow: hidden;
+			color: white;
+		}
+
+		tr:nth-child(even) td:not(:last-child) { /* And here */
+			background-color: #dddddd;
+		}
+		`,
+		scanStyles: false
+	})
+}
+
 // execute
 jurnalSummary()
 datatablesShow('#datatables-ss1')
@@ -77,3 +120,4 @@ $('[btn-filter-jurnal]').click(() => {
   tbl.ajax.reload(null, false)
   jurnalSummary()
 })
+

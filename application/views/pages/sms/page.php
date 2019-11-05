@@ -69,7 +69,7 @@
 										<th>Tipe Tarif</th>
 										<th>Nominal Pembayaran</th>
 										<th>Teks SMS</th>
-										<th>Aksi</th>
+										<th></th>
 									</tr>
 								</thead>
 								<tbody>

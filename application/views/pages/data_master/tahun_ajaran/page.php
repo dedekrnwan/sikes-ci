@@ -34,7 +34,7 @@
 									<tr>
 										<th>No</th>
 										<th>Tahun Ajaran</th>
-										<th>Aksi</th>
+										<th></th>
 									</tr>
 								</thead>
 								<tbody>

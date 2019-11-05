@@ -43,7 +43,7 @@
 								</div>
 								<div class="col-md-4 form-group">
 									<label></label>
-									<button btn-filter type="button" class="btn btm-sm btn-block btn-warning" style="width:50%">
+									<button btn-filter type="button" class="btn btn-sm btn-block btn-warning" style="width:50%">
 										<i class="fa fa-search"></i> Filter
 									</button>
 								</div>
@@ -76,7 +76,7 @@
 										<th>Kelas</th>
 										<th>Jenis Kelamin</th>
 										<th>Nama Orang Tua</th>
-										<th>Aksi</th>
+										<th></th>
 									</tr>
 								</thead>
 								<tbody>

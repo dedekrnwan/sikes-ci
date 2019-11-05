@@ -36,7 +36,7 @@
 										<th>Tahun Ajaran</th>
 										<th>Kelas</th>
 										<th>Status</th>
-										<th>Aksi</th>
+										<th></th>
 									</tr>
 								</thead>
 								<tbody>

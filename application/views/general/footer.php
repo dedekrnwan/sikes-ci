@@ -40,6 +40,8 @@
 <script src="<?= base_url() ?>public/assets/AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <!-- SweetAlert -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<!-- PrintJs -->
+<script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
 
 <!-- Core script -->
 <script>

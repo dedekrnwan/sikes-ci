@@ -85,7 +85,7 @@
 								</div>
 								<div class="col-md-4 form-group">
 									<label></label>
-									<button btn-filter type="button" class="btn btn-block btn-primary" style="width:50%">
+									<button btn-filter type="button" class="btn btn-sm btn-block btn-primary" style="width:50%">
 										<i class="fa fa-search"></i> Filter
 									</button>
 								</div>
@@ -115,7 +115,7 @@
 										<th>Bulan</th>
 										<th>Sisa Tunggakan</th>
 										<th>Status</th>
-										<th>Aksi</th>
+										<th></th>
 									</tr>
 								</thead>
 								<tbody>

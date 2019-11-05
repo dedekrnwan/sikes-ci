@@ -23,7 +23,7 @@
           <div class="box-body">
             <form role="form">
               <div class="box-body">
-                <div class="col-md-4 form-group">
+                <div class="col-md-3 form-group">
                   <label>Jenis</label>
                   <select param-filter name="jurnal_type" class="form-control">
                     <option value="">-Pilih-</option>
@@ -31,11 +31,15 @@
                     <option value="out">Pengeluaran</option>
                   </select>
                 </div>
-                <div class="col-md-4 form-group">
-                  <label>Tanggal</label>
-                  <input param-filter name="date_added" type="text" class="form-control datepicker">
+                <div class="col-md-3 form-group">
+                  <label>Dari Tanggal</label>
+                  <input param-filter name="date_from" type="text" class="form-control datepicker">
                 </div>
-                <div class="col-md-4 form-group">
+                <div class="col-md-3 form-group">
+                  <label>Sampai Tanggal</label>
+                  <input param-filter name="date_until" type="text" class="form-control datepicker">
+                </div>
+                <div class="col-md-3 form-group">
                   <label></label>
                   <button btn-filter-jurnal type="button" class="btn btn-sm btn-block btn-warning" style="width:50%">
                     <i class="fa fa-search"></i> Filter
@@ -49,35 +53,39 @@
       <div class="col-xs-12">
         <div id="box-jurnal_table" class="box">
           <div class="box-header">
-            <h3 class="box-title">List Data Jurnal
-              <small class="label bg-green totalIn">Total Pemasukan : 0</small>
-              <small class="label bg-red totalOut">Total Pengeluaran : 0</small>
-              <small class="label bg-aqua totalBalance">Total Balance : 0</small>
-            </h3>
+            <h3 class="box-title">List Data Jurnal</h3>
           </div>
           <!-- /.box-header -->
           <div class="box-body">
-            <div class="col-md-12" style="margin-bottom:20px">
-              <button type="button" class="btn btn-sm btn-block btn-primary" style="width:15%" onclick="jurnalModal()">
+            <div class="col-md-12">
+              <button type="button" style="width:20%" class="btn btn-sm btn-block btn-primary" onclick="jurnalModal()">
                 <i class="fa fa-plus"></i>
                 Tambah Data
               </button>
+              <button type="button" style="width:20%" class="btn btn-sm btn-block btn-danger" onclick="printShow()">
+                <i class="fa fa-print"></i>
+                Print
+              </button>
             </div>
-            <div class="col-md-12">
+            <div id="printPage" class="col-md-12">
+              <h3 id="datatables-title">Laporan Jurnal</h3>
               <table id="datatables-ss1" class="table table-bordered table-striped table-hover">
                 <thead>
                   <tr>
                     <th>No</th>
+                    <th>Date Added</th>
                     <th>Jenis</th>
                     <th>Total</th>
                     <th>Keterangan</th>
-                    <th>Date Added</th>
-                    <th>Aksi</th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
                 </tbody>
               </table>
+              <small class="label bg-green totalIn">Total Pemasukan : 0</small><br>
+              <small class="label bg-red totalOut">Total Pengeluaran : 0</small><br>
+              <small class="label bg-aqua totalBalance">Total Balance : 0</small>
             </div>
           </div>
           <!-- /.box-body -->

@@ -89,5 +89,5 @@ const deleteRow = (key, val, table) => {
 	})
 }
 
-// plugins
+// datepicker
 $('.datepicker').datepicker()

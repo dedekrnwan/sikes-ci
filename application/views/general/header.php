@@ -31,7 +31,9 @@
   <link rel="stylesheet" href="<?= base_url() ?>public/assets/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
   <!-- DataTables -->
   <link rel="stylesheet" href="<?= base_url() ?>public/assets/AdminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
-
+  <!-- PrintJs -->
+  <link rel="stylesheet" href="https://printjs-4de6.kxcdn.com/print.min.css">
+  
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
