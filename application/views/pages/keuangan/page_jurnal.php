@@ -58,14 +58,16 @@
           <!-- /.box-header -->
           <div class="box-body">
             <div class="col-md-12">
-              <button type="button" style="width:20%" class="btn btn-sm btn-block btn-primary" onclick="jurnalModal()">
-                <i class="fa fa-plus"></i>
-                Tambah Data
-              </button>
-              <button type="button" style="width:20%" class="btn btn-sm btn-block btn-danger" onclick="printShow()">
-                <i class="fa fa-print"></i>
-                Print
-              </button>
+              <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-primary" onclick="jurnalModal()">
+                  <i class="fa fa-plus"></i>
+                  Tambah Data
+                </button>
+                <button type="button" class="btn btn-sm btn-danger" onclick="printShow()">
+                  <i class="fa fa-print"></i>
+                  Print
+                </button>
+              </div>
             </div>
             <div id="printPage" class="col-md-12">
               <h3 id="datatables-title">Laporan Jurnal</h3>
