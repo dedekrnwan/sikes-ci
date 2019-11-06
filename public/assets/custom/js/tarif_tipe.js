@@ -40,6 +40,7 @@ const tarifTipeModal = (id = null) => {
         let d = JSON.parse(res)
         $(formId).find('input[name="tarif_tipe_id"]').val(d.tarif_tipe_id)
         $(formId).find('input[name="tarif_tipe"]').val(d.tarif_tipe)
+        $(formId).find('select[name="spesific"]').val(d.spesific)
         $(formId).find('select[name="transaction_type_id"]').val(d.transaction_type_id)
         removeLoading(boxId)
       }

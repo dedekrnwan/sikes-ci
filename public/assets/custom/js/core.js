@@ -3,7 +3,7 @@ const underConstruct = () => {
 	swal("Under constructon !")
 }
 
-$.ajaxSetup({ error: () => { swal("Some error technical, please contact developer !") } })
+$.ajaxSetup({ error: () => swal("Some error technical, please contact developer !") })
 
 const addLoading = (elm) => {
 	const loader = `<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>`

@@ -3,12 +3,12 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-			Data Master Tipe Tarif
+			Detail Tipe Tarif Spesific
 			<!-- <small>Data Master & Pembayaran</small> -->
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-cubes"></i> Data Master</a></li>
-			<li class="active">Tipe Tarif</li>
+			<li class="active">Tipe Tarif Spesific</li>
 		</ol>
 	</section>
 
@@ -16,14 +16,14 @@
 	<section class="content">
 		<div class="row">
 			<div class="col-xs-12">
-				<div id="box-tarif_tipe_table" class="box">
+				<div class="box">
 					<div class="box-header">
-						<h3 class="box-title">Data Tipe Tarif</h3>
+						<h3 class="box-title">Data Detail Tipe Tarif Spesific - <?= $tarifTipe['tarif_tipe'] ?></h3>
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body">
 						<div class="col-md-12" style="margin-bottom:20px">
-							<button type="button" class="btn btn-sm btn-block btn-primary" onclick="tarifTipeModal()" style="width:15%">
+							<button type="button" class="btn btn-sm btn-block btn-primary" onclick="tarifTipeSpesificAdd()" style="width:15%">
 								<i class="fa fa-plus"></i>
 								Tambah Data
 							</button>
@@ -33,9 +33,8 @@
 								<thead>
 									<tr>
 										<th>No</th>
-										<th>Tipe Tarif</th>
-										<th>Tipe Transaksi</th>
-										<th>Spesific</th>
+										<th>NIS</th>
+										<th>Nama</th>
 										<th></th>
 									</tr>
 								</thead>
@@ -57,39 +56,27 @@
 </div>
 <!-- /.content-wrapper -->
 
-
-<div class="modal fade" id="modal-tarif_tipe">
+<div class="modal fade" id="modal-tarif_tipe_spesific_add">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title">Detail Tipe Tarif</h4>
+				<h4 class="modal-title">Tambah Data</h4>
 			</div>
 			<div class="modal-body">
-				<div id="box-tarif_tipe" class="box box-default">
-					<form id="form-tarif_tipe" role="form">
+				<div id="box-tarif_tipe_spesific_add" class="box box-default">
+					<form id="form-tarif_tipe_spesific_add" role="form">
+						<input type="hidden" name="tarif_tipe_spesific_id">
+						<input type="hidden" name="tarif_tipe_id" value="<?= $tarifTipe['tarif_tipe_id'] ?>">
 						<div class="box-body">
-							<input type="hidden" name="tarif_tipe_id" value="0">
 							<div class="form-group">
-								<label>Tipe Transaksi</label>
-								<select name="transaction_type_id" class="form-control">
+								<label>Siswa</label>
+								<select name="siswa_id" class="form-control">
 									<option value="0">-Pilih-</option>
-									<?php foreach ($listTransactionType as $tt) : ?>
-										<option value="<?= $tt['transaction_type_id'] ?>"><?= $tt['transaction_type'] ?></option>
+									<?php foreach ($listSiswa as $ls) : ?>
+										<option value="<?= $ls['siswa_id'] ?>"><?= $ls['nis'].' - '.$ls['nama'] ?></option>
 									<?php endforeach; ?>
-								</select>
-							</div>
-							<div class="form-group">
-								<label>Tipe Tarif</label>
-								<input name="tarif_tipe" type="text" class="form-control" placeholder="Tipe Tarif">
-							</div>
-							<div class="form-group">
-								<label>Spesific</label>
-								<select name="spesific" class="form-control">
-									<option value="0">-Pilih-</option>
-									<option value="1">Ya</option>
-									<option value="0">Tidak</option>
 								</select>
 							</div>
 						</div>
@@ -98,7 +85,7 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" onclick="tarifTipeSave()">Save</button>
+				<button type="button" class="btn btn-primary" onclick="tarifTipeSpesificSave('add')">Save</button>
 			</div>
 		</div>
 		<!-- /.modal-content -->

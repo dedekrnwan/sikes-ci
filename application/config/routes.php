@@ -98,6 +98,10 @@ $route['data_master/tipe_tarif/listDataTarifNilai/(:any)'] = 'data_master/TipeTa
 $route['data_master/tipe_tarif/saveDataTarifNilai'] = 'data_master/TipeTarifController/saveDataTarifNilai';
 $route['data_master/tipe_tarif/getDataTarifNilai'] = 'data_master/TipeTarifController/getDataTarifNilai';
 
+// tarif_tipe_spesific
+$route['data_master/tipe_tarif/page/tarif_tipe_spesific/(:any)'] = 'data_master/TipeTarifController/tarif_tipe_spesific/$1';
+$route['data_master/tipe_tarif/listDataTarifTipeSpesific/(:any)'] = 'data_master/TipeTarifController/listDataTarifTipeSpesific/$1';
+$route['data_master/tipe_tarif/saveDataTarifTipeSpesific'] = 'data_master/TipeTarifController/saveDataTarifTipeSpesific';
 
 #keuangan
 // pembayaran

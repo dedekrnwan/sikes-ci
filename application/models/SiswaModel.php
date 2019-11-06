@@ -45,9 +45,12 @@ class SiswaModel extends DatatablesSSDModel
     return $res;
   }
 
-  function getSiswaByParam($param)
+  function getSiswaByParam($param, $param_in = null)
   {
-    $q = $this->db->get_where('v_siswa', $param);
+    foreach ($param as $k => $v) $this->db->where($k, $v);
+    if ($param_in != null) foreach ($param_in as $k => $v) $this->db->where_in($k, $v);
+
+    $q = $this->db->get('v_siswa');
     $res = $q->result_array();
 
     return $res;
