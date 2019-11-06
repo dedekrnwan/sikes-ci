@@ -74,6 +74,7 @@ class PembayaranController extends CI_Controller
 			$row[] = $ld->tarif_tipe;
 			$row[] = $ld->ta;
 			$row[] = $ld->kelas;
+			$row[] = $ld->tahun;
 			$row[] = $ld->bulan_ke;
 			$row[] = 'Rp ' . number_format($ld->nominal_sisa);
 			$row[] = ($ld->status == 'lunas') ? '<small class="label bg-green">Lunas</small>' : '<small class="label bg-red">Belum Lunas</small>';

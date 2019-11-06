@@ -10,6 +10,7 @@ class TipeTarifController extends CI_Controller
 		$this->load->model('TarifTipeModel');
 		$this->load->model('TarifNilaiModel');
 		$this->load->model('TarifTipeSpesificModel');
+		$this->load->model('TahunAjaranModel');
 		$this->load->model('TransactionTypeModel');
 		$this->load->model('TahunAjaranModel');
 		$this->load->model('SiswaModel');
@@ -164,6 +165,13 @@ class TipeTarifController extends CI_Controller
 			if ($k == 'date_ended') $v = $this->detectDate(date('Y-m-d', strtotime($v)), 'af', 'date');
 			$d[$k] = $v;
 		}
+
+		// validation
+		if (strtotime($d['date_started']) > strtotime($d['date_ended'])) {
+			echo json_encode(false);
+			exit;
+		}
+
 		if (array_key_exists('active', $d) && $d['active'] == 1) {
 			$dCheck = $this->TarifNilaiModel->getTarifNilaiById($d['tarif_nilai_id']);
 			$params = [

@@ -73,7 +73,7 @@
 			<div class="modal-body">
 				<div id="box-tarif_nilai_add" class="box box-default">
 					<form id="form-tarif_nilai_add" role="form">
-						<input type="hidden" name="tarif_nilai_id">
+					<input type="hidden" name="tarif_nilai_id">
 						<input type="hidden" name="tarif_tipe_id" value="<?= $tarifTipe['tarif_tipe_id'] ?>">
 						<div class="box-body">
 							<div class="form-group">

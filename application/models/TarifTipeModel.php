@@ -47,7 +47,7 @@ class TarifTipeModel extends DatatablesSSDModel
 
   function getTarifTipeById($id)
   {
-    $q = $this->db->get_where('tarif_tipe', ['tarif_tipe_id' => $id]);
+    $q = $this->db->get_where('v_tarif_tipe', ['tarif_tipe_id' => $id]);
     $res = $q->row_array();
 
     return $res;

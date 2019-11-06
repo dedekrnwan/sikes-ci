@@ -110,9 +110,10 @@
 										<th>Nama Siswa</th>
 										<th>Tipe Transaksi</th>
 										<th>Tipe Tarif</th>
-										<th>Tahun Ajaran</th>
+										<th>TA</th>
 										<th>Kelas</th>
-										<th>Bulan</th>
+										<th>Tahun ke</th>
+										<th>Bulan ke</th>
 										<th>Sisa Tunggakan</th>
 										<th>Status</th>
 										<th></th>
