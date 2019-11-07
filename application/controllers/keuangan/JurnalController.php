@@ -25,6 +25,7 @@ class JurnalController extends CI_Controller
 	{
 		// filter
 		$cond = [];
+		$cond[] = ['show', 'true', 'where'];
 		$query = json_decode($this->input->post('query'), true);
 		if (!empty($query)) {
 			foreach ($query as $k => $v) {
