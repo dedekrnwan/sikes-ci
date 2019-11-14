@@ -35,7 +35,7 @@
 									<input param-filter name="date_from" type="text" class="form-control datepicker">
 								</div>
 								<div class="col-md-3 form-group">
-									<label>Smpai Tanggal</label>
+									<label>Sampai Tanggal</label>
 									<input param-filter name="date_until" type="text" class="form-control datepicker">
 								</div>
 								<div class="col-md-3 form-group">
@@ -67,7 +67,7 @@
 										<th>Nama</th>
 										<th>No Orang Tua</th>
 										<th>Tipe Tarif</th>
-										<th>Nominal Pembayaran</th>
+										<th>Nominal</th>
 										<th>Teks SMS</th>
 										<th></th>
 									</tr>

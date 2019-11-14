@@ -195,6 +195,7 @@ class PembayaranController extends CI_Controller
 			'no_ortu' => $d['no_ortu'],
 			'message_type' => 'pembayaran',
 			'message_text' => $msg,
+			'nominal' => $nominal,
 			'date_added' => date('Y-m-d H:i:s'),
 			'date_modified' => date('Y-m-d H:i:s'),
 			'created_by' => $this->session->userdata('user_id')

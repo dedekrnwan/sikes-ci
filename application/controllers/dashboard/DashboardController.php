@@ -10,6 +10,7 @@ class DashboardController extends CI_Controller
 		$this->load->model('TahunAjaranModel');
 		$this->load->model('TarifTipeModel');
 		$this->load->model('UserModel');
+		$this->load->model('JurnalModel');
 
 		$this->load->model('PembayaranDetailModel');
 		if (!$this->session->has_userdata('user_id')) {
@@ -23,9 +24,7 @@ class DashboardController extends CI_Controller
 		$data['countTahunAjaran'] = $this->TahunAjaranModel->countTahunAjaran();
 		$data['countTarifTipe'] = $this->TarifTipeModel->countTarifTipe();
 		$data['countUser'] = $this->UserModel->countUser();
-		$data['sumThisMonth'] = $this->PembayaranDetailModel->sumThisMonth();
-		$data['sumLastMonth'] = $this->PembayaranDetailModel->sumLastMonth();
-		$data['sumAll'] = $this->PembayaranDetailModel->sumAll();
+		$data['summary'] = $this->JurnalModel->getJurnalSummary(0);
 
 		$dataHtml1['html']['page'] = $this->load->view('pages/dashboard/page', $data, true);
 		$dataHtml2['html']['page'] = $this->load->view('pages/layout', $dataHtml1, true);

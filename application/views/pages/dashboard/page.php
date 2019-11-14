@@ -70,16 +70,16 @@
     <div class="row">
       <div class="col-lg-3 col-xs-6">
         <!-- small box -->
-        <div class="small-box bg-yellow">
+        <div class="small-box bg-green">
           <div class="inner">
-            <h3><sup style="font-size: 20px">Rp</sup> <?= $sumLastMonth ?></h3>
+            <h3><sup style="font-size: 20px">Rp</sup> <?= $summary['total_in'] ?></h3>
 
-            <p>Total Pemayaran Bulan Lalu</p>
+            <p>Total Pemasukan</p>
           </div>
           <div class="icon">
             <i class="fa fa-mail-reply"></i>
           </div>
-          <a href="<?= base_url() ?>pembayaran/page" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          <a href="<?= base_url() ?>jurnal" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
         </div>
       </div>
       <!-- ./col -->
@@ -87,29 +87,29 @@
         <!-- small box -->
         <div class="small-box bg-red">
           <div class="inner">
-            <h3><sup style="font-size: 20px">Rp</sup> <?= $sumThisMonth ?></h3>
+            <h3><sup style="font-size: 20px">Rp</sup> <?= $summary['total_out'] ?></h3>
 
-            <p>Total Pembayaran Bulan Ini</p>
+            <p>Total Pengeluaran</p>
           </div>
           <div class="icon">
             <i class="ion ion-stats-bars"></i>
           </div>
-          <a href="<?= base_url() ?>pembayaran/page" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          <a href="<?= base_url() ?>jurnal" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
         </div>
       </div>
       <!-- ./col -->
       <div class="col-lg-6 col-xs-6">
         <!-- small box -->
-        <div class="small-box bg-green">
+        <div class="small-box bg-yellow">
           <div class="inner">
-            <h3><sup style="font-size: 20px">Rp</sup>  <?= $sumAll ?></h3>
+            <h3><sup style="font-size: 20px">Rp</sup> <?= $summary['total_balance'] ?></h3>
 
-            <p>Total Pembayaran Keseluruhan</p>
+            <p>Total Balance</p>
           </div>
           <div class="icon">
             <i class="fa fa-money"></i>
           </div>
-          <a href="<?= base_url() ?>pembayaran/page" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          <a href="<?= base_url() ?>jurnal" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
         </div>
       </div>
       <!-- ./col -->
